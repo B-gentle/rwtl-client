@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './sass/_variables';
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+}
+
+input{
+  padding: 16px !important;
+  border-radius: 4px !important;
+}
+
+a{
+  color: $primary-color;
+}
+
+.center-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

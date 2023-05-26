@@ -1,0 +1,20 @@
+@import '_variables';
+
+@mixin font($size, $weight, $color, $family: $font) {
+    font-size: $size;
+    font-family: $family;
+    font-weight: $weight;
+    color: $color;
+  }
+
+  @mixin display($justify, $display: flex, $direction: row){
+    display: $display;
+    justify-content: $justify;
+    flex-direction: $direction;
+  }
+
+  @mixin searchBox(){
+    outline: none;
+    border: none;
+    color: #3A3A3A66;
+  }

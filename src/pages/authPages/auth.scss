@@ -1,0 +1,92 @@
+@import '../../sass/_variables';
+@import '../../sass/mixins';
+
+.hr {
+    flex-grow: 1;
+}
+
+.login-auth, .sign-up-auth {
+    font-weight: 400;
+    overflow-y: scroll;
+    .main-div{
+        width: 410px;
+        height: 100vh;
+        padding-top: 234px;
+    }
+    .auth-text {
+        margin-bottom: 32px;
+        line-height: 1.5;
+    }
+
+    .auth-divider{
+        margin: 69.5px auto 54.5px;
+    }
+
+    .google-sign-in{
+        margin-bottom: 45px;
+    }
+}
+
+.sign-up-auth{
+    .main-div{
+        padding-top: 115px;
+    }
+}
+.auth-card-div {
+    padding: 65.44px 87px;
+    font-family: 'Rubik', sans-serif;
+
+    .auth-divider {
+        margin: 0 auto 43px;
+    }
+
+    .auth-card {
+        width: 584px;
+        box-shadow: $auth-card-shadow;
+    }
+
+    .auth-logo {
+        display: flex;
+        margin: 65.44px auto 40px;
+        height: 72.12px;
+        width: 79px;
+    }
+
+    .auth-text {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+
+        span:nth-child(1) {
+            @include font(24px, 500px, #3A3A3A)
+        }
+
+        span:nth-child(2) {
+            @include font(16px, 400px, #3A3A3ABF);
+        }
+    }
+
+    .reset-box input {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+button.auth-button {
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width:980px) {
+    .login-auth, .sign-up-auth {
+        .main-div{
+            padding: 1rem;
+        }
+        .auth-text {
+           text-align: center;
+        }
+    }
+
+}
