@@ -82,8 +82,8 @@ const Register = () => {
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2'>
-      <div className='bg-primary'>
-        <img className='center-item mx-auto max-w-full h-auto' src={logo} alt='company-logo' />
+      <div className='md:bg-primary pt-3 pb-2'>
+        <img className='auth-img center-item mx-auto md:max-w-full md:h-auto' src={logo} alt='company-logo' />
       </div>
 
       <div className='center-item h-screen sign-up-auth'>
