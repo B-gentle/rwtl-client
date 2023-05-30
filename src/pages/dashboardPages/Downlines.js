@@ -3,11 +3,13 @@ import { Space, Table, Tag } from 'antd';
 import SelectTableFilter from '../../components/SelectTableFilter';
 import EmptyAndSearch from '../../components/EmptyAndSearch';
 import '../../components/layouts/layouts.scss';
+import { useMediaQuery } from 'react-responsive';
 
 const Downlines = () => {
 
   const user = JSON.parse(localStorage.getItem("userData"))
   const downlines = user.downlines
+  const isMobile = useMediaQuery({maxWidth: 980})
 
   const columns = [
     {
@@ -80,7 +82,12 @@ const Downlines = () => {
       <div>
 
       </div>
-      {data.length <= 0 ? <EmptyAndSearch /> : <Table columns={columns} dataSource={filteredData} />}
+      {data.length <= 0 ? <EmptyAndSearch /> : <Table
+      scroll={{
+        x: isMobile && 1000,
+        y: isMobile && 500,
+      }}
+       columns={columns} dataSource={filteredData} />}
     </div>
   )
 }

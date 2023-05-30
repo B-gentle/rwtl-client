@@ -203,12 +203,6 @@ const Register = () => {
             <Form.Item
             label="Select Package"
             name="package"
-            rules={[
-              {
-                required: true,
-                message: 'Please select a package!',
-              },
-            ]}
               >
               <Select defaultValue="Select Package"
               notFoundContent= {<EmptyAndSearch text="Please wait...." />}

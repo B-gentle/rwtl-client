@@ -33,7 +33,7 @@ const SelectTableFilter = ({data, filteredData, searchValue, setFilteredData, se
   };
 
   return (
-    <div className='flex justify-between mb-[65px]'>
+    <div className='md:flex md:justify-between mb-[65px]'>
       <SearchBox
       value={searchValue}
       onChange={handleSearch}

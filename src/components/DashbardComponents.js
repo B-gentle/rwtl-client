@@ -24,9 +24,9 @@ ChartJS.register(
     Legend
 );
 
-export const FinancialCards = ({ icon, text, alt }) => {
+export const FinancialCards = ({ icon, text, alt, showModal }) => {
     return (
-        <div className='financialCards flex flex-col'>
+        <div className='financialCards flex flex-col' onClick={showModal}>
             <img src={icon} alt={alt} />
             <span>{text}</span>
         </div>

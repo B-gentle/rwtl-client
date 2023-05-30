@@ -1,0 +1,29 @@
+@import '../sass/variables';
+@import '../sass/mixins';
+
+.greetings {
+    h5 {
+        @include font(24px, 500, #3A3A3A);
+    }
+
+    p {
+        @include font(1rem, 400, rgba(58, 58, 58, 0.6));
+    }
+}
+
+.package-name {
+    @include display(center);
+    align-items: center;
+    gap: 12.25px;
+    background-color: rgba(221, 176, 91, 0.1);
+    border-radius: 20px;
+    color: #DDB05B;
+
+}
+
+@media screen and (max-width: 980px) {
+    .package-name {
+        @include display(left);
+        gap: 4px;
+    }
+}
