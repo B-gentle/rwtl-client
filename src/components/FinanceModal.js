@@ -1,56 +1,73 @@
-import { Modal } from 'antd'
-import React from 'react';
-import { FaAngleRight } from 'react-icons/fa'
+import { Modal, Button, Form, Input, Select } from 'antd'
+import React, { useState } from 'react';
+import { IoIosArrowRoundBack } from 'react-icons/io';
+import BackArrowHeading from './BackArrowHeading';
+import TotalBalance from './TotalBalance';
 
-export const SendModal = () => {
+
+export const MoreModal = ({ moreModalContent, activeSubContent, handleMoreItemClick, handleSubContentClick }) => {
+    const [currentPage, setCurrentPage] = useState(null);
+
+      const handleInitialView = () => {
+          setCurrentPage(null);
+      }
+
+        if (currentPage === 'data') {
+            return <MoreContentModal title="Buy Data" back={handleInitialView} />;
+          } else if (currentPage === 'airtime') {
+            return <MoreContentModal title="Buy Airtime" back={handleInitialView} />;
+          } else if (currentPage === 'cable') {
+            return <MoreContentModal title="Cable Subscription" back={handleInitialView} />;
+          } else if (currentPage === 'electricity') {
+            return <MoreContentModal title="Electricity Bills" back={handleInitialView} />;
+          }else{
+      
     return (
         <div>
-            Send
+            
+        </div>
+
+    )
+          }
+}
+
+
+
+export const MoreContentModal = ({title, label, name, message, buttonText, back}) => {
+
+    
+      
+    return(
+        <div>
+            <header><IoIosArrowRoundBack onClick={back} /><h1>{title}</h1></header>
+            <TotalBalance />
+  
+);
+
+export default App;
         </div>
     )
 }
 
-export const WithdrawModal = () => {
-    return (
-        <div>
-            Send
-        </div>
-    )
-}
 
-export const TopUpModal = ({ handleOk, handleCancel, title, stateName }) => {
-    return (
-        <div>
-            More
-        </div>
 
-    )
-}
 
-export const MoreModal = ({ handleOk, handleCancel, title, stateName }) => {
-    return (
-        <div>
-            <h1>More</h1>
-            <p className='flex justify-between mb-3'>
-                <span>Data</span>
-                <FaAngleRight />
-            </p>
-            <p className='flex justify-between mb-3'>
-                <span>Airtime</span>
-                <FaAngleRight />
-            </p>
-            <p className='flex justify-between mb-3'>
-                <span>Cable</span>
-                <FaAngleRight />
-            </p>
-            <p className='flex justify-between mb-3'>
-                <span>Electricity</span>
-                <FaAngleRight />
-            </p>
-        </div>
 
-    )
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,110 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+@media screen and (max-width :980px) {
+
+    button{
+        height: 45px !important;
+    }
+    .send-money{
+        margin: 25.5px auto 200px;
+        .back-arrow-heading{
+            gap: 6rem;
+            h2{
+                @include font(18px, 500, #3A3A3A);
+            }
+            margin-bottom: 25.5px;
+        }
+
+        .total-amount{
+            margin-bottom: 25.5px;
+        }
+
+    }
+
+    .top-up{
+        .back-arrow-heading{
+            gap: 6rem;
+            h2{
+                @include font(18px, 500, #3A3A3A);
+            }
+        }
+        >p{
+            @include font(14px, 400, #3A3A3A99);
+            margin-top: 25.5px;
+        }
+
+        .account-details-container{
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(221, 176, 91, 0.1);
+            margin-top: 1rem;
+            padding: 24px 16px;
+            >div:nth-child(1){
+                @include font(1rem, 500,  rgba(58, 58, 58, 0.6));
+                gap: 24px;
+            }
+            >div:nth-child(2){
+                @include font(14px, 400, #3A3A3A);
+                gap: 24px;
+            }
+        }
+    }
+
+    .more{
+        .back-arrow-heading{
+            gap: 6rem;
+            margin: 25.5px auto 40px;
+            h2{
+                @include font(18px, 500, #3A3A3A);
+            }
+        }
+
+        .more-links{
+            @include font(1rem, 400, #3A3A3A);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .buy-airtime{
+        .back-arrow-heading{
+            gap: 6.5rem;
+            margin: 25.5px auto 40px;
+            h2{
+                @include font(18px, 500, #3A3A3A);
+            }
+        }
+        .total-amount{
+            margin-bottom: 24px;
+        }
+    }
+
+    .success-page{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 242px auto;
+
+        img{
+            width: 165px;
+            height: 165px;
+            margin-bottom: 32px;
+        }
+
+        >span:nth-of-type(1){
+            @include font(18px, 500, #3A3A3A);
+            margin-bottom: 11px;
+        }
+        >span:nth-of-type(2){
+            @include font(1rem, 400, #3A3A3ABF);
+            margin-bottom: 32px;
+        }
+        button{
+            color: #ffffff!important;
+        }
+    }
+}

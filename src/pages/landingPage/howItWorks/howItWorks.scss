@@ -1,0 +1,141 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.how-it-works {
+    padding: 72px 119px 135px 120px;
+
+    .serviceProviders {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        img {
+            height: 32px;
+        }
+
+        span {
+            @include font(32px, 500, #3A3A3A66);
+        }
+    }
+
+    .service-providers-container {
+        display: flex;
+        justify-content: center;
+        gap: 90px;
+        margin-bottom: 100px;
+    }
+
+    .complan-slide {
+        background-color: #111111;
+        padding: 80px;
+        border-radius: 20px;
+        display: flex;
+        gap: 195px;
+
+        >div:nth-child(1) {
+            >span {
+                background-color: #FFFFFF;
+                @include font(1rem, 400, #DDB05B);
+                padding: 8px 16px;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 211px;
+            }
+
+            p {
+                @include font(32px, 500, #FFFFFFCC);
+                margin: 24px auto 91px;
+            }
+        }
+
+        >div:nth-child(2) {
+            padding-top: 80px;
+
+            p {
+                @include font(1rem, 400, #FFFFFFCC);
+            }
+
+            >:nth-child(2) {
+                margin: 152px auto 32px;
+
+                >:nth-child(1) {
+                    @include font(24px, 500, #FFFFFFCC);
+                }
+
+                >:nth-child(2) {
+                    @include font(14px, 400, #FFFFFF99);
+                }
+            }
+
+            .benefits {
+                >p {
+                    @include font(18px, 500, #FFFFFFCC);
+                    margin-bottom: 30px;
+                }
+
+                .bullet-list {
+                    display: flex;
+                    gap: 18px;
+                }
+            }
+
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 105px;
+
+                >:nth-child(1) {
+                    display: flex;
+                }
+
+                >:nth-child(2) {
+                    @include font(18px, 500, #FFFFFFCC)
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:780px) {
+    .how-it-works {
+        padding: 0;
+
+        .service-providers-container {
+            padding: 39px 10px 0 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: flex-start;
+            margin-bottom: 55px;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+
+            /* IE and Edge */
+            &::-webkit-scrollbar {
+                display: none;
+                /* Chrome and Safari */
+            }
+        }
+
+        .complan-slide{
+            flex-direction: column;
+            gap: 40px;
+            padding: 32px 20px;
+            >div:nth-child(1) {
+                p {
+                    margin: 24px auto 16px;
+                }
+            }
+            >div:nth-child(2){
+                padding-top: 0;
+                >:nth-child(2){
+                    margin-top: 32px;
+                }
+            }
+        }
+    }
+}

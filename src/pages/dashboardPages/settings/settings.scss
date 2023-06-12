@@ -1,0 +1,133 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.settingsLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+    margin-bottom: 90px;
+    margin-top: 26.5px;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 400;
+        color: #3A3A3A;
+        text-decoration: none;
+
+        >span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .mobile-profile {
+        >h4 {
+            @include font(18px, 500, #3A3A3A);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+    }
+
+    .profile-banner {
+        display: flex;
+        align-items: center;
+
+        >span {
+            h1 {
+                @include font(1rem, 500, #3A3A3A);
+            }
+
+            h2 {
+                @include font(14px, 400, #3A3A3A99);
+            }
+        }
+    }
+
+    .my-profile {
+        >h1 {
+            @include font(1rem, 500, #3A3A3A);
+        }
+    }
+
+    .referrals {
+        .back-arrow-heading {
+            margin-top: 25.5px;
+            gap: 5rem;
+
+            h1 {
+                @include font(18px, 500, #3A3A3A);
+            }
+
+        }
+
+        .referral-content {
+            margin: 150px auto 100px;
+            padding: auto 20px;
+
+            p {
+                @include font(14px, 400, #3A3A3ABF);
+                text-align: center;
+                margin-bottom: 24px;
+            }
+
+            .copy-link {
+                display: flex;
+                gap: 18px;
+                margin-bottom: 40px;
+
+                span:nth-child(1) {
+                    @include font(14px, 400, #3A3A3A66);
+                    width: 248px;
+                    height: 46px;
+                    background-color: rgba(17, 17, 17, 0.02);
+                    border-radius: 4px;
+                    padding: 14.5px 16px;
+                    overflow: auto;
+                    white-space: nowrap;
+                    -ms-overflow-style: none;  /* IE and Edge */
+                    scrollbar-width: none;  /* Firefox */
+                }
+
+                span:nth-child(1)::-webkit-scrollbar {
+                    display: none;  /* Chrome, Safari and Opera */
+                  }
+
+                span:nth-child(2) {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    height: 46px;
+                    background: #DDB05B;
+                    border-radius: 4px;
+                    svg{
+                        stroke: #ffffff;
+                    }
+                }
+            }
+
+            .referral-social-link{
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                span:nth-child(1){
+                    @include font(1rem, 400, #3A3A3A);
+                }
+                span:nth-child(2){
+                    display: flex;
+                    gap: 24px;
+                    justify-content: center;
+                    svg{
+                        color: #DDB05B;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { Card, Modal, Statistic } from 'antd';
+import { Badge, Card } from 'antd';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -7,15 +7,20 @@ import sendIcon from '../../assets/icons/dashboard_icons/send.svg';
 import withdrawIcon from '../../assets/icons/dashboard_icons/withdraw.svg';
 import topUpIcon from '../../assets/icons/dashboard_icons/top-up.svg';
 import moreIcon from '../../assets/icons/dashboard_icons/more.svg';
-import downlineIcon from '../../assets/icons/dashboard_icons/downline-card-icon.svg';
-import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
-import { Chart, FinancialCards, IncentiveProgress, RecentTransactions } from '../../components/DashbardComponents';
+import { FinancialCards, IncentiveProgress, PortfolioDownlines, RecentTransactions } from '../../components/DashbardComponents';
+import { Chart } from './portfolio/portfolioChart';
 import { format } from 'date-fns';
 import Welcome from '../../components/Welcome';
-import FinanceModal, { MoreModal, SendModal, TopUpModal, WithdrawModal } from '../../components/FinanceModal';
+import notification from '../../assets/icons/notification.svg';
+import profileIcon from '../../assets/icons/profile-pic-icon.svg';
+import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
+import { MoreModal } from '../../components/FinanceModal';
+import { Link } from 'react-router-dom';
+import DateRange from './DateRange';
 
 const Dashboard = () => {
-    const user = useSelector(selectUserData)
+
+    const user = useSelector(selectUserData);
     const date = new Date()
     const todayDate = format(date, 'dd, MMM yyyy')
     const time = format(date, 'hh: mm a')
@@ -23,62 +28,83 @@ const Dashboard = () => {
     const [openModal, setOpenModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const [moreModalContent, setMoreModalContent] = useState(null);
+    const [activeSubContent, setActiveSubContent] = useState(null);
+    const [showNotification, setShowNotification] = useState(true)
 
     const handleCardClick = (content) => {
         if (content === 'more') {
             setOpenModal(true);
             setModalContent(content);
             setMoreModalContent(null);
-        }else{
-        setOpenModal(true);
-        setModalContent(content)
+            setActiveSubContent(null);
+        } else {
+            setOpenModal(true);
+            setModalContent(content)
         }
+    };
+
+    const handleMoreItemClick = (item) => {
+        setMoreModalContent(item);
+        setActiveSubContent(null);
+    };
+
+    const handleSubContentClick = (subContent) => {
+        setActiveSubContent(subContent);
     };
 
     const handleOk = () => {
         setOpenModal(false);
         setModalContent(null)
+        setMoreModalContent(null);
+        setActiveSubContent(null);
     };
 
     const handleCancel = () => {
         setOpenModal(false);
-        setModalContent(null)
+        setModalContent(null);
+        setMoreModalContent(null);
+        setActiveSubContent(null);
     };
+
 
     return (
         <div className='dashboard'>
-            {isMobile ? null : <Welcome user={user} />}
+            {isMobile && (<div className='flex justify-between mt-[1rem] mb-[28px]'>
+                <span className='flex items-center'>
+                    <img className='w-[60px] h-[60px] mr-[8px]' src={profileIcon} alt='avatar' />
+                    <Welcome user={user} />
+                </span>
+                <Badge dot={showNotification}>
+                    <img src={notification} alt='notification' />
+                </Badge>
+            </div>)
+            }
+            <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
                     <div className="flex justify-between balance-card">
-                        <span>Total balance<br /><span>Amount</span></span>
+                        <span>Total balance<br /><span>₦{user.walletBalance}</span></span>
                         <span className='flex text-right'>{todayDate}<br />{time}</span>
                     </div>
                     <div className='flex financial-cards-container'>
-                        <FinancialCards text="Send" icon={sendIcon} showModal={() => { handleCardClick("send") }} content="send" />
-                        <FinancialCards text="Withdraw" icon={withdrawIcon} showModal={() => { handleCardClick("withdraw") }} />
-                        <FinancialCards text="Top Up" icon={topUpIcon} showModal={() => { handleCardClick("top-up") }} />
-                        <FinancialCards text="More" icon={moreIcon} showModal={() => { handleCardClick("more") }} />
+                        <Link to='/sendmoney'>
+                        <FinancialCards text="Send" icon={sendIcon}  />
+                        </Link>
+                        <Link to='/withdraw'>
+                        <FinancialCards text="Withdraw" icon={withdrawIcon} />
+                        </Link>
+                        <Link to='/topup'>
+                        <FinancialCards text="Top Up" icon={topUpIcon} />
+                        </Link>
+                        <Link to='/more'>
+                        <FinancialCards text="More" icon={moreIcon}  />
+                        </Link>
                     </div>
-                    <Modal open={openModal} onOk={handleOk} onCancel={handleCancel}>
-                        {modalContent === "send" && <SendModal />}
-                        {modalContent === "withdraw" && <WithdrawModal />}
-                        {modalContent === "top-up" && <TopUpModal />}
-                        {modalContent === "more" && <MoreModal />}
-                        
-                    </Modal>
                 </Card>
 
                 <Card className='card downline-card hidden md:block'>
                     <Card className='mb-[16px]'>
-                        <span className='flex items-center'>
-                            <img className='mr-2 mb-2' src={downlineIcon} alt='icon' />
-                            <span>Downlines</span>
-                        </span>
-                        <span className="flex justify-between">
-                            <Statistic title="Direct Referral Bonus" value="200" />
-                            <Statistic title="Indirect Referral Bonus" value="200" />
-                        </span>
+                        <PortfolioDownlines user={user} />
                     </Card>
                     <Card>
                         <span className='flex items-center mb-5'>
@@ -97,7 +123,11 @@ const Dashboard = () => {
             </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card'>
+                    <div>
                     <h1>Recent Transactions</h1>
+                    <DateRange />
+                    </div>
+                    
                     <RecentTransactions />
                 </Card>
 

@@ -1,0 +1,36 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+@media screen and (max-width: 980px) {
+.portfolio{
+    margin-bottom: 30px;
+    >h4{
+        @include font(18px, 500, #3A3A3A);
+        text-align: center;
+        margin: 24px auto 20px;
+    }
+
+    .chart{
+        >div{
+            display: flex;
+            justify-content: space-between;
+            h2{
+                @include font(1rem, 500, #3A3A3A)
+            }
+        }
+    }
+
+    .portfolio-downlines{
+        margin-top: 43.5px;
+    }
+
+    .pv-span{
+        >span:nth-child(1){
+            @include font(16px, 500, #3A3A3A)
+        }
+        >span:nth-child(2){
+            @include font(14px, 400, #3A3A3A99);
+        }
+    }
+}
+}

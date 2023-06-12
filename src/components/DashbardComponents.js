@@ -1,32 +1,13 @@
-import { Progress } from 'antd';
+import { Progress, Statistic } from 'antd';
 import { FaSearch } from 'react-icons/fa';
-import { Line } from 'react-chartjs-2';
 import { format } from 'date-fns';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import React from 'react'
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
+import React from 'react';
+import downlineIcon from '../assets/icons/dashboard_icons/downline-card-icon.svg';
+import './components.scss';
 
 export const FinancialCards = ({ icon, text, alt, showModal }) => {
     return (
-        <div className='financialCards flex flex-col' onClick={showModal}>
+        <div className='financialCards flex flex-col items-center justify-center' onClick={showModal}>
             <img src={icon} alt={alt} />
             <span>{text}</span>
         </div>
@@ -35,7 +16,7 @@ export const FinancialCards = ({ icon, text, alt, showModal }) => {
 
 export const IncentiveProgress = ({ title, value, progress }) => {
     return (
-        <div>
+        <div className='incentive-progress'>
             <h3>{title}</h3>
             <Progress percent={progress} />
             <small>{value}</small>
@@ -43,56 +24,33 @@ export const IncentiveProgress = ({ title, value, progress }) => {
     );
 };
 
-export const Chart = () => {
-    const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept'],
-        datasets: [
-            {
-                label: 'My First dataset',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [5, 10, 50, 20, 90, 100, 220],
-            },
-        ],
-    };
+export const PortfolioDownlines = ({ user }) => {
+    const downlines = user.downlines;
+    const downlineCount = downlines.length;
+    const directReferral = downlines.filter((downline, id) => downline.level === 1)
+    const indirectReferral = downlines.filter((downline, id) => downline.level !== 1)
+    const totaldirectPV = directReferral.reduce((accumulator, item) => {
+        return accumulator + (item.pv || 0);
+      }, 0);
 
-    const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function (value, index, values) {
-                        return value + 'k';
-                    }
-                }
-            },
-        },
-    };
+      const totalIndirectReferralPV = indirectReferral.reduce((accumulator, item) => {
+        return accumulator + (item.pv || 0);
+      }, 0);
 
     return (
-        <div style={{ height: 200 }}>
-            <h2>Income Overview</h2>
-            <Line data={data} options={options} />
+        <div className='portfolio-downlines'>
+            <span className='flex items-center'>
+                <img className='mr-2 mb-2' src={downlineIcon} alt='icon' />
+                <span>{downlineCount} Downlines</span>
+            </span>
+            <span className="flex justify-between">
+                <Statistic title="Direct Referral Bonus" value={totaldirectPV}/>
+                <Statistic title="Indirect Referral Bonus" value={totalIndirectReferralPV} />
+            </span>
         </div>
-    );
-};
+    )
+}
+
 
 export const RecentTransactions = () => {
     const date = new Date()
@@ -128,11 +86,11 @@ export const RecentTransactions = () => {
     )
 }
 
-export const SearchBox = ({value, onChange}) => {
+export const SearchBox = ({ value, onChange }) => {
     return (
-      <span className='header-search'>
-      <FaSearch />
-      <input type="search" placeholder='search' value={value} onChange={onChange} />
-    </span>
+        <span className='header-search'>
+            <FaSearch />
+            <input type="search" placeholder='search' value={value} onChange={onChange} />
+        </span>
     )
-  }
+}

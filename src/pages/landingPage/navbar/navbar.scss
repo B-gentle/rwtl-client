@@ -1,0 +1,67 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.home, .about {
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 120px;
+
+        img {
+            @include logo(50px, 50px)
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        span {
+            a {
+                text-decoration: none;
+                @include font(16px, 400, #3A3A3ABF);
+            }
+
+            a.active {
+                color: #DDB05B;
+            }
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 123px;
+            height: 45px !important;
+            box-shadow: -4px 9px 30px rgba(221, 176, 91, 0.25);
+            border-radius: 4px;
+        }
+    }
+}
+
+@media screen and (max-width:780px) {
+    .home {
+        nav {
+            padding: 30px 20px;
+
+            .hamburger {
+                display: flex;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    stroke: #292D32;
+                }
+
+            }
+
+            span:nth-of-type(2) {
+                display: none;
+            }
+
+            button.ant-btn {
+                display: none;
+            }
+        }
+    }
+}

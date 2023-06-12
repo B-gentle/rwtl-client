@@ -7,6 +7,11 @@
     color: $color;
   }
 
+  @mixin logo($width, $height){
+    width: $width;
+    height: $height;
+  }
+
   @mixin display($justify, $display: flex, $direction: row){
     display: $display;
     justify-content: $justify;

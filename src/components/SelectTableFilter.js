@@ -41,7 +41,7 @@ const SelectTableFilter = ({data, filteredData, searchValue, setFilteredData, se
 
 
 <span className='flex justify-between items-center'>
-    <Select defaultValue="all" onChange={handleFilterChange} style={{width: '200px', padding: "16px"}}>
+    <Select defaultValue="all" onChange={handleFilterChange} style={{width: '200px'}}>
         <Option value="all">All</Option>
         <Option value="Indirect Referral">Indirect Referral</Option>
         <Option value="Direct Referral">Direct Referral</Option>

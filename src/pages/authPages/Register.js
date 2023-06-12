@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, message, Select } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './auth.scss';
 import logo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import googleIcon from '../../assets/icons/google-icon.svg';
@@ -9,17 +9,39 @@ import { getPackages } from '../../services/packageCall';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { LOG_IN_USER } from '../../redux/features/user/userSlice';
-import EmptyAndSearch from '../../components/EmptyAndSearch';
-import Loader from '../../components/Loader';
+import EmptyState from '../../components/EmptyState';
 
 const Register = () => {
 
   const loading = useSelector(selectLoading)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const {Option} = Select;
 
   const [packages, setPackages] = useState(null)
+  const [referralCode, setReferralCode] = useState('');
+
+  function getQueryParam(name, queryString) {
+    let reg = new RegExp(name + '=([^&#]*)', 'i');
+    let string = reg.exec(queryString);
+    return string ? string[1] : null;
+}
+
+
+useEffect(() => {
+  let referralLink = getQueryParam('ref', location.pathname + location.search);
+  if (referralLink) {
+    // Extract the code part starting from 'REF'
+    let codeStartIndex = referralLink.indexOf("REF");
+    if (codeStartIndex !== -1) {
+      let code = referralLink.substring(codeStartIndex);
+      setReferralCode(code);
+    }
+  }
+}, [location]);
+
+  
 
   const options = ["+234", "+197", "+911", "+235"]
 
@@ -45,7 +67,7 @@ const Register = () => {
         navigate("/dashboard")
       } else {
         const message =
-          (response && response.data && response.data.message) ||
+          (response && response.response.data && response.response.data.message) ||
           response.message ||
           response.toString();
         throw new Error(message)
@@ -83,11 +105,12 @@ const Register = () => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2'>
       <div className='md:bg-primary pt-3 pb-2'>
+        <Link to='/'>
         <img className='auth-img center-item mx-auto md:max-w-full md:h-auto' src={logo} alt='company-logo' />
+        </Link>
       </div>
 
       <div className='center-item h-screen sign-up-auth'>
-        {loading && <Loader />}
         <div className='main-div'>
           <div className='auth-text'>
             <h1>Sign Up</h1>
@@ -97,6 +120,7 @@ const Register = () => {
           <Form
             layout='vertical'
             onFinish={onFinish}
+            initialValues={{referralCode}}
           >
             <Form.Item
               label="Fullname"
@@ -181,7 +205,7 @@ const Register = () => {
             className='mr-4'
               name="countryCode"
             >
-                <Select defaultValue="+234" options={options.map((option) => ({ label: option, value: option }))} />
+                <Select options={options.map((option) => ({ label: option, value: option }))} />
             </Form.Item>
 
             <Form.Item
@@ -205,9 +229,11 @@ const Register = () => {
             name="package"
               >
               <Select defaultValue="Select Package"
-              notFoundContent= {<EmptyAndSearch text="Please wait...." />}
+              notFoundContent= {<EmptyState />}
               onClick={handlePackageList}>
-              {packages && packages.map((option) => (
+                <Option>Select Packages</Option>
+                <Option>Free User</Option>
+              {packages && packages.map((option) => ( 
         <Option key={option._id} value={option._id}>
           {option.name}
         </Option>
@@ -216,8 +242,8 @@ const Register = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button className='auth-button' type="primary" htmlType="submit" block>
-                {loading ? "loading" : "Signup"}
+              <Button className='auth-button' type="primary" htmlType="submit" block loading={loading && true}>
+                 Signup
               </Button>
             </Form.Item>
             <div className="flex items-center auth-divider mb-54">
@@ -231,7 +257,7 @@ const Register = () => {
               <span className='ml-1'>Sign Up with Google</span>
             </div>
 
-            <span className='flex justify-center pb-[99px]'><span className='mr-2'>Already have an account?</span> <Link to="/">Sign In</Link></span>
+            <span className='flex justify-center pb-[99px]'><span className='mr-2'>Already have an account?</span> <Link to="/login">Sign In</Link></span>
           </Form>
         </div>
       </div>

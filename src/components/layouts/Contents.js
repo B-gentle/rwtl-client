@@ -1,27 +1,49 @@
 import { Space } from 'antd';
 import React from 'react';
 import {  Route, Routes } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import Dashboard from '../../pages/dashboardPages/Dashboard';
 import Downlines from '../../pages/dashboardPages/Downlines';
-import Settings from '../../pages/dashboardPages/Settings';
+import ChangePassword from '../../pages/dashboardPages/settings/ChangePassword';
+import Profile from '../../pages/dashboardPages/settings/Profile';
+import Settings from '../../pages/dashboardPages/settings/Settings';
 import Transactions from '../../pages/dashboardPages/Transactions';
 import '../layouts/layouts.scss';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import Portfolio from '../../pages/dashboardPages/portfolio/Portfolio';
+import SendMoney from '../../pages/financePages/SendMoney';
+import Withdraw from '../../pages/financePages/Withdraw';
+import Topup from '../../pages/financePages/Topup';
+import More from '../../pages/financePages/More';
+import BuyAirtime from '../../pages/financePages/BuyAirtime';
+import BuyData from '../../pages/financePages/BuyData';
+import Referrals from '../../pages/dashboardPages/settings/Referrals';
 
 const Contents = () => {
     
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     return (
         <div className='layout'>
             <Sidebar />
             <div className='layout-content'>
-            <Header />
+          {!isMobile &&  <Header /> }
             <div className="pages">
                 <Routes>
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="transactions" element={<Transactions />} />
                     <Route path="settings" element={<Settings />} />
+                    <Route path="profiles" element={<Profile />} />
+                    <Route path="portfolio" element={<Portfolio />} />
                     <Route path="downlines" element={<Downlines />} />
+                    <Route path='change-password' element={<ChangePassword />} />
+                    <Route path='referrals' element={<Referrals/>} />
+                    <Route path='sendmoney' element={<SendMoney />} />
+                    <Route path='withdraw' element={<Withdraw />} />
+                    <Route path='topup' element={<Topup />} />
+                    <Route path="more" element={<More />} />
+                    <Route path='buyairtime' element={<BuyAirtime />} />
+                    <Route path="buydata" element={<BuyData />} />
                 </Routes>
                 </div>
             </div>

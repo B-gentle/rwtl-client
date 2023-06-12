@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './auth.scss';
 import logo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import { LoginUser } from '../../services/usersApiCall';
 import googleIcon from '../../assets/icons/google-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectError, selectLoading, selectSuccess, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
+import { LOG_IN_USER, LOG_OUT_USER } from '../../redux/features/user/userSlice';
 
 const Login = () => {
 
@@ -14,17 +15,17 @@ const Login = () => {
   const error = useSelector(selectError)
   const success = useSelector(selectSuccess);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     dispatch(SET_LOADING())
     try {
       const response = await LoginUser(values)
-      console.log(response)
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.data)
         message.success("user logged in successfully")
-        dispatch(SET_SUCCESS());
-        window.location.href='/dashboard';
+         dispatch(LOG_IN_USER(true))
+         dispatch(SET_SUCCESS());
+        navigate('/dashboard');
       } else {
         const message =
           (response.response && response.response.data && response.response.data.message) ||
@@ -34,21 +35,25 @@ const Login = () => {
       }
     } catch (error) {
       dispatch(SET_ERROR())
+      dispatch(LOG_OUT_USER(false));
       message.error(error.message)
-      console.log(error)
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("token")){
-      window.location.href="/dashboard"
-  }
-}, [])
+  // useEffect(() => {
+  //  if(localStorage.getItem("userData")){
+  //    navigate('/dashboard')
+  //  }
+  // }, []);
+
+
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2'>
       <div className='md:bg-primary'>
+        <Link to="/">
         <img className='auth-img center-item mx-auto md:max-w-full md:h-auto' src={logo} alt='company-logo' />
+        </Link>
       </div>
 
       <div className='center-item h-screen login-auth'>
@@ -96,8 +101,8 @@ const Login = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button className='auth-button' type="primary" htmlType="submit" block>
-                {loading ?   'Loading' : 'Sign In'}
+              <Button className='auth-button' type="primary" htmlType="submit" block loading={loading && true}>
+                Sign In
               </Button>
             </Form.Item>
             <div className="flex items-center auth-divider mb-54">
