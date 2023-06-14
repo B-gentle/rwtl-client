@@ -103,21 +103,16 @@
 @media screen and (max-width:780px) {
     .how-it-works {
         padding: 0;
+        margin-bottom: 65px;
 
         .service-providers-container {
-            padding: 39px 10px 0 20px;
-            overflow-x: auto;
-            white-space: nowrap;
-            justify-content: flex-start;
-            margin-bottom: 55px;
-            scrollbar-width: none;
-            /* Firefox */
-            -ms-overflow-style: none;
-
-            /* IE and Edge */
-            &::-webkit-scrollbar {
-                display: none;
-                /* Chrome and Safari */
+            flex-direction: column;
+            padding: 39px 10px 55px 20px; 
+            margin-bottom: 0;
+            gap: 3rem;
+            background-color: $primary-color;
+            span{
+                @include font(32px, 500, #FFFFFF);
             }
         }
 
@@ -125,6 +120,7 @@
             flex-direction: column;
             gap: 40px;
             padding: 32px 20px;
+            border-radius: 0;
             >div:nth-child(1) {
                 p {
                     margin: 24px auto 16px;

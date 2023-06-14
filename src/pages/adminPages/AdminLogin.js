@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import './auth.scss';
 import logo from '../../assets/images/RWT_LOGO-removebg-preview.png';
-import { LoginUser } from '../../services/usersApiCall';
 import googleIcon from '../../assets/icons/google-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectError, selectLoading, selectSuccess, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { LOG_IN_USER, LOG_OUT_USER } from '../../redux/features/user/userSlice';
+import '../authPages/auth.scss';
+import { LoginAdmin } from '../../services/adminCalls';
 
-const Login = () => {
+const AdminLogin = () => {
 
   const loading = useSelector(selectLoading)
   const error = useSelector(selectError)
@@ -20,12 +20,12 @@ const Login = () => {
   const onFinish = async (values) => {
     dispatch(SET_LOADING())
     try {
-      const response = await LoginUser(values)
+      const response = await LoginAdmin(values)
       if (response.status === 200) {
          dispatch(LOG_IN_USER(true))
          dispatch(SET_SUCCESS());
-         message.success("user logged in successfully")
-        navigate('/dashboard');
+         message.success("admin logged in successfully")
+        navigate('/admin');
       } else {
         const message =
           (response.response && response.response.data && response.response.data.message) ||
@@ -73,11 +73,11 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please enter your email!',
+                  message: 'Please input your username!',
                 },
               ]}
             >
-              <Input placeholder="johndoe@rwtl.com" />
+              <Input placeholder="Email" />
             </Form.Item>
 
             <Form.Item
@@ -124,4 +124,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default AdminLogin

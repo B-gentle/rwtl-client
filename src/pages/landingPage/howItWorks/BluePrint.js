@@ -27,7 +27,7 @@ export const ComplanSlide = ({ handleNext, handlePrevious, src, textAHeading, te
                     </svg>
                     <span>Compensation Plan</span>
                 </span>
-                <p>How It Works</p>
+                <p className='bg-[green] w-[250px] px-[1rem] rounded-[1rem] text-[white] text-center'>How It Works</p>
                 <img src={src} alt='' />
             </div>
             <div>

@@ -6,7 +6,12 @@ import MTN from '../../../assets/images/MTN.svg';
 import AIRTEL from '../../../assets/images/airtel.svg';
 import nineMobile from '../../../assets/images/9mobile.svg';
 import glo from '../../../assets/images/Glo.svg';
+import cableTv from '../../../assets/images/cableTv.jpeg';
 import gotv from '../../../assets/images/GOTV.png';
+import ekdc from '../../../assets/images/electricity.png';
+import eedc from '../../../assets/images/eedc.png';
+import exams from '../../../assets/images/exams.webp'
+import north from '../../../assets/images/Benin-Port-Harcourt-Kano-and-Kaduna-DisCos-cc.png';
 import slide1 from '../../../assets/images/slide1Image.png';
 import slide2 from '../../../assets/images/slide2Image.png';
 import slide3 from '../../../assets/images/slide3Image.png';
@@ -32,7 +37,12 @@ const HowItWorks = () => {
                 <ServiceProviders src={AIRTEL} networkProvider="AIRTEL" />
                 <ServiceProviders src={glo} networkProvider="GLO" />
                 <ServiceProviders src={nineMobile} networkProvider="mobile" />
-                <ServiceProviders src={gotv} networkProvider="" />
+                {/* <ServiceProviders src={gotv} networkProvider="" /> */}
+                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={cableTv} alt=''/>
+                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={exams} alt=''/>
+                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={ekdc} alt=''/>
+                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={eedc} alt=''/>
+                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={north} alt=''/>
             </div>
             <div>
                 <Carousel
@@ -40,7 +50,7 @@ const HowItWorks = () => {
                     dots={false}
                     >
                     <ComplanSlide
-                        src={slide1}
+                        src={slide5}
                         textAHeading="You are invited"
                         textABody="To get started, either register using the referral link provided to you or input the referral ID that was sent to you. Once you've done that, simply fill in your information and select the registration package that suits your preferences."
                         benefits={["Instant registration bonus of 20% on any package"]}
@@ -75,7 +85,7 @@ const HowItWorks = () => {
                         src={slide5}
                         textAHeading="Exciting Incentives"
                         textABody="By achieving certain milestones, you can earn exciting incentives such as land, a car, a house or even a trip abroad by having a total Personal Volume (PV) of 40% from your direct referrals, while the remaining 60% is accumulated from your downlines, spanning up to the 10th generation."
-                        benefits={["Land Incentive - 300,000 PV", "Car Incentive - 600,000 PV", "House Incentive - 1,000,000 PV", "Trip abroad - 1,000,000 PV"]}
+                        benefits={["Trip abroad - ₦2,000,000", "Car Incentive - ₦3,000,000", "Land Incentive - ₦6, 000,000", "House Incentive - ₦10,000,000"]}
                         page="5"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />

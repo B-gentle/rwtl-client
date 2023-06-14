@@ -4,12 +4,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './auth.scss';
 import logo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import googleIcon from '../../assets/icons/google-icon.svg';
-import { RegisterUser } from '../../services/usersApiCall';
 import { getPackages } from '../../services/packageCall';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { LOG_IN_USER } from '../../redux/features/user/userSlice';
 import EmptyState from '../../components/EmptyState';
+import MakePayment from './MakePayment';
 
 const Register = () => {
 
@@ -21,6 +21,8 @@ const Register = () => {
 
   const [packages, setPackages] = useState(null)
   const [referralCode, setReferralCode] = useState('');
+  const [showPayment, setShowPayment] = useState(false);
+  const [formData, setFormData] = useState(null);
 
   function getQueryParam(name, queryString) {
     let reg = new RegExp(name + '=([^&#]*)', 'i');
@@ -41,42 +43,27 @@ useEffect(() => {
   }
 }, [location]);
 
-  
-
-  const options = ["+234", "+197", "+911", "+235"]
+if(showPayment){
+  return <MakePayment formData={formData} setShowPayment={setShowPayment} setFormData={setFormData} packages={packages} />
+}
 
   const onFinish = async (values) => {
     dispatch(SET_LOADING())
-    const { countryCode, phoneNo, password, confirmPassword } = values;
-    values.phoneNo = countryCode + phoneNo;
-    if (password < 5 & password > 10) {
+    const { passkey, confirmPasskey } = values;
+    if (passkey < 5 & passkey > 10) {
       dispatch(SET_ERROR())
     return  message.error("Password must be greater than 4 characters and less than 10 Characters")
     }
 
-    if(password !== confirmPassword){
+    if(passkey !== confirmPasskey){
       dispatch(SET_ERROR())
      return message.error("Password does not match") 
     }
-    try {
-      const response = await RegisterUser(values)
-      if (response.status === 201) {
-        message.success(response.message)
-        dispatch(SET_SUCCESS());
-        dispatch(LOG_IN_USER(true))
-        navigate("/dashboard")
-      } else {
-        const message =
-          (response && response.response.data && response.response.data.message) ||
-          response.message ||
-          response.toString();
-        throw new Error(message)
-      }
-    } catch (error) {
-      message.error(error.message)
-      dispatch(SET_ERROR());
-    }
-  };
+    const selectedPackage = packages.find((pkg) => pkg._id === values.package);
+    const updatedFormData = { ...values, packageAmount: selectedPackage?.amount };
+    setFormData(updatedFormData);
+    setShowPayment(true);
+  }
 
   const handlePackageList = async() => {
     try{
@@ -163,7 +150,7 @@ useEffect(() => {
 
             <Form.Item
               label="Password"
-              name="password"
+              name="passkey"
               rules={[
                 {
                   required: true,
@@ -176,7 +163,7 @@ useEffect(() => {
 
             <Form.Item
               label="Confirm Password"
-              name="confirmPassword"
+              name="confirmPasskey"
               rules={[
                 {
                   required: true,
@@ -200,16 +187,7 @@ useEffect(() => {
               <Input placeholder="Referral Code" />
             </Form.Item>
 
-            <div className='flex items-center'>
             <Form.Item
-            className='mr-4'
-              name="countryCode"
-            >
-                <Select options={options.map((option) => ({ label: option, value: option }))} />
-            </Form.Item>
-
-            <Form.Item
-            className='flex-grow'
               label="Phone Number"
               name="phoneNo"
               rules={[
@@ -222,7 +200,6 @@ useEffect(() => {
                
                 <Input placeholder="Phone Number" />
             </Form.Item>
-            </div>
 
             <Form.Item
             label="Select Package"
@@ -231,14 +208,54 @@ useEffect(() => {
               <Select defaultValue="Select Package"
               notFoundContent= {<EmptyState />}
               onClick={handlePackageList}>
-                <Option>Select Packages</Option>
-                <Option>Free User</Option>
               {packages && packages.map((option) => ( 
         <Option key={option._id} value={option._id}>
           {option.name}
         </Option>
       ))}
                 </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Bank Name"
+              name="bankName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Bank Name!',
+                },
+              ]}
+            >
+               
+                <Input placeholder="e.g UBA" />
+            </Form.Item>
+
+            <Form.Item
+              label="Account No."
+              name="accountNo"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your account number!',
+                },
+              ]}
+            >
+               
+                <Input placeholder="2060680907" />
+            </Form.Item>
+
+            <Form.Item
+              label="Account Name"
+              name="accountName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your account name!',
+                },
+              ]}
+            >
+               
+                <Input placeholder="John Doe" />
             </Form.Item>
 
             <Form.Item>

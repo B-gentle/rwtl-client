@@ -48,15 +48,18 @@
 @media screen and (max-width:780px) {
     .home, .about {
         nav {
-            padding: 30px 20px;
+            padding: 10px 20px;
+            a{
+                text-decoration: none;
+            }
 
             .hamburger {
                 display: flex;
                 z-index: 2;
 
                 svg {
-                    width: 24px;
-                    height: 24px;
+                    width: 34px;
+                    height: 44px;
                     stroke: #292D32;
                 }
 

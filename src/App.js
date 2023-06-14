@@ -3,6 +3,12 @@ import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import Contents from "./components/layouts/Contents";
 import ProtectedPage from "./components/ProtectedPage";
+import AdminDashboard from "./pages/adminPages/AdminDashboard";
+import AddAdmin from "./pages/adminPages/AddAdmin";
+import CreditWallet from "./pages/adminPages/CreditWallet";
+import AdminLogin from "./pages/adminPages/AdminLogin";
+import CompleteRegistration from "./pages/adminPages/CompleteRegistration";
+import ProtectAdmin from "./pages/adminPages/ProtectAdmin";
 import ForgotPassword from "./pages/authPages/ForgotPassword";
 import Login from "./pages/authPages/Login";
 import Register from "./pages/authPages/Register";
@@ -12,7 +18,7 @@ import Home from "./pages/landingPage/Home";
 function App() {
 
   axios.defaults.withCredentials = true;
-  
+
   return (
     <div className="App">
       <ConfigProvider
@@ -29,10 +35,17 @@ function App() {
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="about" element={<About />} />
+          <Route path="super" element={<AdminLogin />} />
+          <Route path="admin">
+            <Route index element={<ProtectAdmin><AdminDashboard /></ProtectAdmin>} />
+            <Route path='addadmin' element={<ProtectAdmin><AddAdmin /></ProtectAdmin>} />
+            <Route path='approvepayment' element={<ProtectAdmin><CompleteRegistration /></ProtectAdmin>} />
+            <Route path='creditwallet' element={<ProtectAdmin><CreditWallet /></ProtectAdmin>} />
+          </Route>
           <Route path="/*" element={
-          <ProtectedPage>
-             <Contents />
-        </ProtectedPage>
+            <ProtectedPage>
+              <Contents />
+            </ProtectedPage>
           }>
           </Route>
         </Routes>

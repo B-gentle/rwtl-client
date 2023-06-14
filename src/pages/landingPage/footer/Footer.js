@@ -4,6 +4,7 @@ import logo from '../../../assets/images/RWT_LOGO-removebg-preview.png';
 import { FaFacebookF, FaInstagram, FaLinkedin, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
@@ -22,9 +23,9 @@ const Footer = () => {
         <div>
           <h1>Company</h1>
           <div>
-            <Link to='/'>About Us </Link>
-            <Link to='/'>How To Earn </Link>
-            <Link to='/'>Contact Us </Link>
+            <Link to='/about'>About Us </Link>
+            <ScrollLink to='how-it-works' spy={true} smooth={true} style={{cursor: 'pointer'}}>How To Earn </ScrollLink>
+            <ScrollLink to="contact" spy={true} smooth={true} style={{cursor: 'pointer'}}>Contact Us </ScrollLink>
           </div>
         </div>
         <div>

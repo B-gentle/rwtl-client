@@ -1,0 +1,75 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.services {
+    margin-bottom: 156px;
+    h1 {
+        @include font(1rem, 400, #DDB05B);
+        text-align: center;
+    }
+
+    h3 {
+        @include font(32px, 500, #ffffff);
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    p {
+        @include font(1rem, 400, #3A3A3A99);
+        margin-bottom: 92px;
+        text-align: center;
+    }
+
+    .service-card-container {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .service-card {
+            background-color: #FFFFFF;
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            width: 481px;
+            display: flex;
+            gap: 1rem;
+            padding: 24px;
+
+            >:nth-child(2) {
+                h1 {
+                    @include font(1rem, 500, #3A3A3A);
+                    text-align: left;
+                    margin-bottom: 8px
+                }
+
+                p {
+                    @include font(14px, 400, #3A3A3A99);
+                    text-align: left;
+                    line-height: 1.6;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:780px) {
+    .services{
+        padding: 0 20px 0;
+        h1{
+            font-size: 14px;
+        }
+        h3{
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        p{
+            font-size: 14px;
+            margin-bottom: 59px;
+        }
+        .service-card-container{
+            .service-card{
+                width: 100%;
+            }
+        }
+    }
+}

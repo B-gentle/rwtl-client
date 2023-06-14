@@ -35,10 +35,11 @@
       display: flex;
       gap: 1rem;
       margin-bottom: 82px;
+      width: 100%;
 
       button {
          height: 100%;
-         width: 171px;
+         width: 40%;
          box-shadow: -4px 9px 30px rgba(221, 176, 91, 0.25);
          border-radius: 4px;
       }
@@ -53,12 +54,14 @@
 @media screen and (max-width:780px) {
    .hero{
       flex-direction: column;
-      padding: 27px 0 0 20px;
+      padding: 27px 10px;
       .award-span{
          font-size: 14px;
       }
       h1{
-         @include font(24px, 500, #3A3A3A);
+         @include font(24px, 500, #FFFFFF);
+         background-color: green;
+         padding: 1rem;
       }
       p{
          font-size: 14px;

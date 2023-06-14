@@ -36,7 +36,8 @@
 
         .account-details-container{
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-between;
+            align-items: center;
             background-color: rgba(221, 176, 91, 0.1);
             margin-top: 1rem;
             padding: 24px 16px;

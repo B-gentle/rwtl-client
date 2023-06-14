@@ -198,10 +198,7 @@ const BuyData = () => {
     return (
         <div className='buy-airtime'>
             <BackArrowHeading title="Buy Data" link="more" />
-            <TotalBalance />
-            <div className='mb-[32px]'>
-                send to: numbers
-            </div>
+            <TotalBalance />run build
             <Form
                 className='mb-[116px]'
                 name="purchase"
