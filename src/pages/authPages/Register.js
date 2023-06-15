@@ -10,6 +10,7 @@ import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/
 import { LOG_IN_USER } from '../../redux/features/user/userSlice';
 import EmptyState from '../../components/EmptyState';
 import MakePayment from './MakePayment';
+import { checks } from '../../services/usersApiCall';
 
 const Register = () => {
 
@@ -17,83 +18,85 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const {Option} = Select;
+  const { Option } = Select;
 
   const [packages, setPackages] = useState(null)
-  const [referralCode, setReferralCode] = useState('');
   const [showPayment, setShowPayment] = useState(false);
   const [formData, setFormData] = useState(null);
 
-  function getQueryParam(name, queryString) {
-    let reg = new RegExp(name + '=([^&#]*)', 'i');
-    let string = reg.exec(queryString);
-    return string ? string[1] : null;
-}
+  const [form] = Form.useForm();
 
+  useEffect(() => {
+    // Check if the referral link parameter is present in the URL
+    const searchParams = new URLSearchParams(location.search);
+    const referralCode = searchParams.get('referralCode');
 
-useEffect(() => {
-  let referralLink = getQueryParam('ref', location.pathname + location.search);
-  if (referralLink) {
-    // Extract the code part starting from 'REF'
-    let codeStartIndex = referralLink.indexOf("REF");
-    if (codeStartIndex !== -1) {
-      let code = referralLink.substring(codeStartIndex);
-      setReferralCode(code);
+    if (referralCode) {
+      // Prefill the referral link input field
+      form.setFieldsValue({ referralCode });
     }
-  }
-}, [location]);
+  }, [location.search]);
 
-if(showPayment){
-  return <MakePayment formData={formData} setShowPayment={setShowPayment} setFormData={setFormData} packages={packages} />
-}
+  if (showPayment) {
+    return <MakePayment formData={formData} setShowPayment={setShowPayment} setFormData={setFormData} packages={packages} />
+  }
 
   const onFinish = async (values) => {
     dispatch(SET_LOADING())
-    const { passkey, confirmPasskey } = values;
+    const { passkey, confirmPasskey, email, username } = values;
     if (passkey < 5 & passkey > 10) {
       dispatch(SET_ERROR())
-    return  message.error("Password must be greater than 4 characters and less than 10 Characters")
+      return message.error("Password must be greater than 4 characters and less than 10 Characters")
     }
 
-    if(passkey !== confirmPasskey){
+    if (passkey !== confirmPasskey) {
       dispatch(SET_ERROR())
-     return message.error("Password does not match") 
+      return message.error("Password does not match")
     }
-    const selectedPackage = packages.find((pkg) => pkg._id === values.package);
-    const updatedFormData = { ...values, packageAmount: selectedPackage?.amount };
-    setFormData(updatedFormData);
-    setShowPayment(true);
+    try {
+      const dataAlreadyExist = await checks({email, username})
+      if(dataAlreadyExist.status === 200){
+        dispatch(SET_SUCCESS());
+        const selectedPackage = packages.find((pkg) => pkg._id === values.package);
+        const updatedFormData = { ...values, packageAmount: selectedPackage?.amount };
+        setFormData(updatedFormData);
+        setShowPayment(true);
+      }else{
+        const message =
+            (dataAlreadyExist.response && dataAlreadyExist.response.data && dataAlreadyExist.response.data.message) ||
+            dataAlreadyExist.message ||
+            dataAlreadyExist.toString();
+          throw new Error(message)
+      }
+    } catch (error) {
+      dispatch(SET_ERROR())
+      message.error(error.message)
+    }
+   
   }
 
-  const handlePackageList = async() => {
-    try{
+  const handlePackageList = async () => {
+    try {
       const response = await getPackages()
       setPackages(response.data.data)
-      if(response.status !== 200){
+      if (response.status !== 200) {
         const message =
           (response.response && response.response.data && response.response.data.message) ||
           response.message ||
           response.toString();
         throw new Error(message)
       }
-    }catch(error){
+    } catch (error) {
       message.error(error.message)
     }
-    
-  }
 
-  // useEffect(() => {
-  //   const token = getCookie("token");
-  //   if (token) {
-  //     navigate("/dashboard")
-  //   }
-  // }, [])
+  }
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2'>
       <div className='md:bg-primary pt-3 pb-2'>
         <Link to='/'>
-        <img className='auth-img center-item mx-auto md:max-w-full md:h-auto' src={logo} alt='company-logo' />
+          <img className='auth-img center-item mx-auto md:max-w-full md:h-auto' src={logo} alt='company-logo' />
         </Link>
       </div>
 
@@ -105,9 +108,9 @@ if(showPayment){
           </div>
 
           <Form
+            form={form}
             layout='vertical'
             onFinish={onFinish}
-            initialValues={{referralCode}}
           >
             <Form.Item
               label="Fullname"
@@ -174,18 +177,25 @@ if(showPayment){
               <Input.Password placeholder="Password" />
             </Form.Item>
 
-            <Form.Item
-              label="Referral Code"
-              name="referralCode"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input referral code!',
-                },
-              ]}
-            >
-              <Input placeholder="Referral Code" />
-            </Form.Item>
+            {location.search.includes('referralCode') ?
+              (<Form.Item
+                label="Referral Code"
+                name="referralCode"
+              >
+                <Input disabled placeholder="Referral Code" />
+              </Form.Item>) : (<Form.Item
+                label="Referral Code"
+                name="referralCode"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input referral code!',
+                  },
+                ]}
+              >
+                <Input placeholder="Referral Code" />
+              </Form.Item>)
+            }
 
             <Form.Item
               label="Phone Number"
@@ -197,23 +207,23 @@ if(showPayment){
                 },
               ]}
             >
-               
-                <Input placeholder="Phone Number" />
+
+              <Input placeholder="Phone Number" />
             </Form.Item>
 
             <Form.Item
-            label="Select Package"
-            name="package"
-              >
+              label="Select Package"
+              name="package"
+            >
               <Select defaultValue="Select Package"
-              notFoundContent= {<EmptyState />}
-              onClick={handlePackageList}>
-              {packages && packages.map((option) => ( 
-        <Option key={option._id} value={option._id}>
-          {option.name}
-        </Option>
-      ))}
-                </Select>
+                notFoundContent={<EmptyState />}
+                onClick={handlePackageList}>
+                {packages && packages.map((option) => (
+                  <Option key={option._id} value={option._id}>
+                    {option.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -226,8 +236,8 @@ if(showPayment){
                 },
               ]}
             >
-               
-                <Input placeholder="e.g UBA" />
+
+              <Input placeholder="e.g UBA" />
             </Form.Item>
 
             <Form.Item
@@ -240,8 +250,8 @@ if(showPayment){
                 },
               ]}
             >
-               
-                <Input placeholder="2060680907" />
+
+              <Input placeholder="2060680907" />
             </Form.Item>
 
             <Form.Item
@@ -254,13 +264,13 @@ if(showPayment){
                 },
               ]}
             >
-               
-                <Input placeholder="John Doe" />
+
+              <Input placeholder="John Doe" />
             </Form.Item>
 
             <Form.Item>
               <Button className='auth-button' type="primary" htmlType="submit" block loading={loading && true}>
-                 Signup
+                Signup
               </Button>
             </Form.Item>
             <div className="flex items-center auth-divider mb-54">

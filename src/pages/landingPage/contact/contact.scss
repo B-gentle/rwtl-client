@@ -10,7 +10,8 @@
         width: 500px;
 
         h1 {
-            @include font(32px, 500, #3A3A3A);
+            @include font(32px, 500, #ffffff);
+            text-align: center;
             margin-bottom: 16px;
         }
 

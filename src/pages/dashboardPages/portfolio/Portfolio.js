@@ -9,9 +9,15 @@ import pvIcon from '../../../assets/icons/dashboard_icons/pv-icon.svg';
 const Portfolio = () => {
 
     const user = useSelector(selectUserData)
+    const progress1 = ((parseFloat(user.pv) / parseFloat(10000)) * 100).toFixed(2);
+    const progress2 = ((parseFloat(user.pv) / parseFloat(30000)) * 100).toFixed(2);
     return (
         <div className='portfolio'>
             <h4>Portfolio</h4>
+            <div className='flex flex-col bg-[green] text-white p-[1rem] gap-[1rem] mb-[2rem]'>
+                <span>Commission Earned:</span>
+                <span className=''>{user?.commissionBalance}</span>
+            </div>
             <Chart />
             <PortfolioDownlines user={user} />
             <div>
@@ -23,8 +29,8 @@ const Portfolio = () => {
                     </span>
                 </span>
                 <span className='flex justify-between'>
-                    <IncentiveProgress title="Monthly Allowance" value="0 of 10,000PV" />
-                    <IncentiveProgress title="Incentive" value="0 of 30,000PV" />
+                    <IncentiveProgress title="Monthly Allowance" value={`${user.pv} of 30000PV`} progress={progress1} />
+                    <IncentiveProgress title="Incentive" value={`${user.pv} of 30000PV`} progress={progress2} />
                 </span>
             </div>
             <DoughnutChart user={user} />

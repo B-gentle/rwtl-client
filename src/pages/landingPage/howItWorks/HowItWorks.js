@@ -76,8 +76,8 @@ const HowItWorks = () => {
                         <ComplanSlide
                         src={slide4}
                         textAHeading="Monthly Allowance"
-                        textABody="Receive a monthly allowance of ₦100,000 when you get a 40% accumulated PV from your direct referrals and 60% from your team, within a month."
-                        benefits={["Monthly Allowance - 10,000 PV"]}
+                        textABody="Receive a monthly allowance of ₦100,000 when you get 10,000PV, 40% accumulated PV from your direct referrals and 60% from your team, within a month."
+                        benefits={["Monthly Allowance - ₦100,000"]}
                         page="4"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
@@ -85,7 +85,7 @@ const HowItWorks = () => {
                         src={slide5}
                         textAHeading="Exciting Incentives"
                         textABody="By achieving certain milestones, you can earn exciting incentives such as land, a car, a house or even a trip abroad by having a total Personal Volume (PV) of 40% from your direct referrals, while the remaining 60% is accumulated from your downlines, spanning up to the 10th generation."
-                        benefits={["Trip abroad - ₦2,000,000", "Car Incentive - ₦3,000,000", "Land Incentive - ₦6, 000,000", "House Incentive - ₦10,000,000"]}
+                        benefits={["Laptop and 200k cash award - ₦500,000", "Trip abroad - ₦2,000,000", "Car Incentive - ₦3,000,000", "Land Incentive - ₦6, 000,000", "House Incentive - ₦10,000,000"]}
                         page="5"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />

@@ -5,7 +5,7 @@ import GLO from '../../assets/images/Glo.svg';
 import airtel from '../../assets/images/airtel.svg';
 import BackArrowHeading from '../../components/BackArrowHeading'
 import TotalBalance from '../../components/TotalBalance'
-import { PurchaseAirtime } from '../../services/transactionCalls'
+import { buyAirtime } from '../../services/transactionCalls'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import './financePages.scss';
@@ -45,7 +45,7 @@ const BuyAirtime = () => {
             label: "9mobile"
         }]
 
-
+        const [form] = Form.useForm();
 
     const onFinish = async (values) => {
         dispatch(SET_LOADING())
@@ -61,12 +61,23 @@ const BuyAirtime = () => {
         }
 
         try {
-            const response = await PurchaseAirtime(values);
+            const response = await buyAirtime(values);
             console.log(response)
-            dispatch(SET_SUCCESS())
+            if (response.status === 200) {
+                dispatch(SET_SUCCESS())
+                message.success(response.data.message)
+                form.resetFields();
+            } else {
+                const message =
+                    (response.response && response.response.data && response.response.data.message) ||
+                    response.message ||
+                    response.toString();
+                throw new Error(message)
+            }
+
         } catch (error) {
             dispatch(SET_ERROR());
-            console.log(error)
+            message.error(error.message)
         }
 
     };
@@ -80,9 +91,7 @@ const BuyAirtime = () => {
         <div className='buy-airtime'>
             <BackArrowHeading title="Buy Airtime" link="more" />
             <TotalBalance />
-            <div className='mb-[32px]'>
-                send to: numbers
-            </div>
+
             <Form
                 className='mb-[116px]'
                 name="purchase"

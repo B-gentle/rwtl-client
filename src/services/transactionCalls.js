@@ -4,4 +4,8 @@ export const PurchaseAirtime = async(payload) =>  apiCalls('post', `/api/transac
 
 export const sendMoney = async(payload) =>  apiCalls('patch', `/api/transaction/sendmoney`, payload)
 
+export const buyAirtime = async(payload) =>  apiCalls('post', `/api/transaction/purchaseairtime`, payload)
+
+export const getTransactions = async() =>  apiCalls('get', `/api/transaction/getTransactions`)
+
 

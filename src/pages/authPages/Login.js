@@ -68,12 +68,12 @@ const Login = () => {
             onFinish={onFinish}
           >
             <Form.Item
-              label="Email"
-              name="email"
+              label="Username"
+              name="username"
               rules={[
                 {
                   required: true,
-                  message: 'Please enter your email!',
+                  message: 'Please enter your username!',
                 },
               ]}
             >

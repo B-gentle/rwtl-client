@@ -38,14 +38,14 @@ const MakePayment = ({ setShowPayment, formData, setFormData, packages }) => {
     return (
         <div className='success-page'>
             <img src={success} alt='success' />
-            <span>Complete Registration</span>
+            <span>Congratulations</span>
             <p className='text-left p-[1rem]'>Dear User, <br />To complete your registration, kindly make a transfer of: ₦{formData.packageAmount} to the account below:</p>
          <span className='text-left pl-[1rem] mb-[1rem]'> Account Number: 2001103756<br/> Account Name: RECHARGEWISE TECHNOLOGIES LIMITED <br/> Bank Name: FCMB</span>
             <div className='flex gap-[1rem]'>
                 <Button type="primary" onClick={handleSubmission}>Done</Button>
                 <Button type="primary" onClick={handleReset}>Cancel</Button>
             </div>
-            <small className='my-[2rem]'>Do not refresh the page without clicking <b>Done</b> or <b>Cancel</b></small>
+            <small className='my-[2rem] p-[10px]'>Do not refresh the page without clicking <b>Done</b> or <b>Cancel</b> if you have not made payment please kindly cancel the registration.<br/>After success payment please fill out the form below.</small>
 
         </div>
     )

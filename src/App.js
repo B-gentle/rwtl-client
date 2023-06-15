@@ -15,6 +15,7 @@ import Register from "./pages/authPages/Register";
 import ResetPassword from "./pages/authPages/ResetPassword";
 import About from "./pages/landingPage/about/About";
 import Home from "./pages/landingPage/Home";
+
 function App() {
 
   axios.defaults.withCredentials = true;

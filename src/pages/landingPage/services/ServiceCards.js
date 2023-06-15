@@ -4,7 +4,7 @@ import './services.scss';
 const ServiceCards = ({heading, text, icon}) => {
   return (
     <div className='service-card bg-[green]'>
-        <div>
+        <div className='bg-[green]'>
             <img src={icon} alt=''/>
         </div>
         <div>

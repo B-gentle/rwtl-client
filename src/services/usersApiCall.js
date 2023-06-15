@@ -2,6 +2,8 @@ import { apiCalls } from "./apiCalls";
 
 export const RegisterUser = async(payload) =>  apiCalls('post', `/api/users/register`, payload)
 
+export const checks = async(payload) =>  apiCalls('post', `/api/users/detailsValid`, payload)
+
 export const LoginUser = async(payload) =>  apiCalls('post', `/api/users/login`, payload)
 
 export const changePassword = async(payload) =>  apiCalls('patch', `/api/users/changepassword`, payload)

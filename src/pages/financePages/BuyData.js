@@ -10,6 +10,7 @@ import { PurchaseAirtime } from '../../services/transactionCalls'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import './financePages.scss';
+import { getData } from '../../services/dataCalls';
 
 
 const BuyData = () => {
@@ -20,6 +21,9 @@ const BuyData = () => {
     const [selectedPlanAmount, setSelectedPlanAmount] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { Option } = Select;
+
+
+
     const networkProvider = [
         {
             src: "",
@@ -30,33 +34,24 @@ const BuyData = () => {
             src: MTN,
             value: "01",
             label: "MTN",
-            plans: [
-                {name: "50 MB FOR 30 DAYS CORPORATE", amount: 20, value: "50.00" }
-            ]
         },
         {
             src: GLO,
             value: "02",
             label: "GLO",
-            plans: [
-                {name: "50 MB FOR 30 DAYS CORPORATE", amount: 20, value: "50.00" }
-            ]
+            
         },
         {
             src: airtel,
             value: "04",
             label: "AIRTEL",
-            plans: [
-                {name: "50 MB FOR 30 DAYS CORPORATE", amount: 20, value: "50.00" }
-            ]
+           
         },
         {
             src: nineMobile,
             value: "03",
             label: "9mobile",
-            plans: [
-                {name: "50 MB FOR 30 DAYS CORPORATE", amount: 20, value: "50.00" }
-            ]
+           
         }]
 
 // 500.0 for  @ N117.00
@@ -190,6 +185,12 @@ const BuyData = () => {
 
     };
 
+    const [dataPln, setDataPln] = useState([])
+    const handleDataCall = async() => {
+        const response = await getData()
+       setDataPln(response.data.data)
+    }
+
     const onSelect = (option) => {
         setSelectedOption(option.label);
     }
@@ -198,7 +199,7 @@ const BuyData = () => {
     return (
         <div className='buy-airtime'>
             <BackArrowHeading title="Buy Data" link="more" />
-            <TotalBalance />run build
+            <TotalBalance />
             <Form
                 className='mb-[116px]'
                 name="purchase"
@@ -216,6 +217,7 @@ const BuyData = () => {
                         style={{ width: '100%' }}
                         defaultValue="Select a Network"
                         onSelect={setSelectedOption}
+                        onClick={handleDataCall}
                     >
                         {networkProvider.map(option => (
                             <Option key={option.value} value={option.value}>
