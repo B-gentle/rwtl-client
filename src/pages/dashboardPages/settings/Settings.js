@@ -1,5 +1,5 @@
 import { Tabs } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaAngleRight } from 'react-icons/fa';
@@ -13,6 +13,11 @@ import { LOG_OUT_USER } from '../../../redux/features/user/userSlice';
 import ProfileBanner from './ProfileBanner';
 
 const Settings = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
   const isMobile = useMediaQuery({ maxWidth: 980 })
   const onChange = (key) => {
     console.log(key);

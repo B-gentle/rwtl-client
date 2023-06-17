@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { message, Space, Table, Tag } from 'antd';
+import { message, Space, Table, Button } from 'antd';
+import { Link } from 'react-router-dom';
 import SelectTableFilter from '../../components/SelectTableFilter';
 import '../../components/layouts/layouts.scss';
 import { useMediaQuery } from 'react-responsive';
@@ -145,6 +146,7 @@ const Downlines = () => {
       </div>
       {data.length <= 0 ? <EmptyState text="You currently do not have any downline. Invite your friends to earn referral bonus." /> : <Table
         columns={isMobile ? columnsMobile : columns} dataSource={filteredData} locale={{ emptyText: <EmptyTable /> }} />}
+        <Button><Link to='/adddownline'>Add Downline</Link></Button>
     </div>
   )
 }

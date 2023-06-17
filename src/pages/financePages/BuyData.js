@@ -96,8 +96,8 @@ const BuyData = () => {
 
     const handlePlanChange = (value) => {
         const amount = dataPln.find((plan) => plan.productCode === value);
-        setSelectedPlanAmount(amount?.productAmount);
-        form.setFieldsValue({ amount: `₦${amount?.productAmount}` });
+        setSelectedPlanAmount(amount?.companyPrice);
+        form.setFieldsValue({ amount: `₦${amount?.companyPrice}` });
       };
 
 

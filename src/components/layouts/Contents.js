@@ -19,6 +19,7 @@ import More from '../../pages/financePages/More';
 import BuyAirtime from '../../pages/financePages/BuyAirtime';
 import BuyData from '../../pages/financePages/BuyData';
 import Referrals from '../../pages/dashboardPages/settings/Referrals';
+import AddDownlineUser from '../../pages/financePages/AddDownlineUser';
 
 const Contents = () => {
     
@@ -44,6 +45,7 @@ const Contents = () => {
                     <Route path="more" element={<More />} />
                     <Route path='buyairtime' element={<BuyAirtime />} />
                     <Route path="buydata" element={<BuyData />} />
+                    <Route path="adddownline" element={<AddDownlineUser/>} />
                 </Routes>
                 </div>
             </div>

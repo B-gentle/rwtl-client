@@ -4,13 +4,13 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './auth.scss';
 import logo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import googleIcon from '../../assets/icons/google-icon.svg';
-import { getPackages } from '../../services/packageCall';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { LOG_IN_USER } from '../../redux/features/user/userSlice';
 import EmptyState from '../../components/EmptyState';
 import MakePayment from './MakePayment';
 import { checks } from '../../services/usersApiCall';
+import { packagesCall } from '../../services/apiCalls';
 
 const Register = () => {
 
@@ -76,20 +76,7 @@ const Register = () => {
   }
 
   const handlePackageList = async () => {
-    try {
-      const response = await getPackages()
-      setPackages(response.data.data)
-      if (response.status !== 200) {
-        const message =
-          (response.response && response.response.data && response.response.data.message) ||
-          response.message ||
-          response.toString();
-        throw new Error(message)
-      }
-    } catch (error) {
-      message.error(error.message)
-    }
-
+    packagesCall(setPackages, message);
   }
 
   return (
