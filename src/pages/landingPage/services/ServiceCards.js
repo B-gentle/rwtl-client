@@ -3,8 +3,8 @@ import './services.scss';
 
 const ServiceCards = ({heading, text, icon}) => {
   return (
-    <div className='service-card bg-[green]'>
-        <div className='bg-[green]'>
+    <div className='service-card'>
+        <div className='bg-[#392c23]'>
             <img src={icon} alt=''/>
         </div>
         <div>

@@ -10,10 +10,10 @@ const MakePayment = ({ setShowPayment, formData, setFormData, packages }) => {
     const handleSubmission = async () => {
         try {
             const response = await RegisterUser(formData)
-            console.log(response)
             if (response.status === 201) {
                 message.success(response.message)
                 dispatch(SET_SUCCESS());
+                window.location.href= 'https://wa.me/07068720576'
                 // dispatch(LOG_IN_USER(true))
                 setShowPayment(false);
                 setFormData(null);
@@ -45,7 +45,7 @@ const MakePayment = ({ setShowPayment, formData, setFormData, packages }) => {
                 <Button type="primary" onClick={handleSubmission}>Done</Button>
                 <Button type="primary" onClick={handleReset}>Cancel</Button>
             </div>
-            <small className='my-[2rem] p-[10px]'>Do not refresh the page without clicking <b>Done</b> or <b>Cancel</b> if you have not made payment please kindly cancel the registration.<br/>After success payment please fill out the form below.</small>
+            <small className='my-[2rem] p-[10px]'>Do not refresh the page without clicking <b>Done</b> or <b>Cancel</b> if you have not made payment please kindly cancel the registration.<br/>After successful payment please submit your proof of payment to the whatsapp Contact.</small>
 
         </div>
     )

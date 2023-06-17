@@ -2,7 +2,7 @@
 @import '../../../sass/mixins';
 
 .hero {
-   background-color: rgba(17, 17, 17, 0.01);
+   background-color: #E9daa4;
    padding: 110.5px 0 0 120px;
    display: flex;
 
@@ -66,12 +66,12 @@
       p{
          font-size: 16px;
          margin-bottom: 20px;
+         color: #3A3A3A;
       }
 
-      .hero-card.ant-card{
+      .write-ups{
          border-radius: 0 10px 10px 0;
-         background: linear-gradient(to right, #DDB05B, rgba(39, 44, 39, 0.9));
-         @include font(18px, 400, #FFFFFF);
+         @include font(18px, 400, #3a3a3a);
          font-family: $font!important;
       }
       .hero-buttons{

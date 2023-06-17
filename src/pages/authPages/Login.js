@@ -77,7 +77,7 @@ const Login = () => {
                 },
               ]}
             >
-              <Input placeholder="johndoe@rwtl.com" />
+              <Input placeholder="username" />
             </Form.Item>
 
             <Form.Item

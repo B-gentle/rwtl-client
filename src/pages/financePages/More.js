@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaAngleRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import BackArrowHeading from '../../components/BackArrowHeading';
 
 const More = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   return (
     <div className='more'>
       <BackArrowHeading title="More" link="dashboard" />

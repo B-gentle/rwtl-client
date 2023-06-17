@@ -15,10 +15,8 @@ const Hero = () => {
         </span> */}
         <h1 className='text-center'>Welcome To Rechargewise Technologies</h1>
         <p style={{fontSize: '18px'}}>Our world of digitally transformed airtime vending and bill payment platform.</p>
-        <p>
-          <Card className='hero-card'>
+        <p className='write-ups'>
           We provide Virtual Top Up (VTU) business solutions for Data Subscriptions, Electricity Bills Payment, Airtime, Cable TV Subscriptions, WAEC & Neco Result Pin, Recharge Card Printing, etc, at highly subsidized rates.
-          </Card>
          <br /><br />
           ✅Rechargewise is a platform that will create wealth for people thereby lifting many out of poverty.
           <br /><br />

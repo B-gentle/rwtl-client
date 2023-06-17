@@ -53,7 +53,7 @@ const HowItWorks = () => {
                         src={slide5}
                         textAHeading="You are invited"
                         textABody="To get started, either register using the referral link provided to you or input the referral ID that was sent to you. Once you've done that, simply fill in your information and select the registration package that suits your preferences."
-                        benefits={["Instant registration bonus of 20% on any package"]}
+                        benefits={["Instant registration bonus of 25% on any package"]}
                         page="1"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
@@ -61,7 +61,7 @@ const HowItWorks = () => {
                         src={slide2}
                         textAHeading="Commission-Based Transactions"
                         textABody="Get rewarded for every transaction made through the platform. Whether it's recharging mobile phones, subscribing data, paying utility bills. Earn commission from your downlines."
-                        benefits={["Buy or sell data - 10% commission", "Buy or sell Airtime - 4% commission"]}
+                        benefits={["Buy or sell data - up to 10% commission", "Buy or sell Airtime - up to 4% commission"]}
                         page="2"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
@@ -69,7 +69,7 @@ const HowItWorks = () => {
                         src={slide3}
                         textAHeading="Referral Bonus"
                         textABody="Get to earn direct and indirect referral bonus by referring your friends, colleagues to RechargeWise."
-                        benefits={["Direct Referral Bonus - 20% commission", "Indirect Referral Bonus - 10-1% commission"]}
+                        benefits={["Direct Referral Bonus - 25% commission", "Indirect Referral Bonus - 6-1% commission"]}
                         page="3"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
