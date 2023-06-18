@@ -12,17 +12,16 @@ const PendingUserDetails = ({ user, setSelectedUser }) => {
         try {
             const response = await completeRegistration({ email: user?.email })
             if (response.status === 201) {
-                console.log(response)
                 dispatch(SET_SUCCESS());
-                message.success("Registration pending approval")
+                message.success("Registration Approved")
                 setSelectedUser(null)
             } else {
                 console.log(response)
                 const message =
-                    (response.response && response.response.data && response.response.data.message) ||
-                    response.message ||
-                    response.toString();
-                throw new Error(message)
+                (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+                response.message ||
+                response.toString();
+              throw new Error(message)
             }
         } catch (error) {
             dispatch(SET_ERROR());

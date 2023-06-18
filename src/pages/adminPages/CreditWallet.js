@@ -1,6 +1,7 @@
 import { Button, Form, Input, message } from 'antd'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import BackArrowHeading from '../../components/BackArrowHeading';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { credituser } from '../../services/adminCalls';
 
@@ -31,6 +32,7 @@ const CreditWallet = () => {
 
     return (
         <div>
+            <BackArrowHeading title="Credit User" link="admin" />
             <Form
                 layout='vertical'
                 onFinish={onFinish}

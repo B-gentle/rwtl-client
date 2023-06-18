@@ -71,8 +71,17 @@ const BuyData = () => {
 
         try {
             const response = await PurchaseData(values);
-            console.log(response)
-            dispatch(SET_SUCCESS())
+           if(response.status === 200){
+            dispatch(SET_SUCCESS());
+            message.success("Data Purchased Successfully")
+           }else{
+            const message =
+            (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+            response.message ||
+            response.toString();
+          throw new Error(message)
+           }
+            
         } catch (error) {
             dispatch(SET_ERROR());
             console.log(error)
@@ -97,7 +106,7 @@ const BuyData = () => {
     const handlePlanChange = (value) => {
         const amount = dataPln.find((plan) => plan.productCode === value);
         setSelectedPlanAmount(amount?.companyPrice);
-        form.setFieldsValue({ amount: `₦${amount?.companyPrice}` });
+        form.setFieldsValue({ amount: amount?.companyPrice });
       };
 
 

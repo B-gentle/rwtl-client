@@ -1,6 +1,7 @@
 import { Button, message, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getPendingRegistrations } from '../../services/adminCalls';
+import BackArrowHeading from '../../components/BackArrowHeading';
 import './admin.scss';
 import PendingUserDetails from './PendingUserDetails';
 
@@ -63,7 +64,7 @@ const CompleteRegistration = () => {
 
   return (
     <div>
-      <h3>View Pending users</h3>
+      <BackArrowHeading title="View Pending users" link="admin" />
       {selectedUser ? (<PendingUserDetails user={selectedUser} setSelectedUser={setSelectedUser}/>) : (<Table dataSource={data} columns={columns} />)}
       
         

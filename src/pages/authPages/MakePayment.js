@@ -13,7 +13,7 @@ const MakePayment = ({ setShowPayment, formData, setFormData, packages }) => {
             if (response.status === 201) {
                 message.success(response.message)
                 dispatch(SET_SUCCESS());
-                window.location.href= 'https://wa.me/07068720576'
+                window.location.href= 'https://wa.me/+2347068720576'
                 // dispatch(LOG_IN_USER(true))
                 setShowPayment(false);
                 setFormData(null);

@@ -1,6 +1,6 @@
 import { apiCalls } from "./apiCalls";
 
-export const AddAdmin = async(payload) =>  apiCalls('post', `/api/admin/addadmin`, payload)
+export const AddNewAdmin = async(payload) =>  apiCalls('post', `/api/admin/addadmin`, payload)
 
 export const LoginAdmin = async(payload) =>  apiCalls('post', `/api/admin/login`, payload)
 
