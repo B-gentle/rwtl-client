@@ -23,8 +23,6 @@ const BuyData = () => {
     const { Option } = Select;
 
     const [form] = Form.useForm();
-
-
     const networkProvider = [
         {
             src: "",
@@ -55,7 +53,6 @@ const BuyData = () => {
 
         }]
 
-
     const onFinish = async (values) => {
         dispatch(SET_LOADING())
         const { phoneNumber, amount } = values;
@@ -74,6 +71,7 @@ const BuyData = () => {
            if(response.status === 200){
             dispatch(SET_SUCCESS());
             message.success("Data Purchased Successfully")
+            form.resetFields();
            }else{
             const message =
             (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||

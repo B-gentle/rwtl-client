@@ -21,14 +21,18 @@ const More = () => {
                 <span>Airtime</span>
                 <FaAngleRight />
             </Link>
-            <p className='flex justify-between mb-3'>
+            <Link to="/cable" className='more-links'>
                 <span>Cable</span>
                 <FaAngleRight />
-            </p>
-            <p className='flex justify-between mb-3'>
+            </Link>
+            <Link to="/electricity" className='more-links'>
                 <span>Electricity</span>
                 <FaAngleRight />
-            </p>
+            </Link>
+            <Link to="/electricity" className='more-links'>
+                <span>Exams</span>
+                <FaAngleRight />
+            </Link>
             </div>
     </div>
   )

@@ -26,6 +26,7 @@ const Navbar = () => {
             <ScrollLink to='how-it-works' spy={true} smooth={true} style={{cursor: 'pointer'}}>How It Works</ScrollLink>
             <ScrollLink to="services" spy={true} smooth={true} style={{cursor: 'pointer'}}>Services</ScrollLink>
             <ScrollLink to="contact" spy={true} smooth={true} style={{cursor: 'pointer'}}>Contact Us</ScrollLink>
+            <NavLink to='/login'>Login</NavLink>
         </span>
         <Button type='primary'>Get Started</Button>
     </nav>

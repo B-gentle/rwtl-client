@@ -20,6 +20,9 @@ import BuyAirtime from '../../pages/financePages/BuyAirtime';
 import BuyData from '../../pages/financePages/BuyData';
 import Referrals from '../../pages/dashboardPages/settings/Referrals';
 import AddDownlineUser from '../../pages/financePages/AddDownlineUser';
+import Cable from '../../pages/financePages/Cable';
+import Electricity from '../../pages/financePages/Electricity';
+import PackageUpgrade from '../../pages/financePages/PackageUpgrade';
 
 const Contents = () => {
     
@@ -35,6 +38,7 @@ const Contents = () => {
                     <Route path="transactions" element={<Transactions />} />
                     <Route path="settings" element={<Settings />} />
                     <Route path="profiles" element={<Profile />} />
+                    <Route path="packageupgrade" element={<PackageUpgrade/>} />
                     <Route path="portfolio" element={<Portfolio />} />
                     <Route path="downlines" element={<Downlines />} />
                     <Route path='change-password' element={<ChangePassword />} />
@@ -45,6 +49,8 @@ const Contents = () => {
                     <Route path="more" element={<More />} />
                     <Route path='buyairtime' element={<BuyAirtime />} />
                     <Route path="buydata" element={<BuyData />} />
+                    <Route path='cable' element={<Cable />} />
+                    <Route path='electricity' element={<Electricity />} />
                     <Route path="adddownline" element={<AddDownlineUser/>} />
                 </Routes>
                 </div>

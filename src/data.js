@@ -66,6 +66,11 @@ export const settingsMenu = [{
         to: "/profiles"
     },
     {
+        link: "Upgrade Package",
+        img: profile,
+        to: "/packageupgrade"
+    },
+    {
         link: "Notifications",
         img: notification,
         to: "/notifications"

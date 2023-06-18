@@ -69,10 +69,10 @@ const BuyAirtime = () => {
                 form.resetFields();
             } else {
                 const message =
-                    (response.response && response.response.data && response.response.data.message) ||
-                    response.message ||
-                    response.toString();
-                throw new Error(message)
+                (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+                response.message ||
+                response.toString();
+              throw new Error(message)
             }
 
         } catch (error) {
