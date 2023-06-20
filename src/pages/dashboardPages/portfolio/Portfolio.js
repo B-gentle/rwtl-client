@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { IncentiveProgress, PortfolioDownlines } from '../../../components/DashbardComponents'
 import { Chart, DoughnutChart } from './portfolioChart'
@@ -7,17 +7,16 @@ import { selectUserData } from '../../../redux/features/user/userSlice';
 import pvIcon from '../../../assets/icons/dashboard_icons/pv-icon.svg';
 
 const Portfolio = () => {
-
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+    
     const user = useSelector(selectUserData)
     const progress1 = ((parseFloat(user.pv) / parseFloat(10000)) * 100).toFixed(2);
     const progress2 = ((parseFloat(user.pv) / parseFloat(30000)) * 100).toFixed(2);
     return (
         <div className='portfolio'>
             <h4>Portfolio</h4>
-            <div className='flex flex-col bg-[green] text-white p-[1rem] gap-[1rem] mb-[2rem]'>
-                <span>Commission Earned:</span>
-                <span className=''>{user?.commissionBalance}</span>
-            </div>
             <Chart />
             <PortfolioDownlines user={user} />
             <div>

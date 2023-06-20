@@ -1,72 +1,117 @@
-import { Button, Form, Input, Select } from 'antd';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import { Button, Form, Input, message, Select } from 'antd';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../components/BackArrowHeading';
 import TotalBalance from '../../components/TotalBalance';
+import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
+import { getCable } from '../../services/dataCalls';
+import { PayCable } from '../../services/transactionCalls';
 
 const Cable = () => {
     const [form] = Form.useForm();
-    const networkProvider = [
+    const [selectedPlan, setSelectedPlan] = useState(null)
+    const [selectedPlanAmount, setSelectedPlanAmount] = useState()
+    const loading = useSelector(selectLoading)
+    const dispatch = useDispatch()
+
+    const { Option } = Select;
+
+    const cableNetwork = [
         {
             src: "",
             value: "",
             label: "Please "
         },
         {
-            // src: MTN,
             value: "gotv",
             label: "GOTV",
         },
         {
-            // src: GLO,
             value: "dstv",
             label: "DSTV",
 
         },
         {
-            // src: airtel,
             value: "startimes",
             label: "STARTIMES",
 
         }
     ]
-  return (
-    <div>
-        <BackArrowHeading title="Utility Bills" link="more" />
-        <TotalBalance />
-        <Form
+
+    const initialValues = {
+        amount: selectedPlanAmount
+    }
+
+    const handleCableCall = async (value) => {
+        const response = await getCable({ cableNetwork: value })
+        if (response.status === 200) {
+            setSelectedPlan(response.data.data[0])
+            console.log(selectedPlan)
+        }
+    }
+
+    const handlePlanChange = (value) => {
+        const amount = selectedPlan.find((plan) => plan?.PACKAGE_ID === value);
+        setSelectedPlanAmount(amount?.PACKAGE_AMOUNT);
+        form.setFieldsValue({ amount: amount?.PACKAGE_AMOUNT });
+    }
+
+    const onFinish = async (values) => {
+        dispatch(SET_LOADING())
+        try {
+            const response = await PayCable(values)
+            if (response.status === 200) {
+                dispatch(SET_SUCCESS())
+                message.success('Bill Payed')
+                form.resetFields();
+            } else {
+                const message =
+                    (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+                    response.message ||
+                    response.toString();
+                throw new Error(message)
+            }
+        } catch (error) {
+            dispatch(SET_ERROR())
+            message.error(error.message)
+        }
+    }
+    return (
+        <div className='buy-airtime'>
+            <BackArrowHeading title="Utility Bills" link="more" />
+            <TotalBalance />
+            <Form
                 className='mb-[116px]'
                 name="purchase"
                 form={form}
-                // onFinish={onFinish}
+                onFinish={onFinish}
                 layout="vertical"
-                // initialValues={initialValue}
-                
+                initialValues={initialValues}
+
             >
                 <Form.Item
                     label="Select Provider"
                     name="network"
-                    rules={[{ required: true, message: 'Please Select Network!' }]}
+                    rules={[{ required: true, message: 'Please Select Cable Network!' }]}
                 >
 
                     <Select
-                        placeholder="Select Network"
+                        placeholder="Select Provider"
                         style={{ width: '100%' }}
-                        // onChange={handleDataCall}
+                        onChange={handleCableCall}
                     >
-                        {/* {networkProvider.map(option => (
+                        {cableNetwork.map(option => (
                             <Option key={option.value} value={option.value}>
-                                <Avatar src={option.src} />
                                 {option.label}
                             </Option>
-                        ))} */}
+                        ))}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="IUC/SMART CARD NUMBER"
                     name="number"
-                    rules={[{ required: true, message: "Please enter a phone number" }]}
+                    rules={[{ required: true, message: "Please enter an IUC/SMART CARD number" }]}
                 >
                     <Input />
                 </Form.Item>
@@ -80,16 +125,17 @@ const Cable = () => {
                     <Select
                         placeholder="Select Package"
                         style={{ width: '100%' }}
-                        // disabled={dataPln && dataPln.length <= 0}
-                        // onChange={handlePlanChange}
+                        onChange={handlePlanChange}
 
                     >
-                        {/* {dataPln && dataPln.map((plan => (
-                            <Option key={plan?.productCode} value={plan?.productCode}>
-                                {plan.productName}
+                        {selectedPlan && selectedPlan.map((plan => (
+                            <Option key={plan?.PACKAGE_ID
+                            } value={plan?.PACKAGE_ID
+                            }>
+                                {plan.PACKAGE_NAME}
                             </Option>
                         )))
-                        } */}
+                        }
                     </Select>
                 </Form.Item>
 
@@ -98,19 +144,17 @@ const Cable = () => {
                     name="amount"
                     rules={[{ required: true, message: "Please enter an Amount" }]}
                 >
-                    <Input placeholder='Amount'  disabled />
-                    {/* value={selectedPlanAmount} */}
+                    <Input placeholder='Amount' disabled />
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" block >
-                    {/* loading={loading && true} */}
+                    <Button type="primary" loading={loading && true} htmlType="submit" block >
                         Pay
                     </Button>
                 </Form.Item>
             </Form>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Cable

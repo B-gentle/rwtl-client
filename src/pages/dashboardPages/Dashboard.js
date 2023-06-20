@@ -82,22 +82,29 @@ const Dashboard = () => {
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
-                    <div className="flex justify-between balance-card">
-                        <span>Total balance<br /><span>₦{user.walletBalance}</span></span>
-                        <span className='flex text-right'>{todayDate}<br />{time}</span>
+                    <div className="flex justify-between gap-[6rem] balance-card">
+                        <main className='flex flex-col'>
+                            <span>Wallet Balance:<br /><span>₦{user.walletBalance}</span></span>
+                            <span>Total Commission Earned:<br /><span>₦{(user.commissionBalance).toFixed(2)}</span></span>
+                        </main>
+                        <main className='flex flex-col'>
+                            <span>{todayDate}<br />{time}</span>
+                            <span>Commission Balance:<br /><span>₦{(user.withdrawableCommission).toFixed(2)}</span></span>
+                        </main>
+
                     </div>
                     <div className='flex financial-cards-container'>
                         <Link to='/sendmoney'>
-                        <FinancialCards text="Send" icon={sendIcon}  />
+                            <FinancialCards text="Send" icon={sendIcon} />
                         </Link>
                         <Link to='/withdraw'>
-                        <FinancialCards text="Withdraw" icon={withdrawIcon} />
+                            <FinancialCards text="Withdraw" icon={withdrawIcon} />
                         </Link>
                         <Link to='/topup'>
-                        <FinancialCards text="Top Up" icon={topUpIcon} />
+                            <FinancialCards text="Top Up" icon={topUpIcon} />
                         </Link>
                         <Link to='/more'>
-                        <FinancialCards text="More" icon={moreIcon}  />
+                            <FinancialCards text="More" icon={moreIcon} />
                         </Link>
                     </div>
                 </Card>
@@ -124,10 +131,10 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row'>
                 <Card className='card'>
                     <div>
-                    <h1>Recent Transactions</h1>
-                    <DateRange />
+                        <h1>Recent Transactions</h1>
+                        <DateRange />
                     </div>
-                    
+
                     <RecentTransactions />
                 </Card>
 

@@ -1,5 +1,5 @@
 import { Form, Input, Button, Select, message } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmptyState from '../../components/EmptyState';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
@@ -10,6 +10,11 @@ import RegistrationCompleted from './RegistrationCompleted';
 
 
 const AddDownlineUser = () => {
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [])
+    
 
     const [packages, setPackages] = useState(null)
     const [registrationCompleted, setRegistrationCompleted] = useState(false)
@@ -43,10 +48,10 @@ const AddDownlineUser = () => {
                 setRegistrationCompleted(true)
             } else {
                 const message =
-                    (response && response.response.data && response.response.data.message) ||
-                    response.message ||
-                    response.toString();
-                throw new Error(message)
+            (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+            response.message ||
+            response.toString();
+          throw new Error(message)
             }
         } catch (error) {
             message.error(error.message)

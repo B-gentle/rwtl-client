@@ -24,11 +24,11 @@ const Login = () => {
       if (response.status === 200) {
          dispatch(LOG_IN_USER(true))
          dispatch(SET_SUCCESS());
-         message.success("user logged in successfully")
         navigate('/dashboard');
+        message.success("user logged in successfully")
       } else {
         const message =
-          (response.response && response.response.data && response.response.data.message) ||
+          (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
           response.message ||
           response.toString();
         throw new Error(message)

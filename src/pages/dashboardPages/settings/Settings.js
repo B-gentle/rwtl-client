@@ -48,6 +48,9 @@ const Settings = () => {
     dispatch(LOG_OUT_USER(false));
     navigate("/");
 }
+
+const lastElement = settingsMenu.length - 1;
+
   return (
     <div>
       {isMobile ? (
@@ -56,7 +59,7 @@ const Settings = () => {
           <ProfileBanner />
           <h2 className='mt-[40px]'>General Settings</h2>
           <div className='settingsLinks'>
-            {settingsMenu && settingsMenu.map((item, id) => <Link style={{ color: id === 8 && 'red'}} onClick={id === 8 &&logUserOut} to={item.to} key={id}>
+            {settingsMenu && settingsMenu.map((item, id) => <Link style={{ color: id === lastElement && 'red'}} onClick={id === lastElement &&logUserOut} to={item.to} key={id}>
               <span>
               <img src={item.img} alt="icon" />
               <span>{item.link}</span>

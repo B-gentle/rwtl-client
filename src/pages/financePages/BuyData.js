@@ -61,11 +61,6 @@ const BuyData = () => {
             return message.error("Invalid Phone number")
         }
 
-        if (amount < 50) {
-            dispatch(SET_ERROR())
-            return message.error("All recharges are from N50 and Above")
-        }
-
         try {
             const response = await PurchaseData(values);
            if(response.status === 200){
@@ -95,9 +90,11 @@ const BuyData = () => {
 
     const [dataPln, setDataPln] = useState()
     const handleDataCall = async (value) => {
-        const response = await getData({ networkCode: value })
+        const response = await getData()
+        // { networkCode: value }
         if (response.status === 200){
-            setDataPln(response.data.data[0].plans)
+            console.log(response)
+            // setDataPln(response.data.data[0].plans)
         }
     }
 

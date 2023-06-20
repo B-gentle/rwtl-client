@@ -29,7 +29,7 @@ const More = () => {
                 <span>Electricity</span>
                 <FaAngleRight />
             </Link>
-            <Link to="/electricity" className='more-links'>
+            <Link to="/exams" className='more-links'>
                 <span>Exams</span>
                 <FaAngleRight />
             </Link>
