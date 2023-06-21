@@ -17,6 +17,7 @@ import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { MoreModal } from '../../components/FinanceModal';
 import { Link } from 'react-router-dom';
 import DateRange from './DateRange';
+import { FaWallet } from 'react-icons/fa';
 
 const Dashboard = () => {
 
@@ -69,7 +70,7 @@ const Dashboard = () => {
 
     return (
         <div className='dashboard'>
-            {isMobile && (<div className='flex justify-between mt-[1rem] mb-[28px]'>
+            {isMobile && (<div className='flex flex-col md:flex-row justify-between mt-[1rem] mb-[28px]'>
                 <span className='flex items-center'>
                     <img className='w-[60px] h-[60px] mr-[8px]' src={profileIcon} alt='avatar' />
                     <Welcome user={user} />
@@ -82,15 +83,31 @@ const Dashboard = () => {
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
-                    <div className="flex justify-between gap-[6rem] balance-card">
-                        <main className='flex flex-col'>
-                            <span>Wallet Balance:<br /><span>₦{user.walletBalance}</span></span>
-                            <span>Total Commission Earned:<br /><span>₦{(user.commissionBalance).toFixed(2)}</span></span>
-                        </main>
+                    <div className="flex justify-center md:flex-wrap flex-col md:space-x-6 space-y-3 balance-card">
+                        <div className='flex md:w-[70%] w-full space-x-6'>
+                            <div className='flex flex-col md:w-[200px] w-full md:gap-3 gap-[1rem] h-[auto] w-[50%] bg-[#926f34] text-white p-[1rem]'>
+                                <FaWallet />
+                                <span>Wallet Balance:</span>
+                                <span>₦{user.walletBalance}</span>
+                            </div>
+                            <div className='flex flex-col md:w-[200px] w-full md:gap-3 gap-[1rem] h-[auto] w-[50%] bg-[#b88a44] text-white p-[1rem]'>
+                                <FaWallet />
+                                <span>Total Commission Earned:</span>
+                                <span>₦{(user.commissionBalance).toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div className='lg:w-[30%] w-full'>
+                            <div className='flex flex-col md:gap-3 gap-[1rem] h-[auto] w-[100%] text-white bg-[#855424] p-[1rem]'>
+                                <FaWallet />
+                                <span>Commission Balance:</span>
+                                <span>₦{(user.withdrawableCommission).toFixed(2)}</span>
+                            </div>
+                        </div>
+                        {/* 
                         <main className='flex flex-col'>
                             <span>{todayDate}<br />{time}</span>
-                            <span>Commission Balance:<br /><span>₦{(user.withdrawableCommission).toFixed(2)}</span></span>
-                        </main>
+                            <span><br /><span></span></span>
+                        </main> */}
 
                     </div>
                     <div className='flex financial-cards-container'>
