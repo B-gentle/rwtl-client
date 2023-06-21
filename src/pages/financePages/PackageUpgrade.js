@@ -1,16 +1,30 @@
-import { Button, Form, Input } from 'antd'
-import React from 'react'
-import { useSelector } from 'react-redux';
+import { Button, Form, Input, Select, message } from 'antd'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../components/BackArrowHeading'
+import EmptyState from '../../components/EmptyState';
+import { selectLoading } from '../../redux/features/processingStates/processStatesSlice';
 import { selectUserData } from '../../redux/features/user/userSlice';
+import { packagesUpgradeCall } from '../../services/apiCalls';
 
 const PackageUpgrade = () => {
 
 const user = useSelector(selectUserData);
-const userPackage = user?.package?.name
+const loading = useSelector(selectLoading)
+const dispatch = useDispatch()
+const [form] = Form.useForm();
+const { Option } = Select;
+const [packages, setPackages] = useState(null)
+
+const userPackage = user?.package
+
+const handlePackageList = async () => {
+  packagesUpgradeCall(setPackages, message);
+}
 
 const initialValues = {
-    currrentPackage: user?.package.name
+    currrentPackage: user?.package.name,
+    package: 'Select Package'
 }
 
     const onFinish = async(values) => {
@@ -33,23 +47,26 @@ const initialValues = {
     </Form.Item>
 
     <Form.Item
-      label="Password"
-      name="password"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your password!',
-        },
-      ]}
-    >
-      <Input />
-    </Form.Item>
+              label="Select Package"
+              name="package"
+            >
+              <Select
+                notFoundContent={<EmptyState />}
+                onClick={handlePackageList}>
+                {packages && packages
+                 .map((option) => (
+                  <Option key={option._id} value={option._id}>
+                    {option.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
 
     
 
     <Form.Item
     >
-      <Button type="primary" htmlType="submit" block>
+      <Button type="primary" htmlType="submit" block loading={loading && true}>
         Upgrade
       </Button>
     </Form.Item>

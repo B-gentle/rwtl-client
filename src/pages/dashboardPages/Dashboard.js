@@ -70,7 +70,7 @@ const Dashboard = () => {
 
     return (
         <div className='dashboard'>
-            {isMobile && (<div className='flex flex-col md:flex-row justify-between mt-[1rem] mb-[28px]'>
+            {isMobile && (<div className='flex md:flex-row justify-between mt-[1rem] mb-[28px]'>
                 <span className='flex items-center'>
                     <img className='w-[60px] h-[60px] mr-[8px]' src={profileIcon} alt='avatar' />
                     <Welcome user={user} />
@@ -83,33 +83,30 @@ const Dashboard = () => {
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
-                    <div className="flex justify-center md:flex-wrap flex-col md:space-x-6 space-y-3 balance-card">
-                        <div className='flex md:w-[70%] w-full space-x-6'>
-                            <div className='flex flex-col md:w-[200px] w-full md:gap-3 gap-[1rem] h-[auto] w-[50%] bg-[#926f34] text-white p-[1rem]'>
-                                <FaWallet />
-                                <span>Wallet Balance:</span>
-                                <span>₦{user.walletBalance}</span>
-                            </div>
-                            <div className='flex flex-col md:w-[200px] w-full md:gap-3 gap-[1rem] h-[auto] w-[50%] bg-[#b88a44] text-white p-[1rem]'>
-                                <FaWallet />
-                                <span>Total Commission Earned:</span>
-                                <span>₦{(user.commissionBalance).toFixed(2)}</span>
-                            </div>
+                    <div className='flex flex-wrap justify-between'>
+                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[45%] md:w-[30%] p-[1rem]'>
+                            <FaWallet />
+                            <span>Wallet Balance:</span>
+                            <span>₦{user.walletBalance}</span>
                         </div>
-                        <div className='lg:w-[30%] w-full'>
-                            <div className='flex flex-col md:gap-3 gap-[1rem] h-[auto] w-[100%] text-white bg-[#855424] p-[1rem]'>
-                                <FaWallet />
-                                <span>Commission Balance:</span>
+                        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[50%] md:w-[30%] p-[1rem]'>
+                            <FaWallet />
+                            <span>Total Commission Earned:</span>
+                            <span>₦{(user.commissionBalance).toFixed(2)}</span>
+                        </div>
+                        <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem]'>
+                            <FaWallet />
+                            <span className='font-medium'>Commission Balance:</span>
+                            <span className='flex justify-between md:flex-col md:mt-[10px]'>
                                 <span>₦{(user.withdrawableCommission).toFixed(2)}</span>
-                            </div>
+                                <Link to='/withdrawcommission'>
+                                    <button className='bg-[#faf398] text-green p-[1rem] border-none rounded-md'>Transfer Commission
+                                    </button>
+                                </Link>
+                            </span>
                         </div>
-                        {/* 
-                        <main className='flex flex-col'>
-                            <span>{todayDate}<br />{time}</span>
-                            <span><br /><span></span></span>
-                        </main> */}
-
                     </div>
+
                     <div className='flex financial-cards-container'>
                         <Link to='/sendmoney'>
                             <FinancialCards text="Send" icon={sendIcon} />
