@@ -136,13 +136,7 @@
     height: 80px;
     padding: 24px;
     align-items: center;
-    background-color: #FFFFFF;
     border-radius: 4px;
-
-    img {
-        width: 24px;
-        height: 24px;
-    }
 }
 
 .card {
@@ -271,7 +265,7 @@
 
                     .financial-cards-container {
                         margin-top: 24px;
-                        padding: 1rem;
+                        padding: 10px;
                         display: flex;
                         gap: 8px;
                         justify-content: center;
@@ -281,21 +275,11 @@
                         }
 
                         .financialCards {
-                            width: 60.62px;
-                            height: 57.74px;
                             padding: 11.5475px;
                             align-items: center;
-                            background-color: #FFFFFF;
                             border-radius: 4px;
-                            font-size: 10.1px;
+                            font-size: 1rem;
                             font-weight: 400;
-
-                            img {
-                                width: 17.32px;
-                                height: 17.32px;
-                            }
-
-
                         }
                     }
                 }

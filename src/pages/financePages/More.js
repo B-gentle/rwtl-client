@@ -13,16 +13,16 @@ const More = () => {
     <div className='more'>
       <BackArrowHeading title="More" link="dashboard" />
       <div className='flex flex-col gap-[45px] mb-[400px]'>
-            <Link to="/buydata" className='more-links'>
-                <span>Data</span>
+            <Link to="/sendmoney" className='more-links'>
+                <span>Send Money</span>
                 <FaAngleRight />
             </Link>
-            <Link to="/buyairtime" className='more-links'>
-                <span>Airtime</span>
+            <Link to="/withdraw" className='more-links'>
+                <span>Withdraw</span>
                 <FaAngleRight />
             </Link>
-            <Link to="/cable" className='more-links'>
-                <span>Cable</span>
+            <Link to="/topup" className='more-links'>
+                <span>Fund Wallet</span>
                 <FaAngleRight />
             </Link>
             <Link to="/electricity" className='more-links'>
@@ -31,6 +31,10 @@ const More = () => {
             </Link>
             <Link to="/exams" className='more-links'>
                 <span>Exams</span>
+                <FaAngleRight />
+            </Link>
+            <Link to="/cardprinting" className='more-links'>
+                <span>Recharge Card Printing</span>
                 <FaAngleRight />
             </Link>
             </div>

@@ -25,6 +25,7 @@ import Electricity from '../../pages/financePages/Electricity';
 import PackageUpgrade from '../../pages/financePages/PackageUpgrade';
 import Exams from '../../pages/financePages/Exams';
 import WithdrawCommission from '../../pages/financePages/WithdrawCommission';
+import CardPrinting from '../../pages/financePages/CardPrinting';
 
 const Contents = () => {
     
@@ -54,6 +55,7 @@ const Contents = () => {
                     <Route path='cable' element={<Cable />} />
                     <Route path='electricity' element={<Electricity />} />
                     <Route path='exams' element={<Exams />} />
+                    <Route path='cardprinting' element={<CardPrinting />} />
                     <Route path="adddownline" element={<AddDownlineUser/>} />
                     <Route path='withdrawcommission' element={<WithdrawCommission />} />
                 </Routes>

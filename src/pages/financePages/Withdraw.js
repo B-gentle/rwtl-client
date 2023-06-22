@@ -33,7 +33,7 @@ const Withdraw = () => {
 
   return (
     <div className='send-money'>
-      <BackArrowHeading  title={confirm ? "Confirm" : "Withdraw"} link="dashboard" />
+      <BackArrowHeading  title={confirm ? "Confirm" : "Withdraw"} link="more" />
       <TotalBalance />
       <Form
       onFinish={onFinish}>

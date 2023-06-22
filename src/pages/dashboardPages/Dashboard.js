@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { selectUserData } from '../../redux/features/user/userSlice';
 import sendIcon from '../../assets/icons/dashboard_icons/send.svg';
-import withdrawIcon from '../../assets/icons/dashboard_icons/withdraw.svg';
-import topUpIcon from '../../assets/icons/dashboard_icons/top-up.svg';
-import moreIcon from '../../assets/icons/dashboard_icons/more.svg';
+import { MdAddIcCall, MdSignalCellularConnectedNoInternet1Bar, MdGridView } from 'react-icons/md';
+import { FaSatelliteDish } from 'react-icons/fa';
 import { FinancialCards, IncentiveProgress, PortfolioDownlines, RecentTransactions } from '../../components/DashbardComponents';
 import { Chart } from './portfolio/portfolioChart';
 import { format } from 'date-fns';
@@ -14,7 +13,6 @@ import Welcome from '../../components/Welcome';
 import notification from '../../assets/icons/notification.svg';
 import profileIcon from '../../assets/icons/profile-pic-icon.svg';
 import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
-import { MoreModal } from '../../components/FinanceModal';
 import { Link } from 'react-router-dom';
 import DateRange from './DateRange';
 import { FaWallet } from 'react-icons/fa';
@@ -26,47 +24,7 @@ const Dashboard = () => {
     const todayDate = format(date, 'dd, MMM yyyy')
     const time = format(date, 'hh: mm a')
     const isMobile = useMediaQuery({ maxWidth: 767 });
-    const [openModal, setOpenModal] = useState(false);
-    const [modalContent, setModalContent] = useState(null);
-    const [moreModalContent, setMoreModalContent] = useState(null);
-    const [activeSubContent, setActiveSubContent] = useState(null);
     const [showNotification, setShowNotification] = useState(true)
-
-    const handleCardClick = (content) => {
-        if (content === 'more') {
-            setOpenModal(true);
-            setModalContent(content);
-            setMoreModalContent(null);
-            setActiveSubContent(null);
-        } else {
-            setOpenModal(true);
-            setModalContent(content)
-        }
-    };
-
-    const handleMoreItemClick = (item) => {
-        setMoreModalContent(item);
-        setActiveSubContent(null);
-    };
-
-    const handleSubContentClick = (subContent) => {
-        setActiveSubContent(subContent);
-    };
-
-    const handleOk = () => {
-        setOpenModal(false);
-        setModalContent(null)
-        setMoreModalContent(null);
-        setActiveSubContent(null);
-    };
-
-    const handleCancel = () => {
-        setOpenModal(false);
-        setModalContent(null);
-        setMoreModalContent(null);
-        setActiveSubContent(null);
-    };
-
 
     return (
         <div className='dashboard'>
@@ -84,41 +42,43 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
                     <div className='flex flex-wrap justify-between'>
-                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[45%] md:w-[30%] p-[1rem]'>
-                            <FaWallet />
-                            <span>Wallet Balance:</span>
-                            <span>₦{user.walletBalance}</span>
+                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[45%] md:w-[30%] p-[1rem] rounded-md'>
+                            <FaWallet size={32} />
+                            <span className='font-medium text-base'>Wallet Balance:</span>
+                            <span className='font-bold text-2xl'>₦{user.walletBalance}</span>
                         </div>
-                        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[50%] md:w-[30%] p-[1rem]'>
-                            <FaWallet />
-                            <span>Total Commission Earned:</span>
-                            <span>₦{(user.commissionBalance).toFixed(2)}</span>
+                        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[50%] md:w-[30%] p-[1rem] rounded-md'>
+                            <FaWallet size={32} />
+                            <span className='font-medium text-base'>Total Commission Earned:</span>
+                            <span className='font-bold text-2xl'>₦{(user.commissionBalance).toFixed(2)}</span>
                         </div>
-                        <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem]'>
-                            <FaWallet />
-                            <span className='font-medium'>Commission Balance:</span>
+                        <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
                             <span className='flex justify-between md:flex-col md:mt-[10px]'>
-                                <span>₦{(user.withdrawableCommission).toFixed(2)}</span>
+                                <span>
+                                <FaWallet size={32} />
+                                </span>
                                 <Link to='/withdrawcommission'>
-                                    <button className='bg-[#faf398] text-green p-[1rem] border-none rounded-md'>Transfer Commission
+                                    <button className='bg-[#faf398] text-green p-[8px] border-none rounded-md'>Transfer Commission
                                     </button>
                                 </Link>
                             </span>
+                            <span className='font-medium text-base'>Commission Balance:</span>
+                            <span className='font-bold text-2xl'>₦{(user.withdrawableCommission).toFixed(2)}</span>
                         </div>
                     </div>
 
-                    <div className='flex financial-cards-container'>
-                        <Link to='/sendmoney'>
-                            <FinancialCards text="Send" icon={sendIcon} />
+                    <div className='flex flex-wrap md:flex-no-wrap md:gap-[1rem] financial-cards-container'>
+                        <Link to='/buyairtime' className='w-[40%] md:w-[100px] md:h-[80px] md:mt-[20px] md:text-white'>
+                            <FinancialCards text="Airtime" Icon={<MdAddIcCall size={32} />} />
                         </Link>
-                        <Link to='/withdraw'>
-                            <FinancialCards text="Withdraw" icon={withdrawIcon} />
+                        <Link to='/buydata' className='w-[40%] md:w-[100px] md:h-[80px]  md:mt-[20px] md:text-white'>
+                            <FinancialCards text="Data" Icon={<MdSignalCellularConnectedNoInternet1Bar size={32} />} />
                         </Link>
-                        <Link to='/topup'>
-                            <FinancialCards text="Top Up" icon={topUpIcon} />
+                        <Link to='/cable' className='w-[40%] md:w-[100px] md:h-[80px]  md:mt-[20px] md:text-white'>
+                            <FinancialCards text="Cable" Icon={<FaSatelliteDish size={32} />} />
                         </Link>
-                        <Link to='/more'>
-                            <FinancialCards text="More" icon={moreIcon} />
+                        <Link to='/more' className='w-[40%] md:w-[100px] md:h-[80px]  md:mt-[20px] md:text-white'>
+                            <FinancialCards text="More" Icon={<MdGridView size={32} />} />
                         </Link>
                     </div>
                 </Card>

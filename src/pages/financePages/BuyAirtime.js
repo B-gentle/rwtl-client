@@ -89,7 +89,7 @@ const BuyAirtime = () => {
 
     return (
         <div className='buy-airtime'>
-            <BackArrowHeading title="Buy Airtime" link="more" />
+            <BackArrowHeading title="Buy Airtime" link="dashboard" />
             <TotalBalance />
 
             <Form

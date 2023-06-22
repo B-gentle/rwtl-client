@@ -5,10 +5,10 @@ import React from 'react';
 import downlineIcon from '../assets/icons/dashboard_icons/downline-card-icon.svg';
 import './components.scss';
 
-export const FinancialCards = ({ icon, text, alt, showModal }) => {
+export const FinancialCards = ({ Icon, text }) => {
     return (
-        <div className='financialCards flex flex-col items-center justify-center' onClick={showModal}>
-            <img src={icon} alt={alt} />
+        <div className='financialCards flex flex-col items-center justify-center bg-[#EDC967]'>
+          {Icon}
             <span>{text}</span>
         </div>
     )

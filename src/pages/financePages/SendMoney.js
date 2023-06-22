@@ -54,7 +54,7 @@ const SendMoney = () => {
 
   return (
     <div className='send-money'>
-      <BackArrowHeading title={confirm ? "Confirm" : "Send Money"} link="dashboard" />
+      <BackArrowHeading title={confirm ? "Confirm" : "Send Money"} link="more" />
       <TotalBalance />
       <Form
         onFinish={onFinish}>

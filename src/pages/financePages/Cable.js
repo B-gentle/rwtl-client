@@ -78,7 +78,7 @@ const Cable = () => {
     }
     return (
         <div className='buy-airtime'>
-            <BackArrowHeading title="Utility Bills" link="more" />
+            <BackArrowHeading title="Utility Bills" link="dashboard" />
             <TotalBalance />
             <Form
                 className='mb-[116px]'
