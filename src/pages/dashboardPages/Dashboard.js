@@ -1,4 +1,4 @@
-import { Badge, Card } from 'antd';
+import { Badge, Card, Popover } from 'antd';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -26,6 +26,14 @@ const Dashboard = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [showNotification, setShowNotification] = useState(true)
 
+    const pop = (
+        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white p-[1rem] rounded-md'>
+            <FaWallet size={32} />
+            <span className='font-medium text-base'>Wallet Balance:</span>
+            <span className='font-bold text-2xl'>₦{user.walletBalance}</span>
+        </div>
+    )
+
     return (
         <div className='dashboard'>
             {isMobile && (<div className='flex md:flex-row justify-between mt-[1rem] mb-[28px]'>
@@ -42,11 +50,13 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
                     <div className='flex flex-wrap justify-between'>
+                    <Popover content={pop} title="Full Balance">
                         <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[45%] md:w-[30%] p-[1rem] rounded-md'>
                             <FaWallet size={32} />
                             <span className='font-medium text-base'>Wallet Balance:</span>
-                            <span className='font-bold text-2xl'>₦{user.walletBalance}</span>
+                            <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
                         </div>
+                        </Popover>
                         <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[50%] md:w-[30%] p-[1rem] rounded-md'>
                             <FaWallet size={32} />
                             <span className='font-medium text-base'>Total Commission Earned:</span>
@@ -55,7 +65,7 @@ const Dashboard = () => {
                         <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
                             <span className='flex justify-between md:flex-col md:mt-[10px]'>
                                 <span>
-                                <FaWallet size={32} />
+                                    <FaWallet size={32} />
                                 </span>
                                 <Link to='/withdrawcommission'>
                                     <button className='bg-[#faf398] text-green p-[8px] border-none rounded-md'>Transfer Commission

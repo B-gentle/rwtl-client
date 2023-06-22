@@ -46,8 +46,6 @@ const SelectTableFilter = ({data, filteredData, searchValue, setFilteredData, se
         <Option value="Indirect Referral">Indirect Referral</Option>
         <Option value="Direct Referral">Direct Referral</Option>
       </Select>
-
-      <button>Download CSV</button>
       </span>
       </div>
        

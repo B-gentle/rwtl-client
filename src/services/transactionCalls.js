@@ -8,6 +8,8 @@ export const PayCable = async(payload) => apiCalls('post', '/api/transaction/sub
 
 export const sendMoney = async(payload) =>  apiCalls('patch', `/api/transaction/sendmoney`, payload)
 
+export const TransferComm = async(payload) =>  apiCalls('post', `/api/transaction/transfercomm`, payload)
+
 export const buyAirtime = async(payload) =>  apiCalls('post', `/api/transaction/purchaseairtime`, payload)
 
 export const getTransactions = async() =>  apiCalls('get', `/api/transaction/getTransactions`)

@@ -83,7 +83,7 @@ export const DoughnutChart = ({user}) => {
         labels: ['Direct Downlines', 'Indirect Downlines'],
         datasets: [
             {
-              label: '# of Votes',
+              label: 'Number of downlines',
               data: [directReferral?.length, indirectReferral?.length],
               backgroundColor: [
                 '#111111',
