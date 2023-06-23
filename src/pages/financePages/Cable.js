@@ -46,7 +46,6 @@ const Cable = () => {
         const response = await getCable({ cableNetwork: value })
         if (response.status === 200) {
             setSelectedPlan(response.data.data[0])
-            console.log(selectedPlan)
         }
     }
 

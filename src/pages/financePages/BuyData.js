@@ -10,7 +10,7 @@ import { PurchaseData } from '../../services/transactionCalls'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import './financePages.scss';
-import { getData } from '../../services/dataCalls';
+import { getDataPlans } from '../../services/dataCalls';
 
 
 const BuyData = () => {
@@ -69,7 +69,7 @@ const BuyData = () => {
             form.resetFields();
            }else{
             const message =
-            (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+            (response.data && response.data.message && response.data.message.message ) || (response.response && response.response.data && response.response.data.message) ||
             response.message ||
             response.toString();
           throw new Error(message)
@@ -77,7 +77,7 @@ const BuyData = () => {
             
         } catch (error) {
             dispatch(SET_ERROR());
-            console.log(error)
+            message.error(error.message)
         }
 
     };
@@ -90,18 +90,16 @@ const BuyData = () => {
 
     const [dataPln, setDataPln] = useState()
     const handleDataCall = async (value) => {
-        const response = await getData()
-        // { networkCode: value }
+        const response = await getDataPlans({networkCode: value})
         if (response.status === 200){
-            console.log(response)
-            // setDataPln(response.data.data[0].plans)
+            setDataPln(response.data.data[0])
         }
     }
 
     const handlePlanChange = (value) => {
-        const amount = dataPln.find((plan) => plan.productCode === value);
-        setSelectedPlanAmount(amount?.companyPrice);
-        form.setFieldsValue({ amount: amount?.companyPrice });
+        const amount = dataPln.find((plan) => plan.PRODUCT_ID === value);
+        setSelectedPlanAmount(amount?.PRODUCT_AMOUNT);
+        form.setFieldsValue({ amount: amount?.PRODUCT_AMOUNT });
       };
 
 
@@ -160,8 +158,8 @@ const BuyData = () => {
 
                     >
                         {dataPln && dataPln.map((plan => (
-                            <Option key={plan?.productCode} value={plan?.productCode}>
-                                {plan.productName}
+                            <Option key={plan?.PRODUCT_CODE} value={plan?.PRODUCT_ID}>
+                                {plan.PRODUCT_NAME}
                             </Option>
                         )))
                         }
