@@ -1,11 +1,10 @@
 import { Badge, Card, Popover } from 'antd';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { selectUserData } from '../../redux/features/user/userSlice';
-import sendIcon from '../../assets/icons/dashboard_icons/send.svg';
+import { GET_TRANSACTIONS, selectUserData, selectTransaction } from '../../redux/features/user/userSlice';
 import { MdAddIcCall, MdSignalCellularConnectedNoInternet1Bar, MdGridView } from 'react-icons/md';
-import { FaSatelliteDish } from 'react-icons/fa';
+import { FaSatelliteDish, FaWallet } from 'react-icons/fa';
 import { FinancialCards, IncentiveProgress, PortfolioDownlines, RecentTransactions } from '../../components/DashbardComponents';
 import { Chart } from './portfolio/portfolioChart';
 import { format } from 'date-fns';
@@ -15,14 +14,31 @@ import profileIcon from '../../assets/icons/profile-pic-icon.svg';
 import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { Link } from 'react-router-dom';
 import DateRange from './DateRange';
-import { FaWallet } from 'react-icons/fa';
+import { getTransactions } from '../../services/transactionCalls';
+
 
 const Dashboard = () => {
 
+    const dispatch =  useDispatch()
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+          try {
+            const response = await getTransactions(); // Replace with your actual API endpoint
+            dispatch(GET_TRANSACTIONS(response.data.data));
+          } catch (error) {
+            console.error('Error fetching transactions:', error);
+          }
+        };
+    
+        fetchTransactions();
+      }, [])
+
     const user = useSelector(selectUserData);
-    const date = new Date()
-    const todayDate = format(date, 'dd, MMM yyyy')
-    const time = format(date, 'hh: mm a')
+    const transactions = useSelector(selectTransaction);
+    // const date = new Date()
+    // const todayDate = format(date, 'dd, MMM yyyy')
+    // const time = format(date, 'hh: mm a')
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [showNotification, setShowNotification] = useState(true)
 
@@ -113,13 +129,17 @@ const Dashboard = () => {
                 </Card>
             </div>
             <div className='flex flex-col md:flex-row'>
-                <Card className='card'>
-                    <div>
+                <Card className='card bg-[#D2AC47] text-white'>
+                    <div className='flex justify-between'>
                         <h1>Recent Transactions</h1>
-                        <DateRange />
+                        <Link to='/transactions'>
+                            <button>
+                            View All
+                            </button>
+                        </Link>
                     </div>
 
-                    <RecentTransactions />
+                    <RecentTransactions transactions={transactions} />
                 </Card>
 
                 <Card className='hidden md:block card'>

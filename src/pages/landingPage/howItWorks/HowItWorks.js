@@ -12,6 +12,7 @@ import ekdc from '../../../assets/images/electricity.png';
 import eedc from '../../../assets/images/eedc.png';
 import exams from '../../../assets/images/exams.webp'
 import north from '../../../assets/images/Benin-Port-Harcourt-Kano-and-Kaduna-DisCos-cc.png';
+import aedc from '../../../assets/images/AEDC-BRAND.jpg'
 import slide1 from '../../../assets/images/slide1Image.png';
 import slide2 from '../../../assets/images/slide2Image.png';
 import slide3 from '../../../assets/images/slide3Image.png';
@@ -38,13 +39,14 @@ const HowItWorks = () => {
                 <ServiceProviders src={glo} networkProvider="GLO" />
                 <ServiceProviders src={nineMobile} networkProvider="mobile" />
                 {/* <ServiceProviders src={gotv} networkProvider="" /> */}
-                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={cableTv} alt=''/>
-                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={exams} alt=''/>
-                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={ekdc} alt=''/>
-                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={eedc} alt=''/>
-                <img className='h-[100px] w-[80%] mx-[auto] rounded-[1rem]' src={north} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={cableTv} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={exams} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={ekdc} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={eedc} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={north} alt=''/>
+                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={aedc} alt=''/>
             </div>
-            <div>
+            <div className='complan'>
                 <Carousel
                     ref={carouselRef}
                     dots={false}
@@ -76,7 +78,7 @@ const HowItWorks = () => {
                         <ComplanSlide
                         src={slide4}
                         textAHeading="Monthly Allowance"
-                        textABody="Receive a monthly allowance of ₦100,000 when you get 10,000PV, 40% accumulated PV from your direct referrals and 60% from your team, within a month."
+                        textABody="Receive a monthly allowance of ₦100,000 when you get 10,000PV, 40% accumulated PV from your direct referrals and 60% from your indirect referrals, within a month."
                         benefits={["Monthly Allowance - ₦100,000"]}
                         page="4"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
@@ -84,7 +86,7 @@ const HowItWorks = () => {
                          <ComplanSlide
                         src={slide5}
                         textAHeading="Exciting Incentives"
-                        textABody="By achieving certain milestones, you can earn exciting incentives such as land, a car, a house or even a trip abroad by having a total Personal Volume (PV) of 40% from your direct referrals, while the remaining 60% is accumulated from your downlines, spanning up to the 10th generation."
+                        textABody="By achieving certain milestones, you can earn exciting incentives such as land, a car, a house or even a trip abroad by having a total Personal Volume (PV) of 40% from your direct referrals, while the remaining 60% is accumulated from your indirect referrals, spanning up to the 10th generation."
                         benefits={["Laptop and 200k cash award - ₦500,000", "Trip abroad - ₦2,000,000", "Car Incentive - ₦3,000,000", "Land Incentive - ₦6, 000,000", "House Incentive - ₦10,000,000"]}
                         page="5"
                         handleNext={handleNext} handlePrevious={handlePrevious} 

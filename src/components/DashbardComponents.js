@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import React from 'react';
 import downlineIcon from '../assets/icons/dashboard_icons/downline-card-icon.svg';
 import './components.scss';
+import { transformTransaction } from '../services/transactionCalls';
 
 export const FinancialCards = ({ Icon, text }) => {
     return (
@@ -52,33 +53,21 @@ export const PortfolioDownlines = ({ user }) => {
 }
 
 
-export const RecentTransactions = () => {
-    const date = new Date()
-    const transanctionDate = format(date, 'yyyy-MM-dd hh:mm a')
-    const data = [{
-        transanctionType: 'Recharge - MTN',
-        transanctionDate,
-        amount: "N10,0000"
-    }, {
-        transanctionType: 'Data - Glo',
-        transanctionDate,
-        amount: "N10,0000"
-    }, {
-        transanctionType: 'Deposit',
-        transanctionDate,
-        amount: "N10,0000"
-    }]
+export const RecentTransactions = ({transactions}) => {
+const fewTrans = transactions.slice(-15)  
+const modifiedTrans = fewTrans.map(transformTransaction);
+    
     return (
         <>
-            {data && data.map((transanction, id) => (
+            {modifiedTrans && modifiedTrans.map((transaction, id) => (
                 <div key={id} className='flex justify-between items-center'>
                     <span className='flex flex-col mb-8'>
                         <span></span>
-                        <span>{transanction.transanctionType}</span>
-                        <span>{transanction.transanctionDate}</span>
+                        <span className='uppercase' style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>{transaction.transactionType}</span>
+                        <span>{format(new Date(transaction.createdAt), 'yyyy-MM-dd hh:mm:ss a')}</span>
                     </span>
-                    <span>
-                        {transanction.amount}
+                    <span style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>
+                        {transaction.amount}
                     </span>
                 </div>
             ))}

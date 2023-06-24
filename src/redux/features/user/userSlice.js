@@ -6,7 +6,7 @@ const initialState = {
   isLoggedIn:  false,
   loading: true,
   userData: null,
-  allUsers: []
+  transactions: []
 }
 
 const userSlice = createSlice({
@@ -25,8 +25,8 @@ const userSlice = createSlice({
       state.isLoggedIn = action.payload;
     },
 
-    SetAllUsers(state, action) {
-      state.allUsers = action.payload
+    GET_TRANSACTIONS(state, action) {
+      state.transactions = action.payload
     }
   }
 });
@@ -34,11 +34,12 @@ const userSlice = createSlice({
 export const {
   LOG_IN_USER,
   LOG_OUT_USER,
-  SetAllUsers,
+  GET_TRANSACTIONS,
   SET_USERDATA
 } = userSlice.actions
 
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectUserData = (state) => state.user.userData;
+export const selectTransaction = (state) => state.user.transactions;
 
 export default userSlice.reducer

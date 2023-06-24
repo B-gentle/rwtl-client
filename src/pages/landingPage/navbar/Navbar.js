@@ -23,7 +23,7 @@ const Navbar = () => {
         <span onClick={() => {setShowMenu(!showMenu)}} className={showMenu ? 'show links' : 'links'}>
             <NavLink to='/'>Home</NavLink>
             <NavLink to="/about">About Us</NavLink>
-            <ScrollLink to='how-it-works' spy={true} smooth={true} style={{cursor: 'pointer'}}>How It Works</ScrollLink>
+            <ScrollLink to='complan' spy={true} smooth={true} style={{cursor: 'pointer'}}>How It Works</ScrollLink>
             <ScrollLink to="services" spy={true} smooth={true} style={{cursor: 'pointer'}}>Services</ScrollLink>
             <ScrollLink to="contact" spy={true} smooth={true} style={{cursor: 'pointer'}}>Contact Us</ScrollLink>
             <NavLink to='/login'>Login</NavLink>

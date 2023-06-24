@@ -106,10 +106,11 @@
         margin-bottom: 65px;
 
         .service-providers-container {
-            flex-direction: column;
+            // flex-direction: column;
+            flex-wrap: wrap;
             padding: 39px 10px 55px 20px; 
             margin-bottom: 0;
-            gap: 3rem;
+            gap: 2rem;
             background-color: $primary-color;
             span{
                 @include font(32px, 500, #FFFFFF);

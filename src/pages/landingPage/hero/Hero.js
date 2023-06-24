@@ -5,6 +5,7 @@ import heroImage from '../../../assets/images/heroImage.png';
 // import activeFrame from '../../../assets/images/activeUsersFrame.png';
 import { Button, Card } from 'antd';
 import { Link } from 'react-router-dom';
+import { GiMoneyStack } from 'react-icons/gi'
 
 const Hero = () => {
   return (
@@ -14,17 +15,20 @@ const Hero = () => {
           <img src={award} alt='' />
         </span> */}
         <h1 className='text-center'>Welcome To Rechargewise Technologies</h1>
-        <p style={{fontSize: '18px'}}>Our world of digitally transformed airtime vending and bill payment platform.</p>
+        <p style={{ fontSize: '18px' }}>A world of digital and lifestyle transformation through airtime vending and bill payments.
+        </p>
         <p className='write-ups'>
-          We provide Virtual Top Up (VTU) business solutions for Data Subscriptions, Electricity Bills Payment, Airtime, Cable TV Subscriptions, WAEC & Neco Result Pin, Recharge Card Printing, etc, at highly subsidized rates.
-         <br /><br />
-          ✅Rechargewise is a platform that will create wealth for people thereby lifting many out of poverty.
+        We provide Virtual Top Up (VTU) solutions such as; data subscriptions, electricity bills payment, airtime, cable TV subscriptions, WAEC & NECO results PIN, recharge card printing and a lot more at highly subsidised rates.
           <br /><br />
-          ✅It gives you the license (Right) to own and operate your own Virtual Top Up (VTU) business in the Telecoms Sector and share profit on the payments on Airtime vending and utilities bills.
+          <GiMoneyStack color='#DDB05B' size={20} /> Rechargewise is designed to create wealth for participating partners, by extension, an avenue for community development.
           <br /><br />
-          ✅Rechargewise Tech is the simplest, easiest & fastest way to achieving wealth, the platform is designed to help you set up a Plan B financially and earn residual income seamlessly.
+          <GiMoneyStack color='#DDB05B' size={20} /> Rechargewise, grant her users the franchise to own and operate Virtual Top Up (VTU) business within the telecommunication ecosystem with a robust revenue sharing package on our various services and products.
           <br /><br />
-          ✅With our auto-wallet funding system, you enjoy instant funding of your wallet through bank transfer, ussd, etc. This means, you are just a touch away from your next recharge!
+          <GiMoneyStack color='#DDB05B' size={20} />Rechargewise is the simplest, easiest & fastest way to achieve wealth and financial security.
+          <br /><br />
+          <GiMoneyStack color='#DDB05B' size={20} />  With our auto-wallet funding system, you enjoy instant funding of your wallet through bank transfer, USSD, etc. With RWT, you are just a touch away from your next recharge!
+          <br /><br />
+          RWT...transforming  lives, and connecting people
         </p>
         <div className='hero-buttons'>
           <Link to='/signup'>

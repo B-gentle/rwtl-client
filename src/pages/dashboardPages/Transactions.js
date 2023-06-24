@@ -1,44 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { Space, Table, Tag } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Table } from 'antd';
 import SelectTableFilter from '../../components/SelectTableFilter';
 import EmptyState from '../../components/EmptyState';
 import '../../components/layouts/layouts.scss';
 import { useMediaQuery } from 'react-responsive';
-import { getTransactions } from '../../services/transactionCalls';
+import { selectTransaction } from '../../redux/features/user/userSlice';
 
 const Transactions = () => {
 
-  const [transactions, setTransactions] = useState([]);
-
-
   useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const response = await getTransactions(); // Replace with your actual API endpoint
-        setTransactions(response.data.data);
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-      }
-    };
-
-    fetchTransactions();
+   window.scrollTo(0, 0)
   }, [])
   
-  
+  const transactions = useSelector(selectTransaction)
   const isMobile = useMediaQuery({maxWidth: 980})
 
   const columns = [
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'username',
+      title: 'Transaction Type',
+      dataIndex: 'transactionType',
+      key: 'transactionType',
+     
+    },
+
+    {
+      title: 'Amount',
+      dataIndex: 'amount',
+      key: 'amount',
      
     },
     
   ];
 
   const data = transactions
-  console.log(transactions)
 
   const [filteredData, setFilteredData] = useState(data);
   const [searchValue, setSearchValue] = useState("");
@@ -50,10 +45,10 @@ const Transactions = () => {
 
       </div>
       {data.length <= 0 ? <EmptyState /> : <Table
-      scroll={{
-        x: isMobile && 1000,
-        y: isMobile && 500,
-      }}
+      // scroll={{
+      //   x: isMobile && 1000,
+      //   y: isMobile && 500,
+      // }}
        columns={columns} dataSource={filteredData} />}
     </div>
   )

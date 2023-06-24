@@ -24,7 +24,7 @@ const Footer = () => {
           <h1>Company</h1>
           <div>
             <Link to='/about'>About Us </Link>
-            <ScrollLink to='how-it-works' spy={true} smooth={true} style={{cursor: 'pointer'}}>How To Earn </ScrollLink>
+            <ScrollLink to='complan' spy={true} smooth={true} style={{cursor: 'pointer'}}>How To Earn </ScrollLink>
             <ScrollLink to="contact" spy={true} smooth={true} style={{cursor: 'pointer'}}>Contact Us </ScrollLink>
           </div>
         </div>
