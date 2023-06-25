@@ -90,7 +90,7 @@ const Cable = () => {
             >
                 <Form.Item
                     label="Select Provider"
-                    name="network"
+                    name="cableNetwork"
                     rules={[{ required: true, message: 'Please Select Cable Network!' }]}
                 >
 

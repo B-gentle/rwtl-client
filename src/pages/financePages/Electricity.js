@@ -4,14 +4,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../components/BackArrowHeading';
 import TotalBalance from '../../components/TotalBalance';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
+import { ElectricityBill } from '../../services/transactionCalls';
 
 const Electricity = () => {
+
+    const dispatch = useDispatch();
   const [form] = Form.useForm();
   const loading = useSelector(selectLoading)
   const { Option } = Select;
 
-  const onFinish = async() => {
-
+  const onFinish = async(values) => {
+    dispatch(SET_LOADING())
+    try {
+        const response = await ElectricityBill(values)
+        if (response.status === 200) {
+            dispatch(SET_SUCCESS())
+            message.success('Bill Payed')
+            form.resetFields();
+        } else {
+            const message =
+                (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+                response.message ||
+                response.toString();
+            throw new Error(message)
+        }
+    } catch (error) {
+        dispatch(SET_ERROR())
+        message.error(error.message)
+    }
   }
   return (
     <div className='buy-airtime'>
@@ -81,7 +101,7 @@ const Electricity = () => {
                     name="amount"
                     rules={[{ required: true, message: "Please enter an Amount" }]}
                 >
-                    <Input placeholder='Amount' />
+                    <Input type="number" placeholder='Amount' />
                 </Form.Item>
 
                 <Form.Item>

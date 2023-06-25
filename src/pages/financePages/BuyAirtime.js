@@ -131,7 +131,7 @@ const BuyAirtime = () => {
                     name="amount"
                     rules={[{ required: true, message: "Please enter an Amount" }]}
                 >
-                    <Input />
+                    <Input type="number" />
                 </Form.Item>
 
                 <Form.Item>
