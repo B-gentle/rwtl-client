@@ -1,27 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Table } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Table } from 'antd';
 import SelectTableFilter from '../../../components/SelectTableFilter';
 import EmptyState from '../../../components/EmptyState';
 import '../../../components/layouts/layouts.scss';
 import { useMediaQuery } from 'react-responsive';
-import { selectTransaction } from '../../../redux/features/user/userSlice';
+import { GET_TRANSACTIONS, selectTransaction } from '../../../redux/features/user/userSlice';
+import { getTransactions, transformTransaction } from '../../../services/transactionCalls';
+import { Link } from 'react-router-dom';
 
 const Transactions = () => {
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
    window.scrollTo(0, 0)
+    const fetchTransactions = async () => {
+      try {
+        const response = await getTransactions(); // Replace with your actual API endpoint
+        dispatch(GET_TRANSACTIONS(response.data.data));
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+
+    fetchTransactions();
   }, [])
   
   const transactions = useSelector(selectTransaction)
-  const reversedTransactions = transactions.reverse()
+  const modifiedTrans = transactions.map(transformTransaction);
+  const reversedTransactions = modifiedTrans.reverse()
   const isMobile = useMediaQuery({maxWidth: 980})
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleView = (record) => {
+    setSelectedUser(record);
+  };
+
+  const renderAction = (_, record) => (
+    <div>
+      <Link to={`/transactions/${record._id}`}>View</Link>
+    </div>
+  );
 
   const columns = [
     {
       title: 'Transaction Type',
       dataIndex: 'transactionType',
       key: 'transactionType',
+      render: (text) => <span>{text.toUpperCase()}</span>
      
     },
 
@@ -30,6 +57,12 @@ const Transactions = () => {
       dataIndex: 'amount',
       key: 'amount',
      
+    },
+
+    {
+      title: 'View Details',
+      key: 'action',
+      render: renderAction,
     },
     
   ];

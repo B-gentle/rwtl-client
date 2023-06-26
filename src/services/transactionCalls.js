@@ -43,6 +43,10 @@ export const transformTransaction = (transaction) => {
         case "fundTransfer":
             transformedTransactionType = "Wallet to Wallet Transfer";
             break;
+
+            case "commissionTransfer":
+            transformedTransactionType = "Commission To Wallet Transfer";
+            break;
         default:
             transformedTransactionType = transactionType;
             break;

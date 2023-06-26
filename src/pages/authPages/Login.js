@@ -25,7 +25,7 @@ const Login = () => {
          dispatch(LOG_IN_USER(true))
          dispatch(SET_SUCCESS());
         navigate('/dashboard');
-        message.success("user logged in successfully")
+        // message.success("user logged in successfully")
       } else {
         const message =
           (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
