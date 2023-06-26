@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Table } from 'antd';
-import SelectTableFilter from '../../components/SelectTableFilter';
-import EmptyState from '../../components/EmptyState';
-import '../../components/layouts/layouts.scss';
+import SelectTableFilter from '../../../components/SelectTableFilter';
+import EmptyState from '../../../components/EmptyState';
+import '../../../components/layouts/layouts.scss';
 import { useMediaQuery } from 'react-responsive';
-import { selectTransaction } from '../../redux/features/user/userSlice';
+import { selectTransaction } from '../../../redux/features/user/userSlice';
 
 const Transactions = () => {
 
@@ -14,6 +14,7 @@ const Transactions = () => {
   }, [])
   
   const transactions = useSelector(selectTransaction)
+  const reversedTransactions = transactions.reverse()
   const isMobile = useMediaQuery({maxWidth: 980})
 
   const columns = [
@@ -33,7 +34,7 @@ const Transactions = () => {
     
   ];
 
-  const data = transactions
+  const data = reversedTransactions
 
   const [filteredData, setFilteredData] = useState(data);
   const [searchValue, setSearchValue] = useState("");

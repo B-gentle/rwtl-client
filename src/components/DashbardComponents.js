@@ -5,6 +5,7 @@ import React from 'react';
 import downlineIcon from '../assets/icons/dashboard_icons/downline-card-icon.svg';
 import './components.scss';
 import { transformTransaction } from '../services/transactionCalls';
+import { Link } from 'react-router-dom';
 
 export const FinancialCards = ({ Icon, text }) => {
     return (
@@ -56,11 +57,12 @@ export const PortfolioDownlines = ({ user }) => {
 export const RecentTransactions = ({transactions}) => {
 const fewTrans = transactions.slice(-15)  
 const modifiedTrans = fewTrans.map(transformTransaction);
+const reversedTrans = modifiedTrans.reverse()
     
     return (
         <>
-            {modifiedTrans && modifiedTrans.map((transaction, id) => (
-                <div key={id} className='flex justify-between items-center'>
+            {reversedTrans && reversedTrans.map((transaction, id) => (
+                <Link to={`/transactions/${transaction._id}`} key={id} className='flex justify-between items-center text-white'>
                     <span className='flex flex-col mb-8'>
                         <span></span>
                         <span className='uppercase' style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>{transaction.transactionType}</span>
@@ -69,7 +71,7 @@ const modifiedTrans = fewTrans.map(transformTransaction);
                     <span style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>
                         {transaction.amount}
                     </span>
-                </div>
+                </Link>
             ))}
         </>
     )

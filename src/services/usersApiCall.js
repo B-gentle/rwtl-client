@@ -12,6 +12,8 @@ export const changePassword = async(payload) =>  apiCalls('patch', `/api/users/c
 
 export const updateUser = async(payload) => apiCalls('patch', `/api/users/updateuser`, payload)
 
+export const UpgradePackage = async(payload) => apiCalls('patch', `/api/users/upgradepackage`, payload)
+
 export const getLoggedinUser = async() =>  apiCalls('get', `/api/users/getuser`)
 
 export const getLoggedinStatus = async() =>  apiCalls('get', `/api/users/loginstatus`)

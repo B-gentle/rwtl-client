@@ -15,6 +15,7 @@ const SendMoney = () => {
   const [formData, setFormData] = useState(null);
   const [confirm, setConfirm] = useState(false);
   const [transactionSuccessful, setTransactionSuccessful] = useState(false);
+  const [form] = Form.useForm();
 
   if (transactionSuccessful) {
     return <SuccessPage details={formData} setTransactionSuccessful={setTransactionSuccessful} setFormData={setFormData} />
@@ -49,6 +50,7 @@ const SendMoney = () => {
       // reset the form
       setConfirm(false);
       setTransactionSuccessful(true);
+      form.resetFields();
     }
   }
 
@@ -57,7 +59,9 @@ const SendMoney = () => {
       <BackArrowHeading title={confirm ? "Confirm" : "Send Money"} link="more" />
       <TotalBalance />
       <Form
-        onFinish={onFinish}>
+        onFinish={onFinish}
+        form={form}
+        >
         <Form.Item
           label="Username"
           name="username"

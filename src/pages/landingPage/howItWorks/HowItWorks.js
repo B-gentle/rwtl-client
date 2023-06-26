@@ -55,7 +55,7 @@ const HowItWorks = () => {
                         src={slide5}
                         textAHeading="You are invited"
                         textABody="To get started, either register using the referral link provided to you or input the referral ID that was sent to you. Once you've done that, simply fill in your information and select the registration package that suits your preferences."
-                        benefits={["Instant registration bonus of 20% on any package"]}
+                        benefits={["Instant registration bonus of 15% on any package"]}
                         page="1"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
@@ -71,15 +71,15 @@ const HowItWorks = () => {
                         src={slide3}
                         textAHeading="Referral Bonus"
                         textABody="Get to earn direct and indirect referral bonus by referring your friends, colleagues to RechargeWise."
-                        benefits={["Direct Referral Bonus - 20% commission", "Indirect Referral Bonus - 4%- 1% commission"]}
+                        benefits={["Direct Referral Bonus - 25% commission", "Indirect Referral Bonus - 4%- 1% commission"]}
                         page="3"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
                         <ComplanSlide
                         src={slide4}
                         textAHeading="Monthly Allowance"
-                        textABody="Receive a monthly allowance of ₦100,000 when you get 10,000PV, (40, 40, 20 rule applies), within a month."
-                        benefits={["Monthly Allowance - ₦100,000"]}
+                        textABody="Receive a monthly allowance of ₦120,000 when you get 10,000PV, (40, 40, 20 rule applies), within a month."
+                        benefits={["Monthly Allowance - ₦120,000"]}
                         page="4"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />
@@ -87,7 +87,7 @@ const HowItWorks = () => {
                         src={slide5}
                         textAHeading="Exciting Incentives"
                         textABody="By achieving certain milestones, you can earn exciting incentives such as land, a car, a house or even a trip abroad by having a total Personal Volume (PV) of (40, 40, 20 rule applies), spanning up to the 10th generation."
-                        benefits={["Laptop and 200k cash award - ₦500,000", "Trip abroad - ₦2,000,000", "Car Incentive - ₦3,000,000", "Land Incentive - ₦6, 000,000", "House Incentive - ₦10,000,000"]}
+                        benefits={["a laptop and ₦300,000 - ₦600,000", "Family Trip abroad - ₦2,000,000", "Small Car Award - ₦3,000,000", "Big Car Award - ₦4, 500,000", "First House Fund - ₦7,000,000", "Second House Fund - ₦10,000,000"]}
                         page="5"
                         handleNext={handleNext} handlePrevious={handlePrevious} 
                         />

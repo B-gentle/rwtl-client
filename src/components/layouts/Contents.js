@@ -7,7 +7,7 @@ import Downlines from '../../pages/dashboardPages/Downlines';
 import ChangePassword from '../../pages/dashboardPages/settings/ChangePassword';
 import Profile from '../../pages/dashboardPages/settings/Profile';
 import Settings from '../../pages/dashboardPages/settings/Settings';
-import Transactions from '../../pages/dashboardPages/Transactions';
+import Transactions from '../../pages/dashboardPages/transactions/Transactions';
 import '../layouts/layouts.scss';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -26,6 +26,7 @@ import PackageUpgrade from '../../pages/financePages/PackageUpgrade';
 import Exams from '../../pages/financePages/Exams';
 import WithdrawCommission from '../../pages/financePages/WithdrawCommission';
 import CardPrinting from '../../pages/financePages/CardPrinting';
+import TransactionDetails from '../../pages/dashboardPages/transactions/TransactionDetails';
 
 const Contents = () => {
     
@@ -39,6 +40,7 @@ const Contents = () => {
                 <Routes>
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="transactions" element={<Transactions />} />
+                    <Route path="transactions/:id" element={<TransactionDetails/>} />
                     <Route path="settings" element={<Settings />} />
                     <Route path="profiles" element={<Profile />} />
                     <Route path="packageupgrade" element={<PackageUpgrade/>} />

@@ -130,10 +130,10 @@ const Dashboard = () => {
             </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card bg-[#D2AC47] text-white'>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between items-center mb-[1rem]'>
                         <h1>Recent Transactions</h1>
                         <Link to='/transactions'>
-                            <button>
+                            <button className='rounded-md border-none bg-yellow-300 w-[70px]'>
                             View All
                             </button>
                         </Link>
