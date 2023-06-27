@@ -34,6 +34,10 @@ const WithdrawCommission = () => {
         if (response.status === 200) {
           dispatch(SET_SUCCESS())
           message.success(response.data.message)
+          // TODO: actually send the money
+          // reset the form
+          setConfirm(false);
+          setTransactionSuccessful(true);
         } else {
           const message =
             (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
@@ -45,11 +49,6 @@ const WithdrawCommission = () => {
         dispatch(SET_ERROR())
         message.error(error.message)
       }
-
-      // TODO: actually send the money
-      // reset the form
-      setConfirm(false);
-      setTransactionSuccessful(true);
     }
   }
   return (

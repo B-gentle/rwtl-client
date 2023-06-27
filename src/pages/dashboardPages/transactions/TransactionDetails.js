@@ -45,32 +45,37 @@ const TransactionDetails = () => {
                     <span>{transaction.transactionType}</span>
                 </section>
 
-                {transaction.transactionType === 'data' || transaction.transactionType === 'airtime' || transaction.transactionType === 'cableTv' || transaction.transactionType === 'electricity' && <section className='flex justify-between items-center'>
-                    <span>Commission Earned</span>
-                    <span>{transaction.commission}</span>
-                </section>}
-
-                {transaction.transactionType === 'data' ||
-                    transaction.transactionType === 'airtime' ||
-                    transaction.transactionType === 'cableTv' ||
-                    transaction.transactionType === 'electricity'
+                {((transaction.transactionType === 'data')
+                    || (transaction.transactionType === 'airtime')
+                    || (transaction.transactionType === 'cableTv')
+                    || (transaction.transactionType === 'electricity'))
                     &&
-                    <section className='flex justify-between items-center'>
+                    (<section className='flex justify-between items-center'>
+                        <span>Commission Earned</span>
+                        <span>{transaction.commission}</span>
+                    </section>)}
+
+                {((transaction.transactionType === 'data')
+                    || (transaction.transactionType === 'airtime')
+                    || (transaction.transactionType === 'cableTv')
+                    || (transaction.transactionType === 'electricity'))
+                    &&
+                    (<section className='flex justify-between items-center'>
                         <span>Previous Commission Balance</span>
                         <span>{transaction.prevcommissionBalance}</span>
                     </section>
-                }
+                    )}
 
-                {transaction.transactionType === 'data'
-                    || transaction.transactionType === 'airtime'
-                    || transaction.transactionType === 'cableTv'
-                    || transaction.transactionType === 'electricity'
-                    || transaction.transactionType === 'upgrade'
+                {((transaction.transactionType === 'data')
+                    || (transaction.transactionType === 'airtime')
+                    || (transaction.transactionType === 'cableTv')
+                    || (transaction.transactionType === 'electricity')
+                    || (transaction.transactionType === 'upgrade'))
                     &&
-                    <section className='flex justify-between items-center'>
+                    (<section className='flex justify-between items-center'>
                         <span>Previous Commission Balance</span>
                         <span>{transaction.newcommissionBalance}</span>
-                    </section>}
+                    </section>)}
 
                 <section className='flex justify-between items-center'>
                     <span>Previous Wallet Balanace</span>

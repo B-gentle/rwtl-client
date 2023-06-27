@@ -12,7 +12,7 @@ const Portfolio = () => {
     }, [])
     
     const user = useSelector(selectUserData)
-    const progress1 = ((parseFloat(user.pv) / parseFloat(10000)) * 100).toFixed(2);
+    const progress1 = ((parseFloat(user.monthlyPv) / parseFloat(10000)) * 100).toFixed(2);
     const progress2 = ((parseFloat(user.pv) / parseFloat(30000)) * 100).toFixed(2);
     return (
         <div className='portfolio'>
@@ -28,8 +28,8 @@ const Portfolio = () => {
                     </span>
                 </span>
                 <span className='flex justify-between'>
-                    <IncentiveProgress title="Monthly Allowance" value={`${user.pv} of 30000PV`} progress={progress1} />
-                    <IncentiveProgress title="Incentive" value={`${user.pv} of 30000PV`} progress={progress2} />
+                    <IncentiveProgress title="Monthly Allowance" value={`${user.monthlyPv} of 10000PV`} progress={progress1} />
+                    <IncentiveProgress title="Incentive" value={`${user.pv} of 25000PV`} progress={progress2} />
                 </span>
             </div>
             <DoughnutChart user={user} />

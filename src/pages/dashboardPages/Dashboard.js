@@ -19,20 +19,20 @@ import { getTransactions } from '../../services/transactionCalls';
 
 const Dashboard = () => {
 
-    const dispatch =  useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchTransactions = async () => {
-          try {
-            const response = await getTransactions(); // Replace with your actual API endpoint
-            dispatch(GET_TRANSACTIONS(response.data.data));
-          } catch (error) {
-            console.error('Error fetching transactions:', error);
-          }
+            try {
+                const response = await getTransactions(); // Replace with your actual API endpoint
+                dispatch(GET_TRANSACTIONS(response.data.data));
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            }
         };
-    
+
         fetchTransactions();
-      }, [])
+    }, [])
 
     const user = useSelector(selectUserData);
     const transactions = useSelector(selectTransaction);
@@ -47,6 +47,14 @@ const Dashboard = () => {
             <FaWallet size={32} />
             <span className='font-medium text-base'>Wallet Balance:</span>
             <span className='font-bold text-2xl'>₦{user.walletBalance}</span>
+        </div>
+    )
+
+    const commissionEarned = (
+        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white p-[1rem] rounded-md'>
+            <FaWallet size={32} />
+            <span className='font-medium text-base'>Total Commission Earned:</span>
+            <span className='font-bold text-2xl'>₦{(user.commissionBalance).toFixed(2)}</span>
         </div>
     )
 
@@ -65,19 +73,19 @@ const Dashboard = () => {
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
-                    <div className='flex flex-wrap justify-between'>
-                    <Popover content={pop} title="Full Balance">
-                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[45%] md:w-[30%] p-[1rem] rounded-md'>
-                            <FaWallet size={32} />
-                            <span className='font-medium text-base'>Wallet Balance:</span>
-                            <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
-                        </div>
-                        </Popover>
-                        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[50%] md:w-[30%] p-[1rem] rounded-md'>
-                            <FaWallet size={32} />
-                            <span className='font-medium text-base'>Total Commission Earned:</span>
-                            <span className='font-bold text-2xl'>₦{(user.commissionBalance).toFixed(2)}</span>
-                        </div>
+                    <div className='flex flex-col md:flex-row md:flex-wrap justify-between'>
+                            <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
+                                <FaWallet size={32} />
+                                <span className='font-medium text-base'>Wallet Balance:</span>
+                                <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
+                            </div>
+                        
+                            <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[100%] mt-[10px] md:w-[30%] p-[1rem] rounded-md'>
+                                <FaWallet size={32} />
+                                <span className='font-medium text-base'>Total Commission Earned:</span>
+                                <span className='font-bold text-2xl truncate'>₦{(user.commissionBalance).toFixed(2)}</span>
+                            </div>
+                      
                         <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
                             <span className='flex justify-between md:flex-col md:mt-[10px]'>
                                 <span>
@@ -134,7 +142,7 @@ const Dashboard = () => {
                         <h1>Recent Transactions</h1>
                         <Link to='/transactions'>
                             <button className='rounded-md border-none bg-yellow-300 w-[70px]'>
-                            View All
+                                View All
                             </button>
                         </Link>
                     </div>

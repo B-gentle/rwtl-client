@@ -34,6 +34,9 @@ const SendMoney = () => {
         if (response.status === 200) {
           dispatch(SET_SUCCESS())
           message.success(response.data.message)
+          setConfirm(false);
+          setTransactionSuccessful(true);
+          form.resetFields();
         } else {
           const message =
             (response.response && response.response.data && response.response.data.message) ||
@@ -48,9 +51,7 @@ const SendMoney = () => {
 
       // TODO: actually send the money
       // reset the form
-      setConfirm(false);
-      setTransactionSuccessful(true);
-      form.resetFields();
+
     }
   }
 
@@ -61,7 +62,7 @@ const SendMoney = () => {
       <Form
         onFinish={onFinish}
         form={form}
-        >
+      >
         <Form.Item
           label="Username"
           name="username"

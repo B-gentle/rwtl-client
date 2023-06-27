@@ -99,6 +99,12 @@ const Downlines = () => {
       dataIndex: 'level',
       key: 'level',
     },
+
+    {
+      title: 'PV',
+      dataIndex: 'pv',
+      key: 'pv',
+    },
   ];
 
   const data = downlines

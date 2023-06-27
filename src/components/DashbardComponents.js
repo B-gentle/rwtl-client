@@ -29,15 +29,9 @@ export const IncentiveProgress = ({ title, value, progress }) => {
 export const PortfolioDownlines = ({ user }) => {
     const downlines = user.downlines;
     const downlineCount = downlines.length;
-    const directReferral = downlines.filter((downline, id) => downline.level === 1)
-    const indirectReferral = downlines.filter((downline, id) => downline.level !== 1)
-    const totaldirectPV = directReferral.reduce((accumulator, item) => {
-        return accumulator + (item.pv || 0);
-      }, 0);
+    const directPv = user.directPv
+    const indirectPv = user.indirectPv
 
-      const totalIndirectReferralPV = indirectReferral.reduce((accumulator, item) => {
-        return accumulator + (item.pv || 0);
-      }, 0);
 
     return (
         <div className='portfolio-downlines'>
@@ -46,8 +40,8 @@ export const PortfolioDownlines = ({ user }) => {
                 <span>{downlineCount} Downlines</span>
             </span>
             <span className="flex justify-between">
-                <Statistic title="Direct Referral Bonus" value={totaldirectPV}/>
-                <Statistic title="Indirect Referral Bonus" value={totalIndirectReferralPV} />
+                <Statistic title="Direct PV" value={directPv}/>
+                <Statistic title="Indirect PV" value={indirectPv} />
             </span>
         </div>
     )
@@ -55,7 +49,7 @@ export const PortfolioDownlines = ({ user }) => {
 
 
 export const RecentTransactions = ({transactions}) => {
-const fewTrans = transactions.slice(-15)  
+const fewTrans = transactions.slice(-10)  
 const modifiedTrans = fewTrans.map(transformTransaction);
 const reversedTrans = modifiedTrans.reverse()
     
@@ -69,7 +63,7 @@ const reversedTrans = modifiedTrans.reverse()
                         <span>{format(new Date(transaction.createdAt), 'yyyy-MM-dd hh:mm:ss a')}</span>
                     </span>
                     <span style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>
-                        {transaction.amount}
+                    ₦{transaction.amount}
                     </span>
                 </Link>
             ))}

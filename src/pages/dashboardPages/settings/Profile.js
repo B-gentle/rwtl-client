@@ -19,7 +19,10 @@ const Profile = () => {
     const initialValues = {
         fullname: user.fullname,
         eMail: user.email,
-        usernaMe:  user.username
+        usernaMe:  user.username,
+        bankName: user.bankName,
+        accountNo: user.accountNo,
+        accountName: user.accountName
     }
     const onFinish = async (values) => {
         dispatch(SET_LOADING())
@@ -81,19 +84,19 @@ const Profile = () => {
                     label="Bank Name"
                     name="bankName"
                 >
-                    <Input placeholder='e.g UBA' />
+                    <Input placeholder='e.g UBA' disabled />
                 </Form.Item>
                 <Form.Item
                     label="Account No"
                     name="accountNo"
                 >
-                    <Input placeholder='e.g 2060680907' />
+                    <Input placeholder='e.g 2060680907' disabled />
                 </Form.Item>
                 <Form.Item
                     label="Account Name"
                     name="accountName"
                 >
-                    <Input placeholder='e.g Roy Kings' />
+                    <Input placeholder='e.g Roy Kings' disabled />
                 </Form.Item>
                 <Form.Item>
                     <Button className='auth-button' block type="primary" htmlType="submit" loading={loading && true} >
