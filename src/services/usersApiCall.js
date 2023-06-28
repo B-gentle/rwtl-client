@@ -19,3 +19,5 @@ export const getLoggedinUser = async() =>  apiCalls('get', `/api/users/getuser`)
 export const getLoggedinStatus = async() =>  apiCalls('get', `/api/users/loginstatus`)
 
 export const logoutUser = async() => apiCalls('get', '/api/users/logout')
+
+export const getNextIncentive = async() => apiCalls('get', '/api/users/getuserincentive')

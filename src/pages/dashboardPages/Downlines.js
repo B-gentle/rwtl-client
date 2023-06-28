@@ -148,7 +148,7 @@ const Downlines = () => {
       <h2>Downlines</h2>
       <SelectTableFilter data={data} filteredData={filteredData} searchValue={searchValue} setFilteredData={setFilteredData} setSearchValue={setSearchValue} />
       {data.length <= 0 ? <EmptyTable text="You currently do not have any downline. Invite your friends to earn referral bonus." /> : <Table
-      scroll={{ x: '100%', y: 400 }}
+      scroll={{ x: 400, y: 400 }}
         columns={isMobile ? columnsMobile : columns} dataSource={filteredData} locale={{ emptyText: <EmptyTable /> }} />}
         <Button><Link to='/adddownline'>Add Downline</Link></Button>
     </div>
