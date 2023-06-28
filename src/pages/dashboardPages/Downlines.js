@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SelectTableFilter from '../../components/SelectTableFilter';
 import '../../components/layouts/layouts.scss';
 import { useMediaQuery } from 'react-responsive';
-import EmptyState from '../../components/EmptyState';
+// import EmptyState from '../../components/EmptyState';
 import { useSelector } from 'react-redux';
 import { selectUserData } from '../../redux/features/user/userSlice';
 
@@ -44,8 +44,8 @@ const Downlines = () => {
       dataIndex: 'comissionPercent',
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <span>Invite {record.name}</span>
+          <span>Delete</span>
         </Space>
       ),
     },
@@ -124,7 +124,7 @@ const Downlines = () => {
   const EmptyTable = () => {
     return (
       <>
-        <EmptyState />
+        {/* <EmptyState /> */}
         <div className='empty-table'>
           <p>You currently do not have any downline. Invite your friends to earn referral bonus.</p>
           <div className='copy-link'>
@@ -147,10 +147,8 @@ const Downlines = () => {
     <div className='downlines'>
       <h2>Downlines</h2>
       <SelectTableFilter data={data} filteredData={filteredData} searchValue={searchValue} setFilteredData={setFilteredData} setSearchValue={setSearchValue} />
-      <div>
-
-      </div>
-      {data.length <= 0 ? <EmptyState text="You currently do not have any downline. Invite your friends to earn referral bonus." /> : <Table
+      {data.length <= 0 ? <EmptyTable text="You currently do not have any downline. Invite your friends to earn referral bonus." /> : <Table
+      scroll={{ x: '100%', y: 400 }}
         columns={isMobile ? columnsMobile : columns} dataSource={filteredData} locale={{ emptyText: <EmptyTable /> }} />}
         <Button><Link to='/adddownline'>Add Downline</Link></Button>
     </div>

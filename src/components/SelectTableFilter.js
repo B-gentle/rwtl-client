@@ -2,8 +2,8 @@ import { Input, Select } from 'antd';
 import React, { useState } from 'react'
 import { SearchBox } from './DashbardComponents';
 
-const SelectTableFilter = ({data, filteredData, searchValue, setFilteredData, setSearchValue }) => {
-  
+const SelectTableFilter = ({ data, filteredData, searchValue, setFilteredData, setSearchValue }) => {
+
   const { Option } = Select;
 
   const handleFilterChange = (option) => {
@@ -24,31 +24,32 @@ const SelectTableFilter = ({data, filteredData, searchValue, setFilteredData, se
 
     const filtered = data.filter(
       (item) => {
-      const referralState = item.level === 1 ? 'Direct Referral' : 'Indirect Referral';
-       return (  item.username.toLowerCase().includes(value.toLowerCase()) ||
-         
-         referralState.toString().includes(value)
-     )});
-     setFilteredData(filtered);
+        const referralState = item.level === 1 ? 'Direct Referral' : 'Indirect Referral';
+        return (item.username.toLowerCase().includes(value.toLowerCase()) ||
+
+          referralState.toString().includes(value)
+        )
+      });
+    setFilteredData(filtered);
   };
 
   return (
     <div className='md:flex md:justify-between mb-[65px]'>
       <SearchBox
-      value={searchValue}
-      onChange={handleSearch}
+        value={searchValue}
+        onChange={handleSearch}
       />
 
 
-<span className='flex justify-between items-center'>
-    <Select defaultValue="all" onChange={handleFilterChange} style={{width: '200px'}}>
-        <Option value="all">All</Option>
-        <Option value="Indirect Referral">Indirect Referral</Option>
-        <Option value="Direct Referral">Direct Referral</Option>
-      </Select>
+      <span className='flex mt-[1rem] justify-between items-center'>
+        <Select defaultValue="all" onChange={handleFilterChange} style={{ width: '200px' }}>
+          <Option value="all">All</Option>
+          <Option value="Indirect Referral">Indirect Referral</Option>
+          <Option value="Direct Referral">Direct Referral</Option>
+        </Select>
       </span>
-      </div>
-       
+    </div>
+
   )
 }
 
