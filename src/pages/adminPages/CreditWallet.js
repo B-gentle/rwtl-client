@@ -26,6 +26,7 @@ const CreditWallet = () => {
             }
         } catch (error) {
             dispatch(SET_ERROR());
+            console.log(error)
             message.error(error.message)
         }
     };

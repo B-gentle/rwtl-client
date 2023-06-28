@@ -48,7 +48,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/RechargeWisetech"><FaFacebookF /></a>
               <a href="https://www.instagram.com/rechargewise_tech/?igshid=ZGUzMzM3NWJiOQ=="><FaInstagram /></a>
               <a href='https://www.linkedin.com/in/rechargewise-tech-9b273627a'><FaLinkedin /></a>
-              <a href="https://wa.me/07068720576"><FaWhatsapp /></a>
+              <a href="https://wa.me/+2348117980805"><FaWhatsapp /></a>
               <a href="https://tiktok.com/@rechargewise_tech"><FaTiktok/></a>
               
               
