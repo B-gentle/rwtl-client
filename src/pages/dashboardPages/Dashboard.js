@@ -1,4 +1,4 @@
-import { Badge, Card, Popover } from 'antd';
+import { Badge, Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -13,13 +13,14 @@ import notification from '../../assets/icons/notification.svg';
 import profileIcon from '../../assets/icons/profile-pic-icon.svg';
 import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { Link } from 'react-router-dom';
-import DateRange from './DateRange';
 import { getTransactions } from '../../services/transactionCalls';
+import { getNextIncentive } from '../../services/usersApiCall';
 
 
 const Dashboard = () => {
 
     const dispatch = useDispatch()
+    const [nextIncentive, setNextIncentive] = useState(null)
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -31,7 +32,14 @@ const Dashboard = () => {
             }
         };
 
+        const getIncentive = async () => {
+            const response = await getNextIncentive()
+            if (response.status === 200) {
+                setNextIncentive(response.data.data[0].incentiveName)
+            }
+        }
         fetchTransactions();
+        getIncentive()
     }, [])
 
     const user = useSelector(selectUserData);
@@ -41,22 +49,6 @@ const Dashboard = () => {
     // const time = format(date, 'hh: mm a')
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [showNotification, setShowNotification] = useState(true)
-
-    const pop = (
-        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white p-[1rem] rounded-md'>
-            <FaWallet size={32} />
-            <span className='font-medium text-base'>Wallet Balance:</span>
-            <span className='font-bold text-2xl'>₦{user.walletBalance}</span>
-        </div>
-    )
-
-    const commissionEarned = (
-        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white p-[1rem] rounded-md'>
-            <FaWallet size={32} />
-            <span className='font-medium text-base'>Total Commission Earned:</span>
-            <span className='font-bold text-2xl'>₦{(user.commissionBalance).toFixed(2)}</span>
-        </div>
-    )
 
     return (
         <div className='dashboard'>
@@ -74,18 +66,18 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>
                     <div className='flex flex-col md:flex-row md:flex-wrap justify-between'>
-                            <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
-                                <FaWallet size={32} />
-                                <span className='font-medium text-base'>Wallet Balance:</span>
-                                <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
-                            </div>
-                        
-                            <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[100%] mt-[10px] md:w-[30%] p-[1rem] rounded-md'>
-                                <FaWallet size={32} />
-                                <span className='font-medium text-base'>Total Commission Earned:</span>
-                                <span className='font-bold text-2xl truncate'>₦{(user.commissionBalance).toFixed(2)}</span>
-                            </div>
-                      
+                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
+                            <FaWallet size={32} />
+                            <span className='font-medium text-base'>Wallet Balance:</span>
+                            <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
+                        </div>
+
+                        <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[100%] mt-[10px] md:w-[30%] p-[1rem] rounded-md'>
+                            <FaWallet size={32} />
+                            <span className='font-medium text-base'>Total Commission Earned:</span>
+                            <span className='font-bold text-2xl truncate'>₦{(user.commissionBalance).toFixed(2)}</span>
+                        </div>
+
                         <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
                             <span className='flex justify-between md:flex-col md:mt-[10px]'>
                                 <span>
@@ -130,8 +122,8 @@ const Dashboard = () => {
                             </span>
                         </span>
                         <span className='flex justify-between'>
-                            <IncentiveProgress title="Monthly Allowance" value="0 of 10,000PV" />
-                            <IncentiveProgress title="Incentive" value="0 of 30,000PV" />
+                        { (user?.package?.name === "Platinum" ||  user?.package?.name === "Executive Platinum") && <IncentiveProgress title="Leadership Bonus" value={`${user.monthlyPv} of 10000PV`} />}
+                            <IncentiveProgress title={nextIncentive} value={`${user.pv} of 25000PV`} />
                         </span>
                     </Card>
                 </Card>
