@@ -21,20 +21,40 @@ const ViewUsers = () => {
         dispatch(SET_SUCCESS())
         form.resetFields();
         setDetails(response.data.data)
+      } else {
+        const message =
+          (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+          response.message ||
+          response.toString();
+        throw new Error(message)
       }
 
     } catch (error) {
       dispatch(SET_ERROR());
-      console.log(error)
+      message.error(error.message)
     }
 
   }
 
-  const deleteUser = async() =>{
-    const response = await DeleteUser({userId: details._id})
-    if(response.status === 200){
-      message.success('User Deleted Successfully')
+  const deleteUser = async () => {
+    try {
+      dispatch(SET_LOADING())
+      const response = await DeleteUser({ userId: details._id })
+      if (response.status === 200) {
+        dispatch(SET_SUCCESS())
+        message.success('User Deleted Successfully')
+      } else {
+        const message =
+          (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+          response.message ||
+          response.toString();
+        throw new Error(message)
+      }
+    } catch (error) {
+      dispatch(SET_ERROR())
+      message.error(error.message)
     }
+
   }
 
 
@@ -74,9 +94,9 @@ const ViewUsers = () => {
             {/* <button>Block User</button> */}
             <button onClick={deleteUser} className='bg-[red] text-white border-none rounded-[4px] p-[5px]'>Delete User</button>
           </div>
-          <div>
-            <p>Personal Information</p>
-            <div className='flex justify-between'>
+          <div className='mt-[1rem]'>
+            <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Personal Information</p>
+            <div className='flex justify-between mt-[1.5rem]'>
               <div className='flex flex-col md:flex-row gap-[1rem] md:gap-[1rem] md:flex-wrap'>
                 <div className='flex flex-col gap-[10px]'>
                   <label>Fullname:</label>
@@ -119,18 +139,26 @@ const ViewUsers = () => {
           </div>
 
           <div className='mt-[1rem]'>
-            <p>Downlines</p>
-            <div className='flex justify-between'>
+            <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Downlines</p>
+            <div>
               <div className='flex flex-col md:flex-row md:gap-[1rem] md:flex-wrap'>
-                {details.downlines.map((downline, id) => 
-                  <span>
-                    {downline.username}
-                    {downline.level}
-                    {downline.package.name}
-                  </span>
+                {details.downlines.map((downline, id) =>
+                  <div>
+                    <div className='mt-[10px] bg-[#D2AC47] p-[1rem] rounded-[4px] text-white'>
+                      <div className='text-[1.5rem] font-[600]'>Level {id + 1}</div>
+                      <div>
+                        {downline.level === id + 1 &&
+                          (<div className='flex flex-col'>
+                            <span>Username: {downline.username}</span>
+                            <span>Package: {downline.package.name}</span>
+                            <span>PV: {downline.pv}PV</span>
+                            <span>Level: {downline.level}</span>
+                          </div>)}
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-              <BiEdit size={23} />
             </div>
           </div>
         </div>
