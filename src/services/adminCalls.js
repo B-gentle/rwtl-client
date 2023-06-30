@@ -10,6 +10,8 @@ export const completeRegistration = async(payload) => apiCalls('patch', `/api/ad
 
 export const ViewUser = async(payload) => apiCalls('post', `/api/admin/viewuser`, payload)
 
+export const ViewUserTransactions = async(payload) => apiCalls('post', `/api/admin/viewusertransactions`, payload)
+
 export const DeleteUser = async(payload) => apiCalls('post', `/api/users/deleteuser`, payload)
 
 export const getLoggedinAdmin = async() =>  apiCalls('get', `/api/admin/getadmin`)

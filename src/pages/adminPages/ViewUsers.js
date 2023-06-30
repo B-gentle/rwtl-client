@@ -57,6 +57,27 @@ const ViewUsers = () => {
 
   }
 
+  const viewDownlineUser = async (username) => {
+    try {
+      const response = await ViewUser({ username })
+      console.log(response)
+      if (response.status === 200) {
+        setDetails(response.data.data)
+      } else {
+        const message =
+          (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+          response.message ||
+          response.toString();
+        throw new Error(message)
+      }
+
+    } catch (error) {
+      dispatch(SET_ERROR());
+      message.error(error.message)
+    }
+
+  }
+
 
   return (
     <div className='p-[1rem]'>
@@ -142,18 +163,20 @@ const ViewUsers = () => {
             <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Downlines</p>
             <div>
               <div className='flex flex-col md:flex-row md:gap-[1rem] md:flex-wrap'>
-                {details.downlines.map((downline, id) =>
-                  <div>
+                {details.downlines.map((_, id) =>
+                  <div key={id}>
                     <div className='mt-[10px] bg-[#D2AC47] p-[1rem] rounded-[4px] text-white'>
                       <div className='text-[1.5rem] font-[600]'>Level {id + 1}</div>
                       <div>
-                        {downline.level === id + 1 &&
-                          (<div className='flex flex-col'>
+                        {details.downlines
+                          .filter((downline) => downline.level === id + 1)
+                          .map((downline, id) =>
+                          (<div onClick={() => {viewDownlineUser(downline.username) }} key={id} className='flex flex-col mb-[1.5rem]'>
                             <span>Username: {downline.username}</span>
                             <span>Package: {downline.package.name}</span>
                             <span>PV: {downline.pv}PV</span>
                             <span>Level: {downline.level}</span>
-                          </div>)}
+                          </div>))}
                       </div>
                     </div>
                   </div>
@@ -162,8 +185,6 @@ const ViewUsers = () => {
             </div>
           </div>
         </div>
-        <div></div>
-        <div></div>
       </div>}
 
     </div>

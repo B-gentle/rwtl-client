@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BackArrowHeading from '../../../components/BackArrowHeading';
 import { GET_TRANSACTIONS, selectTransaction } from '../../../redux/features/user/userSlice';
-import { getTransactions } from '../../../services/transactionCalls';
+import { getTransactions, transformTransaction } from '../../../services/transactionCalls';
 
 const TransactionDetails = () => {
 
@@ -28,6 +28,8 @@ const TransactionDetails = () => {
         (transaction) => parseInt(transaction._id) === parseInt(id)
     );
 
+    const transformedTransaction = transaction ? transformTransaction(transaction) : null;
+
 
     if (!transaction) {
         return <div>Transaction not found</div>;
@@ -36,14 +38,47 @@ const TransactionDetails = () => {
         <div>
             <BackArrowHeading title="Transaction Details" link="dashboard" />
             <div className='space-y-4 mt-[1.5rem]'>
+
+            <section className='flex justify-between items-center'>
+                    <span>Transaction Type</span>
+                    <span>{transaction.transactionType}</span>
+                </section>
+
                 <section className='flex justify-between items-center'>
                     <span className=''>Transction Amount</span>
                     <span className='text-right'>₦{transaction.amount}</span>
                 </section>
-                <section className='flex justify-between items-center'>
-                    <span>Transaction Type</span>
-                    <span>{transaction.transactionType}</span>
-                </section>
+
+                {((transaction.transactionType === 'data')
+                    || (transaction.transactionType === 'airtime')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>Network</span>
+                        <span>{transformedTransaction.network}</span>
+                    </section>))}
+
+                    {((transaction.transactionType === 'data')
+                    || (transaction.transactionType === 'airtime')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>Phone No</span>
+                        <span>{transaction.phoneNumber}</span>
+                    </section>))}
+
+                    {((transaction.transactionType === 'cableTv')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>IUC/SMART CARD No</span>
+                        <span>{transaction.IUC}</span>
+                    </section>))}
+
+                    {((transaction.transactionType === 'electricity')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>Meter No</span>
+                        <span>{transaction.meterNo}</span>
+                    </section>))}
+               
 
                 {((transaction.transactionType === 'data')
                     || (transaction.transactionType === 'airtime')
@@ -62,7 +97,7 @@ const TransactionDetails = () => {
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Previous Commission Balance</span>
-                        <span>{transaction.prevcommissionBalance}</span>
+                        <span>{transaction.prevCommissionBalance}</span>
                     </section>
                     )}
 
@@ -73,8 +108,8 @@ const TransactionDetails = () => {
                     || (transaction.transactionType === 'upgrade'))
                     &&
                     (<section className='flex justify-between items-center'>
-                        <span>Previous Commission Balance</span>
-                        <span>{transaction.newcommissionBalance}</span>
+                        <span>New Commission Balance</span>
+                        <span>{transaction.newCommissionBalance}</span>
                     </section>)}
 
                 <section className='flex justify-between items-center'>

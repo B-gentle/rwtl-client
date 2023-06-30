@@ -1,5 +1,4 @@
-import { Button, Card, Form, Input, message } from 'antd';
-import { FaArrowLeft } from 'react-icons/fa';
+import { Button, Form, Input, message } from 'antd';
 import React from 'react';
 import '../../../pages/authPages/auth.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +38,7 @@ const ChangePassword = () => {
 
     return (
         <div className=''>
-            <BackArrowHeading title="Change Password" />
+            <BackArrowHeading title="Change Password" link="settings" />
             <Form
                 className='mt-[30px]'
                 onFinish={onFinish}

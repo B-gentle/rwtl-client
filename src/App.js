@@ -16,6 +16,7 @@ import ResetPassword from "./pages/authPages/ResetPassword";
 import About from "./pages/landingPage/about/About";
 import Home from "./pages/landingPage/Home";
 import ViewUsers from "./pages/adminPages/ViewUsers";
+import ViewTransaction from "./pages/adminPages/ViewTransaction";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
             <Route path='approvepayment' element={<ProtectAdmin><CompleteRegistration /></ProtectAdmin>} />
             <Route path='creditwallet' element={<ProtectAdmin><CreditWallet /></ProtectAdmin>} />
             <Route path='viewuser' element={<ProtectAdmin><ViewUsers /></ProtectAdmin>} />
+            <Route path='viewtransactions' element={<ProtectAdmin><ViewTransaction /></ProtectAdmin>} />
           </Route>
           <Route path="/*" element={
             <ProtectedPage>
