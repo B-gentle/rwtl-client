@@ -17,11 +17,13 @@ const AdminDashboard = () => {
   return (
     <div className='flex flex-col gap-[1rem]'>
       <div className="bg-[#ae8625] py-4 px-6 text-white text-center">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl">Welcome admin</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl">Welcome admin</h1>
       </div>
       <Link to='/admin/addadmin'>Add Admin</Link>
       <Link to='/admin/approvepayment'>Approve Payment</Link>
       <Link to='/admin/creditwallet'>Credit Wallet</Link>
+      <Link to='/admin/viewuser'>View User</Link>
+      <Link to='/admin/creditwallet'>Transaction Details</Link>
       <p onClick={logUserOut}>Logout</p>
     </div>
   )

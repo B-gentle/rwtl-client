@@ -23,14 +23,5 @@
     .portfolio-downlines{
         margin-top: 43.5px;
     }
-
-    .pv-span{
-        >span:nth-child(1){
-            @include font(16px, 500, #3A3A3A)
-        }
-        >span:nth-child(2){
-            @include font(14px, 400, #3A3A3A99);
-        }
-    }
 }
 }

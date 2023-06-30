@@ -7,7 +7,6 @@ import { MdAddIcCall, MdSignalCellularConnectedNoInternet1Bar, MdGridView } from
 import { FaSatelliteDish, FaWallet } from 'react-icons/fa';
 import { FinancialCards, IncentiveProgress, PortfolioDownlines, RecentTransactions } from '../../components/DashbardComponents';
 import { Chart } from './portfolio/portfolioChart';
-import { format } from 'date-fns';
 import Welcome from '../../components/Welcome';
 import notification from '../../assets/icons/notification.svg';
 import profileIcon from '../../assets/icons/profile-pic-icon.svg';

@@ -12,8 +12,6 @@ import { LoginAdmin } from '../../services/adminCalls';
 const AdminLogin = () => {
 
   const loading = useSelector(selectLoading)
-  const error = useSelector(selectError)
-  const success = useSelector(selectSuccess);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

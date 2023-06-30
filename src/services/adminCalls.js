@@ -8,6 +8,8 @@ export const credituser = async(payload) =>  apiCalls('patch', `/api/admin/credi
 
 export const completeRegistration = async(payload) => apiCalls('patch', `/api/admin/completeRegistration`, payload)
 
+export const ViewUser = async(payload) => apiCalls('post', `/api/admin/viewuser`, payload)
+
 export const getLoggedinAdmin = async() =>  apiCalls('get', `/api/admin/getadmin`)
 
 export const getLoggedinStatus = async() =>  apiCalls('get', `/api/admin/loginstatus`)

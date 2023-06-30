@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import MTN from '../../assets/images/MTN.svg';
 import GLO from '../../assets/images/Glo.svg';
 import airtel from '../../assets/images/airtel.svg';
+import nineMobile from '../../assets/images/9mobile.svg';
 import BackArrowHeading from '../../components/BackArrowHeading'
 import TotalBalance from '../../components/TotalBalance'
 import { buyAirtime } from '../../services/transactionCalls'
@@ -40,7 +41,7 @@ const BuyAirtime = () => {
             label: "AIRTEL"
         },
         {
-            src: MTN,
+            src: nineMobile,
             value: "03",
             label: "9mobile"
         }]

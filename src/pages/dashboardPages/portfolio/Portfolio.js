@@ -4,7 +4,6 @@ import { IncentiveProgress, PortfolioDownlines } from '../../../components/Dashb
 import { Chart, DoughnutChart } from './portfolioChart'
 import './portfolio.scss';
 import { selectUserData } from '../../../redux/features/user/userSlice';
-import pvIcon from '../../../assets/icons/dashboard_icons/pv-icon.svg';
 import { getNextIncentive } from '../../../services/usersApiCall';
 
 const Portfolio = () => {
@@ -19,7 +18,7 @@ const Portfolio = () => {
             }
         }
         getIncentive()
-     }, [])
+    }, [])
 
     const user = useSelector(selectUserData)
     const progress1 = ((parseFloat(user.monthlyPv) / parseFloat(10000)) * 100).toFixed(2);
@@ -28,20 +27,22 @@ const Portfolio = () => {
         <div className='portfolio'>
             <h4>Portfolio</h4>
             {/* <Chart /> */}
-            <PortfolioDownlines user={user} />
             <div>
-                <span className='flex items-center mb-[16px] mt-[32px]'>
-                    <img className='mr-4' src={pvIcon} alt="icon" />
-                    <span className='flex justify-center items-center gap-[2px] pv-span'>
-                        <span>{user.pv}</span>
+                <span className='flex items-center justify-center mb-[16px] mt-[32px] p-[1rem] bg-[#AE8625] text-white'>
+        
+                    <span className='flex justify-center flex-col items-center gap-[2px]'>
+                        <span className='text-[1.2rem]  font-[500]'>Total PV</span>
+                        <span className='text-[1.5rem] font-[400]'>{user.pv}</span>
                         <span>PV</span>
                     </span>
                 </span>
-                <span className='flex justify-between'>
-                    <IncentiveProgress title="Monthly Allowance" value={`${user.monthlyPv} of 10000PV`} progress={progress1} />
+                <span className='flex flex-col gap-[1rem] justify-center'>
+                    {(user?.package?.name === "Platinum" || user?.package?.name === "Executive Platinum") && (<IncentiveProgress title="Monthly Allowance" value={`${user.monthlyPv} of 10000PV`} progress={progress1} />)}
                     <IncentiveProgress title={nextIncentive} value={`${user.pv} of 25000PV`} progress={progress2} />
                 </span>
             </div>
+
+            <PortfolioDownlines user={user} />
             <DoughnutChart user={user} />
         </div>
     )
