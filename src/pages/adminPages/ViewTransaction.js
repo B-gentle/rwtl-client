@@ -1,15 +1,33 @@
-import React from 'react';
-import { Form, Button, Input, Select } from 'antd'
+import React, { useState } from 'react';
+import { Form, Button, Input, Select, message } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_LOADING, selectLoading, SET_SUCCESS, SET_ERROR } from '../../redux/features/processingStates/processStatesSlice'
 import BackArrowHeading from '../../components/BackArrowHeading';
+import { ViewUserTransactions } from '../../services/adminCalls';
 
 const ViewTransaction = () => {
 
-  // const dispatch = useDispatch()
-  const onFinish = async () => {
+  const [userTransaction, setUserTransaction] = useState(null)
+  const dispatch = useDispatch()
+  const loading = useSelector(selectLoading)
+  const onFinish = async (values) => {
 try {
-  
+  dispatch(SET_LOADING())
+  const response = await ViewUserTransactions({username: values.username, transactionType: values.transactionType})
+  if (response.status === 200){
+    dispatch(SET_SUCCESS())
+    setUserTransaction(response.data.data)
+  }else{
+    const message =
+          (response.data && response.data.message) || (response.response && response.response.data && response.response.data.message) ||
+          response.message ||
+          response.toString();
+        throw new Error(message)
+  }
+  console.log(response)
 } catch (error) {
-  
+  dispatch(SET_ERROR())
+  message.error(error.message)
 }
   }
   return (
@@ -85,7 +103,7 @@ try {
 
         <Form.Item
         >
-          <Button type="primary" htmlType="submit" block>
+          <Button type="primary" htmlType="submit" block loading={loading && true}>
             Submit
           </Button>
         </Form.Item>

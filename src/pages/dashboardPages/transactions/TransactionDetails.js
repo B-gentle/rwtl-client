@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BackArrowHeading from '../../../components/BackArrowHeading';
-import { GET_TRANSACTIONS, selectTransaction } from '../../../redux/features/user/userSlice';
+import { GET_TRANSACTIONS, selectTransaction, selectUserData } from '../../../redux/features/user/userSlice';
 import { getTransactions, transformTransaction } from '../../../services/transactionCalls';
 
 const TransactionDetails = () => {
@@ -23,9 +23,11 @@ const TransactionDetails = () => {
     }, [])
 
     const { id } = useParams();
+    const user = useSelector(selectUserData)
+    const username = user.username
     const transactions = useSelector(selectTransaction)
     const transaction = transactions.find(
-        (transaction) => parseInt(transaction._id) === parseInt(id)
+        (transaction) => transaction._id === id
     );
 
     const transformedTransaction = transaction ? transformTransaction(transaction) : null;
@@ -39,7 +41,7 @@ const TransactionDetails = () => {
             <BackArrowHeading title="Transaction Details" link="dashboard" />
             <div className='space-y-4 mt-[1.5rem]'>
 
-            <section className='flex justify-between items-center'>
+                <section className='flex justify-between items-center'>
                     <span>Transaction Type</span>
                     <span>{transaction.transactionType}</span>
                 </section>
@@ -49,36 +51,50 @@ const TransactionDetails = () => {
                     <span className='text-right'>₦{transaction.amount}</span>
                 </section>
 
-                {((transaction.transactionType === 'data')
-                    || (transaction.transactionType === 'airtime')
+                {(transaction.transactionType === 'data'
+                    || transaction.transactionType === 'airtime')
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Network</span>
                         <span>{transformedTransaction.network}</span>
-                    </section>))}
+                    </section>)}
 
-                    {((transaction.transactionType === 'data')
-                    || (transaction.transactionType === 'airtime')
+                {(transaction.transactionType === 'data'
+                    || transaction.transactionType === 'airtime')
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Phone No</span>
                         <span>{transaction.phoneNumber}</span>
-                    </section>))}
+                    </section>)}
 
-                    {((transaction.transactionType === 'cableTv')
+                {((transaction.transactionType === 'cableTv')
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>IUC/SMART CARD No</span>
                         <span>{transaction.IUC}</span>
                     </section>))}
 
-                    {((transaction.transactionType === 'electricity')
+                {((transaction.transactionType === 'electricity')
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Meter No</span>
                         <span>{transaction.meterNo}</span>
                     </section>))}
-               
+
+                {((transaction.transactionType === 'fundTransfer')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>Recipient:</span>
+                        <span>{transaction.recipient}</span>
+                    </section>))}
+
+                {((transaction.transactionType === 'fundTransfer')
+                    &&
+                    (<section className='flex justify-between items-center'>
+                        <span>Sender:</span>
+                        <span>{transaction.sender}</span>
+                    </section>))}
+
 
                 {((transaction.transactionType === 'data')
                     || (transaction.transactionType === 'airtime')
@@ -97,7 +113,7 @@ const TransactionDetails = () => {
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Previous Commission Balance</span>
-                        <span>{transaction.prevCommissionBalance}</span>
+                        <span>{(transaction.prevCommissionBalance).toFixed(2)}</span>
                     </section>
                     )}
 
@@ -109,19 +125,49 @@ const TransactionDetails = () => {
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>New Commission Balance</span>
-                        <span>{transaction.newCommissionBalance}</span>
+                        <span>{(transaction.newCommissionBalance).toFixed(2)}</span>
                     </section>)}
 
-                <section className='flex justify-between items-center'>
+                {(transaction.transactionType === 'fundTransfer' && transaction.recipient === username) && (<section className='flex justify-between items-center'>
+                    <span>Previous Wallet Balanace</span>
+                    <span>{transaction.receiverPrevWalletBalance}</span>
+                </section>)}
+
+                {(transaction.transactionType === 'fundTransfer' && transaction.recipient === username) && (<section className='flex justify-between items-center'>
+                    <span>New Wallet Balance</span>
+                    <span>{transaction.receiverNewWalletBalance}</span>
+                </section>)}
+
+                {(transaction.transactionType === 'fundTransfer' && transaction.sender === username)
+                    &&
+                    (
+                        <section className='flex justify-between items-center'>
+                            <span>Previous Wallet Balance</span>
+                            <span>{transaction.senderPrevWalletBalance}</span>
+                        </section>
+                    )}
+
+                {(transaction.transactionType === 'fundTransfer' && transaction.sender === username)
+                    &&
+                    (
+                        <section className='flex justify-between items-center'>
+                            <span>New Wallet Balanace</span>
+                            <span>{transaction.senderNewWalletBalance}</span>
+                        </section>
+                    )}
+
+                {(transaction.transactionType !== 'fundTransfer') && (<section className='flex justify-between items-center'>
                     <span>Previous Wallet Balanace</span>
                     <span>{transaction.prevWalletBalance}</span>
-                </section>
+                </section>)
+                }
 
-                <section className='flex justify-between items-center'>
+                {(transaction.transactionType !== 'fundTransfer') && (<section className='flex justify-between items-center'>
                     <span>New Wallet Balanace</span>
                     <span>{transaction.newWalletBalance}</span>
                 </section>
-
+                )
+                }
             </div>
 
         </div>
