@@ -159,7 +159,7 @@ const BuyData = () => {
                     >
                         {dataPln && dataPln.map((plan => (
                             <Option key={plan?.PRODUCT_CODE} value={plan?.PRODUCT_ID}>
-                                {plan.PRODUCT_NAME}
+                                {plan.PRODUCT_NAME} for ₦{plan.PRODUCT_AMOUNT}
                             </Option>
                         )))
                         }

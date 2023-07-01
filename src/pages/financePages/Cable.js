@@ -131,7 +131,7 @@ const Cable = () => {
                             <Option key={plan?.PACKAGE_ID
                             } value={plan?.PACKAGE_ID
                             }>
-                                {plan.PACKAGE_NAME}
+                                {plan.PACKAGE_NAME} for ₦{plan.PACKAGE_AMOUNT}
                             </Option>
                         )))
                         }
