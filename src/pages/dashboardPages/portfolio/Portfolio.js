@@ -14,7 +14,7 @@ const Portfolio = () => {
         const getIncentive = async () => {
             const response = await getNextIncentive()
             if (response.status === 200) {
-                setNextIncentive(response.data.data[0].incentiveName)
+                setNextIncentive(response.data.data[0])
             }
         }
         getIncentive()
@@ -38,7 +38,7 @@ const Portfolio = () => {
                 </span>
                 <span className='flex flex-col gap-[1rem] justify-center'>
                     {(user?.package?.name === "Platinum" || user?.package?.name === "Executive Platinum") && (<IncentiveProgress title="Monthly Allowance" value={`${user.monthlyPv} of 10000PV`} progress={progress1} />)}
-                    <IncentiveProgress title={nextIncentive} value={`${user.pv} of 25000PV`} progress={progress2} />
+                    <IncentiveProgress title={nextIncentive?.incentiveName} value={`${user.pv} of ${nextIncentive?.requiredPv}`} progress={progress2} />
                 </span>
             </div>
 

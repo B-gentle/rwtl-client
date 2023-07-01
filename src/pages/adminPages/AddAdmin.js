@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input, message, Select } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
@@ -16,7 +16,6 @@ const AddAdmin = () => {
     dispatch(SET_LOADING())
     try {
       const response = await AddNewAdmin(values)
-      console.log(response);
       if (response.status === 201) {
         dispatch(SET_SUCCESS())
         message.success("Admin Created")
@@ -29,7 +28,6 @@ const AddAdmin = () => {
         throw new Error(message)
       }
     } catch (error) {
-      console.log(error);
       dispatch(SET_ERROR());
       message.error(error.message)
     }
@@ -65,6 +63,30 @@ const AddAdmin = () => {
           rules={[{ required: true, message: 'Please input your email!' }]}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Role"
+          name="role"
+          rules={[{ required: true, message: 'Please select Admin role!' }]}
+        >
+           <Select
+            placeholder="Select Admin role"
+            options={[
+              {
+                value: 'super',
+                label: 'Super Admin',
+              },
+              {
+                value: 'director',
+                label: 'Director Level',
+              },
+              {
+                value: 'staff',
+                label: 'Staff',
+              },
+            ]}
+          />
         </Form.Item>
 
         <Form.Item

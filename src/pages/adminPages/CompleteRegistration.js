@@ -51,6 +51,11 @@ const CompleteRegistration = () => {
       key: 'fullname',
     },
     {
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
+    },
+    {
       title: 'Package',
       dataIndex: 'package',
       key: 'package',
@@ -63,9 +68,12 @@ const CompleteRegistration = () => {
   ]
 
   return (
-    <div>
+    <div className='pt-[1rem] complete-registrations'>
       <BackArrowHeading title="View Pending users" link="admin" />
-      {selectedUser ? (<PendingUserDetails user={selectedUser} setSelectedUser={setSelectedUser}/>) : (<Table dataSource={data} columns={columns} />)}
+      {selectedUser ? (<PendingUserDetails user={selectedUser} setSelectedUser={setSelectedUser}/>) : (<Table 
+      className='mt-[2rem]'
+      scroll={{ x: 400, y: 400 }}
+      dataSource={data} columns={columns} />)}
       
         
     </div>

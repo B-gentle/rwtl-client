@@ -20,6 +20,7 @@ const AdminDashboard = () => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl">Welcome admin</h1>
       </div>
       <Link to='/admin/addadmin'>Add Admin</Link>
+      <Link to='/admin/addadmin'>Delete Admin</Link>
       <Link to='/admin/approvepayment'>Approve Payment</Link>
       <Link to='/admin/creditwallet'>Credit Wallet</Link>
       <Link to='/admin/viewuser'>View User</Link>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 import BackArrowHeading from '../../../components/BackArrowHeading';
 import { GET_TRANSACTIONS, selectTransaction, selectUserData } from '../../../redux/features/user/userSlice';
 import { getTransactions, transformTransaction } from '../../../services/transactionCalls';
@@ -168,6 +169,18 @@ const TransactionDetails = () => {
                 </section>
                 )
                 }
+
+                <section className='flex justify-between items-center'>
+                    <span>Time</span>
+                    <span>{format(new Date(transaction.createdAt), 'hh:mm:ss a')}</span>
+                </section>
+
+                <section className='flex justify-between items-center'>
+                    <span>Transaction Date</span>
+                    <span>{format(new Date(transaction.createdAt), 'yyyy-MM-dd')}</span>
+                </section>
+
+                
             </div>
 
         </div>
