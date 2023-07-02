@@ -46,6 +46,7 @@ const SendMoney = () => {
         }
       } catch (error) {
         dispatch(SET_ERROR())
+        window.location.reload();
         message.error(error.message)
       }
 
