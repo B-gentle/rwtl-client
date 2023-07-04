@@ -15,7 +15,7 @@ import Register from "./pages/authPages/Register";
 import ResetPassword from "./pages/authPages/ResetPassword";
 import About from "./pages/landingPage/about/About";
 import Home from "./pages/landingPage/Home";
-import ViewUsers from "./pages/adminPages/ViewUsers";
+import ViewUsers from "./pages/adminPages/viewUsers/ViewUsers";
 import ViewTransaction from "./pages/adminPages/ViewTransaction";
 
 function App() {
