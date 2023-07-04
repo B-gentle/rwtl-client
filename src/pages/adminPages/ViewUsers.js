@@ -118,46 +118,87 @@ const ViewUsers = () => {
           <div className='mt-[1rem]'>
             <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Personal Information</p>
             <div className='flex justify-between mt-[1.5rem]'>
-              <div className='flex flex-col md:flex-row gap-[1rem] md:gap-[1rem] md:flex-wrap'>
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Fullname:</label>
-                  <input className={!editPI && `border-none outline-none bg-[transparent]`} type="text" defaultValue={details.fullname} disabled={editPI ? false : true} />
-                </div>
+              <form>
+                <div className='flex flex-col md:flex-row gap-[1rem] md:gap-[1rem] md:flex-wrap'>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Fullname:</label>
+                    <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.fullname} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Username:</label>
-                  <input className={!editPI && `border-none outline-none bg-[transparent]`} type="text" defaultValue={details.username} disabled={editPI ? false : true} />
-                </div>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Username:</label>
+                    <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.username} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Package:</label>
-                  <input className={!editPI && `border-none outline-none bg-[transparent]`} type="text" defaultValue={details.package.name} disabled={editPI ? false : true} />
-                </div>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Package:</label>
+                    <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.package.name} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Wallet Balance:</label>
-                  <input className={!editPI && `border-none outline-none bg-[transparent]`} type="number" defaultValue={details.walletBalance} disabled={editPI ? false : true} />
-                </div>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Wallet Balance:</label>
+                    <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="number" defaultValue={details.walletBalance} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Withdrawable Commission:</label>
-                  <input className={!editPI && `border-none outline-none bg-[transparent]`} type="number" defaultValue={details.withdrawableCommission} disabled={editPI ? false : true} />
-                </div>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Withdrawable Commission:</label>
+                    <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="number" defaultValue={details.withdrawableCommission} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>Total Commission:</label>
-                  <input className={!editPI && `border-none outline-none`} type="number" defaultValue={details.commissionBalance} disabled={editPI ? false : true} />
-                </div>
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>Total Commission:</label>
+                    <input className={!editPI ? `border-none outline-none` : ''} type="number" defaultValue={details.commissionBalance} disabled={editPI ? false : true} />
+                  </div>
 
-                <div className='flex flex-col gap-[10px]'>
-                  <label>PV:</label>
-                  <input className={!editPI && `border-none outline-none`} type="number" defaultValue={details.pv} disabled={editPI ? false : true} />
+                  <div className='flex flex-col gap-[10px]'>
+                    <label>PV:</label>
+                    <input className={!editPI ? `border-none outline-none` : ''} type="number" defaultValue={details.pv} disabled={editPI ? false : true} />
+                  </div>
                 </div>
-
-              </div>
+              </form>
               <BiEdit size={23} onClick={() => { setEditPI(!editPI) }} />
             </div>
           </div>
+
+          <div className='mt-[1rem]'>
+            <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Bank Details</p>
+            <div className='flex justify-between mt-[1rem]'>
+              <form>
+                <div className='flex flex-col gap-[10px]'>
+                  <label>Bank Name:</label>
+                  <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.bankName} disabled={editPI ? false : true} />
+                </div>
+                <div className='flex flex-col gap-[10px]'>
+                  <label>Account Number:</label>
+                  <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.accountNo} disabled={editPI ? false : true} />
+                </div>
+                <div className='flex flex-col gap-[10px]'>
+                  <label>Account Name:</label>
+                  <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" defaultValue={details.accountName} disabled={editPI ? false : true} />
+                </div>
+              </form>
+              <BiEdit size={23} onClick={() => { setEditPI(!editPI) }} />
+            </div>
+          </div>
+
+          <div className='mt-[1rem]'>
+            <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Security</p>
+            <div className='flex justify-between mt-[1rem]'>
+              <form>
+                <div className='flex flex-col gap-[10px]'>
+                  <label>Change Password</label>
+                  <input className={!editPI ? `border-none outline-none bg-[transparent]` : ''} type="text" disabled={editPI ? false : true} />
+                </div>
+              </form>
+              <BiEdit size={23} onClick={() => { setEditPI(!editPI) }} />
+            </div>
+          </div>
+
+          <div className='flex justify-center gap-[1rem]'>
+            <button className='rounded-[10px] border-none p-[1rem] bg-[#E9DAA4]'>Access User Account</button>
+            <button className='rounded-[10px] border-none p-[1rem] bg-[#A1967D] text-white'>Save Changes</button>
+          </div>
+
 
           <div className='mt-[1rem]'>
             <p className='font-[500] text-[1.2rem] bg-[#F7EF8A] p-[1rem] text-[#3a3a3a99]'>Downlines</p>
@@ -171,7 +212,7 @@ const ViewUsers = () => {
                         {details.downlines
                           .filter((downline) => downline.level === id + 1)
                           .map((downline, id) =>
-                          (<div onClick={() => {viewDownlineUser(downline.username) }} key={id} className='flex flex-col mb-[1.5rem]'>
+                          (<div onClick={() => { viewDownlineUser(downline.username) }} key={id} className='flex flex-col mb-[1.5rem]'>
                             <span>Username: {downline.username}</span>
                             <span>Package: {downline.package.name}</span>
                             <span>PV: {downline.pv}PV</span>
@@ -187,7 +228,7 @@ const ViewUsers = () => {
         </div>
       </div>}
 
-    </div>
+    </div >
   )
 }
 

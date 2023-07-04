@@ -100,7 +100,8 @@ const TransactionDetails = () => {
                 {((transaction.transactionType === 'data')
                     || (transaction.transactionType === 'airtime')
                     || (transaction.transactionType === 'cableTv')
-                    || (transaction.transactionType === 'electricity'))
+                    || (transaction.transactionType === 'electricity')
+                    || (transaction.transactionType === 'upgrade'))
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Commission Earned</span>
@@ -110,7 +111,8 @@ const TransactionDetails = () => {
                 {((transaction.transactionType === 'data')
                     || (transaction.transactionType === 'airtime')
                     || (transaction.transactionType === 'cableTv')
-                    || (transaction.transactionType === 'electricity'))
+                    || (transaction.transactionType === 'electricity')
+                    || (transaction.transactionType === 'upgrade'))
                     &&
                     (<section className='flex justify-between items-center'>
                         <span>Previous Commission Balance</span>
@@ -180,7 +182,7 @@ const TransactionDetails = () => {
                     <span>{format(new Date(transaction.createdAt), 'yyyy-MM-dd')}</span>
                 </section>
 
-                
+
             </div>
 
         </div>

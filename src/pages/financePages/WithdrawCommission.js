@@ -2,7 +2,6 @@ import { Button, Form, Input, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../components/BackArrowHeading';
-import TotalBalance from '../../components/TotalBalance';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { selectUserData } from '../../redux/features/user/userSlice';
 import { TransferComm } from '../../services/transactionCalls';
@@ -17,6 +16,7 @@ const WithdrawCommission = () => {
   const loading = useSelector(selectLoading)
   const dispatch = useDispatch()
   const user = useSelector(selectUserData)
+  const [form] = Form.useForm()
   const [confirm, setConfirm] = useState(false)
   const [formData, setFormData] = useState(null)
   const [transactionSuccessful, setTransactionSuccessful] = useState(false);
@@ -34,8 +34,8 @@ const WithdrawCommission = () => {
         if (response.status === 200) {
           dispatch(SET_SUCCESS())
           message.success(response.data.message)
-          // TODO: actually send the money
-          // reset the form
+          form.resetFields();
+          window.location.reload();
           setConfirm(false);
           setTransactionSuccessful(true);
         } else {
@@ -61,6 +61,7 @@ const WithdrawCommission = () => {
         </div>
         <Form
           onFinish={onFinish}
+          form={form}
         >
 
           <Form.Item
