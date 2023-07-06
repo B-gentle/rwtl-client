@@ -48,6 +48,11 @@ const TransactionDetails = () => {
                 </section>
 
                 <section className='flex justify-between items-center'>
+                    <span>Transaction Id</span>
+                    <span>{transaction.transactionId}</span>
+                </section>
+
+                <section className='flex justify-between items-center'>
                     <span className=''>Transction Amount</span>
                     <span className='text-right'>₦{transaction.amount}</span>
                 </section>

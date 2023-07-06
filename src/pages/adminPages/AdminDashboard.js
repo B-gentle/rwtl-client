@@ -31,6 +31,7 @@ const AdminDashboard = () => {
       <Link to='/admin/creditwallet'>Credit Wallet</Link>
       <Link to='/admin/viewuser'>View User</Link>
       <Link to='/admin/viewtransactions'>Transaction Details</Link>
+      <Link to='/admin/viewtransactions'>Verify Qualified Users</Link>
       <p onClick={logUserOut}>Logout</p>
     </div>
   )

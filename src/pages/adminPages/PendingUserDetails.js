@@ -1,6 +1,6 @@
 import { Button, message } from 'antd'
 import React from 'react'
-import { completeRegistration } from '../../services/adminCalls';
+import { completeRegistration, DeleteUser } from '../../services/adminCalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_LOADING, SET_ERROR, SET_SUCCESS, selectLoading } from '../../redux/features/processingStates/processStatesSlice';
 
@@ -29,6 +29,29 @@ const PendingUserDetails = ({ user, setSelectedUser }) => {
         }
 
     }
+
+    const deleteUser = async () => {
+        dispatch(SET_LOADING())
+        try {
+            const response = await DeleteUser({ email: user?.email })
+            if (response.status === 201) {
+                dispatch(SET_SUCCESS());
+                message.success("Registration Approved")
+                setSelectedUser(null)
+            } else {
+                console.log(response)
+                const message =
+                (response.data && response.data.message ) || (response.response && response.response.data && response.response.data.message) ||
+                response.message ||
+                response.toString();
+              throw new Error(message)
+            }
+        } catch (error) {
+            dispatch(SET_ERROR());
+            message.error(error.message)
+        }
+
+    }
     return (
         <div>
             <h2>User Details</h2>
@@ -38,7 +61,7 @@ const PendingUserDetails = ({ user, setSelectedUser }) => {
             <p>username: {user.username}</p>
             <div>
                 <Button onClick={approveUser} loading={loading && true}>Approve</Button>
-                <Button>Delete</Button>
+                <Button onClick={deleteUser}>Delete</Button>
             </div>
         </div>
     )
