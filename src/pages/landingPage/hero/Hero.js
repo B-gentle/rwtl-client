@@ -1,24 +1,33 @@
 import React from 'react';
+import { Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
+import { GiMoneyStack } from 'react-icons/gi'
 import './hero.scss';
 import award from '../../../assets/images/medal-star.svg';
 import heroImage from '../../../assets/images/heroImage.png';
 // import activeFrame from '../../../assets/images/activeUsersFrame.png';
-import { Button, Card } from 'antd';
-import { Link } from 'react-router-dom';
-import { GiMoneyStack } from 'react-icons/gi'
+
 
 const Hero = () => {
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 768px)'});
   return (
     <div className='hero'>
       <div>
         {/* <span className='award-span'>
           <img src={award} alt='' />
         </span> */}
-        <h1 className='text-center'>Welcome To Rechargewise Technologies</h1>
+        <motion.h1
+          initial={isMobileScreen ? { opacity: 0, scale: 1.5 } : { opacity: 1, scale: 1 }}
+          animate={isMobileScreen ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1 }}
+          className='text-center'
+        >Welcome To Rechargewise Technologies</motion.h1>
         <p style={{ fontSize: '18px' }}>A world of digital and lifestyle transformation through airtime vending and bill payments.
         </p>
         <p className='write-ups'>
-        We provide Virtual Top Up (VTU) solutions such as; data subscriptions, electricity bills payment, airtime, cable TV subscriptions, WAEC & NECO results PIN, recharge card printing and a lot more at highly subsidised rates.
+          We provide Virtual Top Up (VTU) solutions such as; data subscriptions, electricity bills payment, airtime, cable TV subscriptions, WAEC & NECO results PIN, recharge card printing and a lot more at highly subsidised rates.
           <br /><br />
           <GiMoneyStack color='#DDB05B' size={20} /> Rechargewise is designed to create wealth for participating partners, by extension, an avenue for community development.
           <br /><br />

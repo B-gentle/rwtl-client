@@ -2,7 +2,7 @@
 @import '../../../sass/mixins';
 
 .how-it-works {
-    padding: 72px 119px 135px 120px;
+    padding: 72px 90px 135px;
 
     .serviceProviders {
         display: flex;
@@ -21,8 +21,9 @@
 
     .service-providers-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 90px;
+        gap: 30px;
         margin-bottom: 100px;
     }
 

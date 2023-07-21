@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsFillTelephoneFill } from 'react-icons/bs';
 import './contact.scss';
 import contact from '../../../assets/images/contact.svg';
 
@@ -16,6 +17,10 @@ const Contact = () => {
     <main>
         <header>Email Address</header>
         <a href='mailto:rechargewisetech@gmail.com'>rechargewisetech@gmail.com</a>
+    </main>
+    <main>
+        <header>Customer Care</header>
+        <a href='tel:+2348142114603'><BsFillTelephoneFill/>  08142114603</a>
     </main>
     </span>
 </div>

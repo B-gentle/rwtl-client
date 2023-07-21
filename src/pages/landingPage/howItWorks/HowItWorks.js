@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Carousel } from 'antd';
+import { motion } from 'framer-motion';
 import './howItWorks.scss';
 import { ComplanSlide, ServiceProviders } from './BluePrint';
 import MTN from '../../../assets/images/MTN.svg';
@@ -31,21 +32,45 @@ const HowItWorks = () => {
         carouselRef.current.prev();
     };
 
+    const container = {
+        hidden: { opacity: 1, scale: 0 },
+        visible: {
+          opacity: 1,
+          scale: 1,
+          transition: {
+            delayChildren: 0.3,
+            staggerChildren: 0.2
+          }
+        }
+      };
+      
+      const item = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+          y: 0,
+          opacity: 1
+        }
+      };
+
     return (
         <div className='how-it-works'>
-            <div className='service-providers-container'>
+            <motion.div 
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className='service-providers-container'>
                 <ServiceProviders src={MTN} networkProvider="MTN" />
                 <ServiceProviders src={AIRTEL} networkProvider="AIRTEL" />
                 <ServiceProviders src={glo} networkProvider="GLO" />
                 <ServiceProviders src={nineMobile} networkProvider="mobile" />
                 {/* <ServiceProviders src={gotv} networkProvider="" /> */}
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={cableTv} alt=''/>
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={exams} alt=''/>
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={ekdc} alt=''/>
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={eedc} alt=''/>
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={north} alt=''/>
-                <img className='w-[25%] md:h-[100px] md:w-[80%] mx-[auto] rounded-[1rem]' src={aedc} alt=''/>
-            </div>
+                <img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem] border-1 border-red-500' src={exams} alt=''/>
+                <motion.img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem]' variants={item} src={cableTv} alt=''/>
+                <motion.img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem]' variants={item} src={ekdc} alt=''/>
+                <motion.img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem]' variants={item} src={eedc} alt=''/>
+                <motion.img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem]' variants={item} src={north} alt=''/>
+                <motion.img className='w-[25%] md:h-[150px] md:w-[30%] mx-[auto] rounded-[1rem]' variants={item} src={aedc} alt=''/>
+            </motion.div>
             <div className='complan'>
                 <Carousel
                     ref={carouselRef}

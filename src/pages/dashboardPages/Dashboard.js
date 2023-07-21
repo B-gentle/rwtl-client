@@ -9,7 +9,7 @@ import { FinancialCards, IncentiveProgress, PortfolioDownlines, RecentTransactio
 import { Chart } from './portfolio/portfolioChart';
 import Welcome from '../../components/Welcome';
 import notification from '../../assets/icons/notification.svg';
-import profileIcon from '../../assets/icons/profile-pic-icon.svg';
+import companyLogo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { Link } from 'react-router-dom';
 import { getTransactions } from '../../services/transactionCalls';
@@ -53,7 +53,7 @@ const Dashboard = () => {
         <div className='dashboard'>
             {isMobile && (<div className='flex md:flex-row justify-between mt-[1rem] mb-[28px]'>
                 <span className='flex items-center'>
-                    <img className='w-[60px] h-[60px] mr-[8px]' src={profileIcon} alt='avatar' />
+                    <img className='w-[60px] h-[60px] mr-[8px]' src={companyLogo} alt='avatar' />
                     <Welcome user={user} />
                 </span>
                 <Badge dot={showNotification}>
