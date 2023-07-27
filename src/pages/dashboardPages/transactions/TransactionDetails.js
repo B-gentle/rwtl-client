@@ -52,10 +52,15 @@ const TransactionDetails = () => {
                     <span>{transaction.transactionId}</span>
                 </section>
 
-                <section className='flex justify-between items-center'>
+               { transaction.transactionType !== 'commission' && (<section className='flex justify-between items-center'>
                     <span className=''>Transction Amount</span>
                     <span className='text-right'>₦{transaction.amount}</span>
-                </section>
+                </section>)}
+
+                { transaction.transactionType === 'commission' && (<section className='flex justify-between items-center'>
+                    <span className=''>Commission Earned:</span>
+                    <span className='text-right'>₦{transaction.commission}</span>
+                </section>)}
 
                 {(transaction.transactionType === 'data'
                     || transaction.transactionType === 'airtime')
@@ -164,13 +169,13 @@ const TransactionDetails = () => {
                         </section>
                     )}
 
-                {(transaction.transactionType !== 'fundTransfer') && (<section className='flex justify-between items-center'>
+                {(transaction.transactionType !== 'fundTransfer' && transaction.transactionType !== 'commission') && (<section className='flex justify-between items-center'>
                     <span>Previous Wallet Balanace</span>
                     <span>{transaction.prevWalletBalance}</span>
                 </section>)
                 }
 
-                {(transaction.transactionType !== 'fundTransfer') && (<section className='flex justify-between items-center'>
+                {(transaction.transactionType !== 'fundTransfer' && transaction.transactionType !== 'commission') && (<section className='flex justify-between items-center'>
                     <span>New Wallet Balanace</span>
                     <span>{transaction.newWalletBalance}</span>
                 </section>

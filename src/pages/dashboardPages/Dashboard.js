@@ -68,13 +68,19 @@ const Dashboard = () => {
                         <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
                             <FaWallet size={32} />
                             <span className='font-medium text-base'>Wallet Balance:</span>
-                            <span className='font-bold text-2xl truncate'>₦{user.walletBalance}</span>
+                            <span className='font-bold text-2xl truncate'>₦{user.walletBalance.toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            })}</span>
                         </div>
 
                         <div className='flex flex-col gap-[1rem] bg-[#b88a44] text-white w-[100%] mt-[10px] md:w-[30%] p-[1rem] rounded-md'>
                             <FaWallet size={32} />
                             <span className='font-medium text-base'>Total Commission Earned:</span>
-                            <span className='font-bold text-2xl truncate'>₦{(user.commissionBalance).toFixed(2)}</span>
+                            <span className='font-bold text-2xl truncate'>₦{(user.commissionBalance).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            })}</span>
                         </div>
 
                         <div className='flex flex-col gap=[1rem] bg-[#855424] mt-[10px] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
@@ -88,7 +94,10 @@ const Dashboard = () => {
                                 </Link>
                             </span>
                             <span className='font-medium text-base'>Commission Balance:</span>
-                            <span className='font-bold text-2xl'>₦{(user.withdrawableCommission).toFixed(2)}</span>
+                            <span className='font-bold text-2xl'>₦{(user.withdrawableCommission).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            })}</span>
                         </div>
                     </div>
 
@@ -121,7 +130,7 @@ const Dashboard = () => {
                             </span>
                         </span>
                         <span className='flex justify-between'>
-                        { (user?.package?.name === "Platinum" ||  user?.package?.name === "Executive Platinum") && <IncentiveProgress title="Leadership Bonus" value={`${user.monthlyPv} of 10000PV`} />}
+                            {(user?.package?.name === "Platinum" || user?.package?.name === "Executive Platinum") && <IncentiveProgress title="Leadership Bonus" value={`${user.monthlyPv} of 10000PV`} />}
                             <IncentiveProgress title={nextIncentive} value={`${user.pv} of 25000PV`} />
                         </span>
                     </Card>

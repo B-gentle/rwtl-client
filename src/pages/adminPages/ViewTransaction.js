@@ -9,6 +9,7 @@ import { ViewUserTransactions } from '../../services/adminCalls';
 const ViewTransaction = () => {
 
   const [userTransaction, setUserTransaction] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
 
@@ -32,6 +33,16 @@ const ViewTransaction = () => {
       message.error(error.message)
     }
   }
+
+  const handleView = (record) => {
+    setSelectedUser(record);
+  };
+
+  const renderAction = (_, record) => (
+    <div>
+      <Button onClick={() => handleView(record)}>View</Button>
+    </div>
+  );
 
 
   const columns = [
@@ -60,6 +71,11 @@ const ViewTransaction = () => {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: renderAction,
     },
   ];
 
@@ -90,7 +106,7 @@ const ViewTransaction = () => {
         >
 
           <Select
-            placeholder="Select Transaaction Type"
+            placeholder="Select Transaction Type"
             options={[
               {
                 value: 'airtime',

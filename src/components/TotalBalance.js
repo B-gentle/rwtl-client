@@ -7,8 +7,11 @@ const TotalBalance = () => {
   const user = useSelector(selectUserData)
   return (
     <div className='total-amount'>
-        <h2>Total Balance</h2>
-        <h3>₦{user.walletBalance}</h3>
+      <h2>Total Balance</h2>
+      <h3>₦{user.walletBalance.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}</h3>
     </div>
   )
 }

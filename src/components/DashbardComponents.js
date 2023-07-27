@@ -63,7 +63,7 @@ const reversedTrans = modifiedTrans.reverse()
                         <span>{format(new Date(transaction.createdAt), 'yyyy-MM-dd hh:mm:ss a')}</span>
                     </span>
                     <span style={{color: transaction.transactionType === 'fundTransfer' && 'red' }}>
-                    ₦{transaction.amount}
+                    {transaction.transactionType === 'commission' ? `₦${transaction.commission}` : `₦${transaction.amount}`}
                     </span>
                 </Link>
             ))}

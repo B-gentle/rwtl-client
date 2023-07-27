@@ -27,6 +27,8 @@ import Exams from '../../pages/financePages/Exams';
 import WithdrawCommission from '../../pages/financePages/WithdrawCommission';
 import CardPrinting from '../../pages/financePages/CardPrinting';
 import TransactionDetails from '../../pages/dashboardPages/transactions/TransactionDetails';
+import Jamb from '../../pages/financePages/Jamb';
+import Waec from '../../pages/financePages/Waec';
 
 const Contents = () => {
     
@@ -60,6 +62,8 @@ const Contents = () => {
                     <Route path='cardprinting' element={<CardPrinting />} />
                     <Route path="adddownline" element={<AddDownlineUser/>} />
                     <Route path='withdrawcommission' element={<WithdrawCommission />} />
+                    <Route path='jamb' element={<Jamb />} />
+                    <Route path='waec' element={<Waec />} />
                 </Routes>
                 </div>
             </div>
