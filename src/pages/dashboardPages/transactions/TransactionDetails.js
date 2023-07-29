@@ -38,7 +38,7 @@ const TransactionDetails = () => {
         return <div>Transaction not found</div>;
     }
     return (
-        <div>
+        <div className='h-[100vh]'>
             <BackArrowHeading title="Transaction Details" link="dashboard" />
             <div className='space-y-4 mt-[1.5rem]'>
 

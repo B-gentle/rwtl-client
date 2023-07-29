@@ -13,13 +13,17 @@ import companyLogo from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { Link } from 'react-router-dom';
 import { getTransactions } from '../../services/transactionCalls';
-import { getNextIncentive } from '../../services/usersApiCall';
+import { getNextIncentive, getNotifications } from '../../services/usersApiCall';
 
 
 const Dashboard = () => {
 
     const dispatch = useDispatch()
     const [nextIncentive, setNextIncentive] = useState(null)
+    const [newNotification, setNewNotification] = useState(false)
+    const [notifications, setShowNotification] = useState(null)
+    const [displayNotifications, setDisplayNotifications] = useState(false)
+    
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -37,17 +41,29 @@ const Dashboard = () => {
                 setNextIncentive(response.data.data[0].incentiveName)
             }
         }
+
+        const getnotifications = async () => {
+            const response = await getNotifications()
+            if (response.status === 200) {
+                setShowNotification(response.data)
+                setNewNotification(true)
+            }
+        }
         fetchTransactions();
-        getIncentive()
+        getIncentive();
+        getnotifications();
     }, [])
 
     const user = useSelector(selectUserData);
     const transactions = useSelector(selectTransaction);
-    // const date = new Date()
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
+    const readNotification = () => {
+
+    }
+     // const date = new Date()
     // const todayDate = format(date, 'dd, MMM yyyy')
     // const time = format(date, 'hh: mm a')
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    const [showNotification, setShowNotification] = useState(true)
 
     return (
         <div className='dashboard'>
@@ -56,11 +72,21 @@ const Dashboard = () => {
                     <img className='w-[60px] h-[60px] mr-[8px]' src={companyLogo} alt='avatar' />
                     <Welcome user={user} />
                 </span>
-                <Badge dot={showNotification}>
+                <Badge dot={newNotification} onClick={()=> {setDisplayNotifications(!displayNotifications)}}>
                     <img src={notification} alt='notification' />
                 </Badge>
             </div>)
             }
+
+           { displayNotifications && (<section>
+                {notifications && notifications.map((notification, index) => 
+                    <div key={index} onClick={readNotification}>
+                        {notification.message}
+                    </div>
+                )}
+            </section>)}
+
+
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
                 <Card className='card finance-card'>

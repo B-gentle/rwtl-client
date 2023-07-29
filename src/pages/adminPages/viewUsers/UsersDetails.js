@@ -14,6 +14,7 @@ const UsersDetails = ({ details, setDetails }) => {
         fullname: details?.fullname,
         username: details?.username,
         email: details?.email,
+        phoneNo: details?.phoneNo,
         packageName: details?.package.name,
         walletBalance: details?.walletBalance,
         withdrawableCommission: details?.withdrawableCommission,
@@ -218,6 +219,11 @@ const UsersDetails = ({ details, setDetails }) => {
                                 <div className='flex flex-col gap-[10px]'>
                                     <label>Email:</label>
                                     <input className={!editPI ? 'border-none outline-none bg-[transparent]' : 'border border-[#9c8c94]'} type="text" name='email' value={personalInformation.email} onChange={handlePersonalInformationChange} disabled={editPI ? false : true} />
+                                </div>
+
+                                <div className='flex flex-col gap-[10px]'>
+                                    <label>Phone No:</label>
+                                    <input className={!editPI ? 'border-none outline-none bg-[transparent]' : 'border border-[#9c8c94]'} type="text" name='email' value={personalInformation.phoneNo} onChange={handlePersonalInformationChange} disabled={editPI ? false : true} />
                                 </div>
 
                                 <div className='flex flex-col gap-[10px]'>

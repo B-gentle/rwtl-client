@@ -5,9 +5,11 @@ import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/
 import BackArrowHeading from '../../components/BackArrowHeading';
 import { AddNewAdmin } from '../../services/adminCalls';
 import { useNavigate } from 'react-router-dom';
+import { selectUserData } from '../../redux/features/user/userSlice';
 
 const AddAdmin = () => {
 
+  const admin = useSelector(selectUserData)
   const dispatch = useDispatch();
   const navigate = useNavigate('/admin');
   const loading = useSelector(selectLoading)
@@ -36,6 +38,7 @@ const AddAdmin = () => {
   return (
     <div className='p-[1rem]'>
       <BackArrowHeading title="Add Admin" link="admin" />
+{admin.role === 'super' ? 
       <Form
         name="basic"
         onFinish={onFinish}
@@ -126,7 +129,8 @@ const AddAdmin = () => {
             Add Admin
           </Button>
         </Form.Item>
-      </Form>
+      </Form> : 'unauthorized'
+}
     </div>
   )
 }

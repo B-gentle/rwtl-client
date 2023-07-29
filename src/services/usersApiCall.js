@@ -21,3 +21,5 @@ export const getLoggedinStatus = async() =>  apiCalls('get', `/api/users/loginst
 export const logoutUser = async() => apiCalls('get', '/api/users/logout')
 
 export const getNextIncentive = async() => apiCalls('get', '/api/users/getuserincentive')
+
+export const getNotifications = async() => apiCalls('get', '/api/users/get-notifications')
