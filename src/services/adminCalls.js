@@ -12,6 +12,8 @@ export const ViewUser = async(payload) => apiCalls('post', `/api/admin/viewuser`
 
 export const EditUserPI = async(payload) => apiCalls('post', `/api/admin/edituserpi`, payload)
 
+export const EditUserUsername = async(payload) => apiCalls('post', `/api/admin/edit-user-username`, payload)
+
 export const EditUserBank = async(payload) => apiCalls('post', `/api/admin/edituserbank`, payload)
 
 export const EditUserPassword = async(payload) => apiCalls('post', `/api/admin/edituserpassword`, payload)
@@ -21,6 +23,8 @@ export const EnterUserAccount = async(payload) => apiCalls('post', `/api/admin/e
 export const ViewUserTransactions = async(payload) => apiCalls('post', `/api/admin/viewusertransactions`, payload)
 
 export const DeleteUser = async(payload) => apiCalls('post', `/api/users/deleteuser`, payload)
+
+export const getFullName = async(payload) => apiCalls('post', '/api/admin/get-full-name', payload)
 
 export const getLoggedinAdmin = async() =>  apiCalls('get', `/api/admin/getadmin`)
 

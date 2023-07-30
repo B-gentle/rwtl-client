@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_LOADING, selectLoading, SET_SUCCESS, SET_ERROR } from '../../redux/features/processingStates/processStatesSlice'
 import BackArrowHeading from '../../components/BackArrowHeading';
 import { ViewUserTransactions } from '../../services/adminCalls';
+import { Link } from 'react-router-dom';
 
 
 const ViewTransaction = () => {
@@ -40,7 +41,7 @@ const ViewTransaction = () => {
 
   const renderAction = (_, record) => (
     <div>
-      <Button onClick={() => handleView(record)}>View</Button>
+       <Link to={`/admin/transactions/${record._id}`}>View</Link>
     </div>
   );
 

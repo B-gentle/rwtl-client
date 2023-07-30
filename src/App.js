@@ -17,6 +17,8 @@ import About from "./pages/landingPage/about/About";
 import Home from "./pages/landingPage/Home";
 import ViewUsers from "./pages/adminPages/viewUsers/ViewUsers";
 import ViewTransaction from "./pages/adminPages/ViewTransaction";
+import ChangeUsername from "./pages/adminPages/ChangeUsername";
+import TransactionDetails from "./pages/dashboardPages/transactions/TransactionDetails";
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
             <Route path='creditwallet' element={<ProtectAdmin><CreditWallet /></ProtectAdmin>} />
             <Route path='viewuser' element={<ProtectAdmin><ViewUsers /></ProtectAdmin>} />
             <Route path='viewtransactions' element={<ProtectAdmin><ViewTransaction /></ProtectAdmin>} />
+            <Route path='changeusername' element={<ProtectAdmin><ChangeUsername /></ProtectAdmin>} />
+            <Route path="transactions/:id" element={<ProtectAdmin><TransactionDetails/></ProtectAdmin>} />
           </Route>
           <Route path="/*" element={
             <ProtectedPage>

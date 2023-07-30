@@ -8,6 +8,8 @@ export const checks = async(payload) =>  apiCalls('post', `/api/users/detailsVal
 
 export const LoginUser = async(payload) =>  apiCalls('post', `/api/users/login`, payload)
 
+export const getFullName = async(payload) => apiCalls('post', '/api/users/get-full-name', payload)
+
 export const changePassword = async(payload) =>  apiCalls('patch', `/api/users/changepassword`, payload)
 
 export const updateUser = async(payload) => apiCalls('patch', `/api/users/updateuser`, payload)
