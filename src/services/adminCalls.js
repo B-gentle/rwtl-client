@@ -26,6 +26,8 @@ export const DeleteUser = async(payload) => apiCalls('post', `/api/users/deleteu
 
 export const getFullName = async(payload) => apiCalls('post', '/api/admin/get-full-name', payload)
 
+export const Message = async(payload) => apiCalls('post', '/api/admin/notifyusers', payload)
+
 export const getLoggedinAdmin = async() =>  apiCalls('get', `/api/admin/getadmin`)
 
 export const getLoggedinStatus = async() =>  apiCalls('get', `/api/admin/loginstatus`)
@@ -33,3 +35,5 @@ export const getLoggedinStatus = async() =>  apiCalls('get', `/api/admin/loginst
 export const logoutAdmin = async() => apiCalls('get', '/api/admin/logout')
 
 export const getPendingRegistrations = async() => apiCalls('get', '/api/admin/getpendingregistrations')
+
+export const GetQualifiedUsers = async() => apiCalls('get', '/api/admin/view-qualified-users')

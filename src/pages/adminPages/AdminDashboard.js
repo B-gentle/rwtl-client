@@ -91,7 +91,7 @@ const AdminDashboard = () => {
           {subMenu.users && (<div className='flex flex-col gap-[1rem] mt-[1rem]'>
             <Link to='/admin/viewuser' className='no-underline text-[#ffffff] text-[1rem]'>View User</Link>
             <Link to='/admin/changeusername' className='no-underline text-[#ffffff] text-[1rem]'>Change Username</Link>
-            <Link to='/admin/viewuser' className='no-underline text-[#ffffff] text-[1rem]'>Message</Link>
+            <Link to='/admin/message' className='no-underline text-[#ffffff] text-[1rem]'>Message</Link>
           </div>)}
         </div>
 
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
           </div>
           {subMenu.reports && (<div className='flex flex-col gap-[1rem] mt-[1rem]'>
             <Link to='/admin/viewtransactions' className='no-underline text-[#ffffff] text-[1rem]'>Transaction Details</Link>
-            <Link to='/admin/viewtransactions' className='no-underline text-[#ffffff] text-[1rem]'>Verify Qualified Users</Link>
+            <Link to='/admin/viewqualifiedusers' className='no-underline text-[#ffffff] text-[1rem]'>Verify Qualified Users</Link>
           </div>)}
         </div>
 
