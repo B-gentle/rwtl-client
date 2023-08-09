@@ -6,6 +6,8 @@ export const LoginAdmin = async(payload) =>  apiCalls('post', `/api/admin/login`
 
 export const credituser = async(payload) =>  apiCalls('patch', `/api/admin/credit`, payload)
 
+export const changePassword = async(payload) => apiCalls('patch', '/api/admin/changepassword', payload)
+
 export const completeRegistration = async(payload) => apiCalls('patch', `/api/admin/completeRegistration`, payload)
 
 export const ViewUser = async(payload) => apiCalls('post', `/api/admin/viewuser`, payload)

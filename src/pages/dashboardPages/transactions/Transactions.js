@@ -17,7 +17,7 @@ const Transactions = () => {
    window.scrollTo(0, 0)
     const fetchTransactions = async () => {
       try {
-        const response = await getTransactions(); // Replace with your actual API endpoint
+        const response = await getTransactions(); 
         dispatch(GET_TRANSACTIONS(response.data.data));
       } catch (error) {
         console.error('Error fetching transactions:', error);
@@ -29,13 +29,6 @@ const Transactions = () => {
   
   const transactions = useSelector(selectTransaction)
   const modifiedTrans = transactions.map(transformTransaction);
-  const reversedTransactions = modifiedTrans.reverse()
-  const isMobile = useMediaQuery({maxWidth: 980})
-  const [selectedUser, setSelectedUser] = useState(null);
-
-  const handleView = (record) => {
-    setSelectedUser(record);
-  };
 
   const renderAction = (_, record) => (
     <div>
@@ -67,22 +60,35 @@ const Transactions = () => {
     
   ];
 
-  const data = reversedTransactions
-
+  const data = modifiedTrans
+const transactionsFilterOptions = [
+  {value: 'all', label: 'All'},
+  {value: 'airtime', label: 'Airtime'},
+  {value: 'data', label: 'Data'},
+  {value: 'commission', label: 'Commission'},
+  {value: 'Wallet to Wallet Transfer', label: 'Wallet Transfer'}
+  
+]
   const [filteredData, setFilteredData] = useState(data);
   const [searchValue, setSearchValue] = useState("");
   return (
     <div className='downlines'>
       <h2>Transactions</h2>
-      <SelectTableFilter data={data} filteredData={filteredData} searchValue={searchValue} setFilteredData={setFilteredData} setSearchValue={setSearchValue} />
+      <SelectTableFilter 
+      data={data} 
+      filteredData={filteredData} 
+      searchValue={searchValue} 
+      setFilteredData={setFilteredData} 
+      setSearchValue={setSearchValue}
+      filterOptions={transactionsFilterOptions} 
+      filterField='transactionType'/>
       <div>
 
       </div>
       {data.length <= 0 ? <EmptyState /> : <Table
-      // scroll={{
-      //   x: isMobile && 1000,
-      //   y: isMobile && 500,
-      // }}
+      scroll={{
+        x:true
+      }}
        columns={columns} dataSource={filteredData} />}
     </div>
   )

@@ -6,6 +6,7 @@ import BackArrowHeading from '../../components/BackArrowHeading';
 import { AddNewAdmin } from '../../services/adminCalls';
 import { useNavigate } from 'react-router-dom';
 import { selectUserData } from '../../redux/features/user/userSlice';
+import UnAuthorized from '../../components/UnAuthorized';
 
 const AddAdmin = () => {
 
@@ -129,7 +130,7 @@ const AddAdmin = () => {
             Add Admin
           </Button>
         </Form.Item>
-      </Form> : 'unauthorized'
+      </Form> : <UnAuthorized />
 }
     </div>
   )

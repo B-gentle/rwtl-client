@@ -4,7 +4,7 @@ import './layouts.scss';
 import copy from '../../assets/icons/copy.svg';
 import share from '../../assets/icons/share.svg';
 import notification from '../../assets/icons/notification.svg';
-import profileIcon from '../../assets/icons/profile-pic-icon.svg';
+import profileIcon from '../../assets/images/RWT_LOGO-removebg-preview.png';
 import { SearchBox } from '../DashbardComponents';
 import { selectUserData } from '../../redux/features/user/userSlice';
 import { useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const Header = () => {
         <Badge dot={showNotification}>
           <img src={notification} alt='notification' />
         </Badge>
-        <img src={profileIcon} alt='avatar' />
+        <img className='w-[30px]' src={profileIcon} alt='avatar' />
       </span>
     </header>
   )

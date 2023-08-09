@@ -22,7 +22,7 @@ const ViewTransaction = () => {
 
     try {
       dispatch(SET_LOADING())
-      const response = await ViewUserTransactions({ username: values.username, option: formName, transactionType: values.transactionType, from: values.from, to: values.to })
+      const response = await ViewUserTransactions({ username: values.username, option: formName, transactionType: values.transactionType, from: values.from, period: values.period, to: values.to })
       if (response.status === 200) {
         dispatch(SET_SUCCESS())
         setUserTransaction(response.data.data)

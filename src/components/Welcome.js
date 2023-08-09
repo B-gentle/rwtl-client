@@ -7,7 +7,7 @@ const Welcome = ({user}) => {
     <div className='flex flex-col md:flex-row justify-between md:pt-[32px] md:pb-[32px]'>
                 <span className='greetings'>
                     <h5>Hello {user?.username},</h5>
-                    <p>Welcome back<span className='hidden md:inline'>to RechargeWise</span></p>
+                    <p>Welcome back <span className='hidden md:inline'> to RechargeWise</span></p>
                 </span>
                 <span>
                     <span className='package-name'>

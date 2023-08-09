@@ -1,4 +1,4 @@
-import { Button, Form, Select } from 'antd'
+import { Button, Form, Input, Select } from 'antd'
 import React from 'react'
 
 const AdminViewByTransType = ({onFinish, loading, formName}) => {
@@ -58,6 +58,13 @@ const AdminViewByTransType = ({onFinish, loading, formName}) => {
             ]}
           />
 
+        </Form.Item>
+
+        <Form.Item
+          label="Transaction Date"
+          name="period"
+        >
+          <Input type='date' />
         </Form.Item>
 
         <Form.Item

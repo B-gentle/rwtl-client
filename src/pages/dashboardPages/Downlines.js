@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { message, Space, Table, Button } from 'antd';
+import { message, Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import SelectTableFilter from '../../components/SelectTableFilter';
 import '../../components/layouts/layouts.scss';
@@ -33,22 +33,6 @@ const Downlines = () => {
       key: 'package',
     },
 
-    {
-      title: 'Commission ₦',
-      key: 'comissionN',
-      dataIndex: 'comissionN',
-    },
-    {
-      title: 'Commission %',
-      key: 'comissionPercent',
-      dataIndex: 'comissionPercent',
-      render: (_, record) => (
-        <Space size="middle">
-          <span>Invite {record.name}</span>
-          <span>Delete</span>
-        </Space>
-      ),
-    },
     {
       title: 'PV',
       dataIndex: 'pv',
@@ -109,6 +93,12 @@ const Downlines = () => {
 
   const data = downlines
 
+  const transactionsFilterOptions = [
+    { value: 'all', label: 'All' },
+    { value: 'Direct Referral', label: 'Direct Referral' },
+    { value: 'Indirect Referral', label: 'Indirect Referral' },
+  ];
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
       .then(() => {
@@ -146,9 +136,15 @@ const Downlines = () => {
   return (
     <div className='downlines'>
       <h2>Downlines</h2>
-      <SelectTableFilter data={data} filteredData={filteredData} searchValue={searchValue} setFilteredData={setFilteredData} setSearchValue={setSearchValue} />
+      <SelectTableFilter data={data} 
+      filteredData={filteredData} 
+      searchValue={searchValue} 
+      setFilteredData={setFilteredData} 
+      setSearchValue={setSearchValue}
+      filterOptions={transactionsFilterOptions} 
+      filterField='level'/>
       {data.length <= 0 ? <EmptyTable text="You currently do not have any downline. Invite your friends to earn referral bonus." /> : <Table
-      scroll={{ x: 450, y: 400 }}
+      scroll={{ x: true }}
         columns={isMobile ? columnsMobile : columns} dataSource={filteredData} locale={{ emptyText: <EmptyTable /> }} />}
         <Button><Link to='/adddownline'>Add Downline</Link></Button>
     </div>

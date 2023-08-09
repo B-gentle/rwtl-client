@@ -118,7 +118,7 @@ const AdminDashboard = () => {
             <span>{subMenu.settings ? <FaAngleUp size={32} /> : <FaAngleDown size={32} />}</span>
           </div>
           {subMenu.settings && (<div className='flex flex-col gap-[1rem] mt-[1rem]'>
-            <Link to='/admin/viewtransactions' className='no-underline text-[#ffffff] text-[1rem]'>Change Password</Link>
+            <Link to='/admin/change-Password' className='no-underline text-[#ffffff] text-[1rem]'>Change Password</Link>
           </div>)}
         </div>
 

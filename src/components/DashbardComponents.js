@@ -49,13 +49,13 @@ export const PortfolioDownlines = ({ user }) => {
 
 
 export const RecentTransactions = ({transactions}) => {
-const fewTrans = transactions.slice(-10)  
+const fewTrans = transactions.slice(0, 10)
 const modifiedTrans = fewTrans.map(transformTransaction);
-const reversedTrans = modifiedTrans.reverse()
+
     
     return (
         <>
-            {reversedTrans && reversedTrans.map((transaction, id) => (
+            {modifiedTrans && modifiedTrans.map((transaction, id) => (
                 <Link to={`/transactions/${transaction._id}`} key={id} className='flex justify-between items-center text-white'>
                     <span className='flex flex-col mb-8'>
                         <span></span>

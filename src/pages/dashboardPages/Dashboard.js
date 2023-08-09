@@ -23,7 +23,7 @@ const Dashboard = () => {
     const [newNotification, setNewNotification] = useState(false)
     const [notifications, setShowNotification] = useState(null)
     const [displayNotifications, setDisplayNotifications] = useState(false)
-    
+
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -61,7 +61,7 @@ const Dashboard = () => {
     const readNotification = () => {
 
     }
-     // const date = new Date()
+    // const date = new Date()
     // const todayDate = format(date, 'dd, MMM yyyy')
     // const time = format(date, 'hh: mm a')
 
@@ -72,14 +72,14 @@ const Dashboard = () => {
                     <img className='w-[60px] h-[60px] mr-[8px]' src={companyLogo} alt='avatar' />
                     <Welcome user={user} />
                 </span>
-                <Badge dot={newNotification} onClick={()=> {setDisplayNotifications(!displayNotifications)}}>
+                <Badge dot={newNotification} onClick={() => { setDisplayNotifications(!displayNotifications) }}>
                     <img src={notification} alt='notification' />
                 </Badge>
             </div>)
             }
 
-           { displayNotifications && (<section>
-                {notifications && notifications.map((notification, index) => 
+            {displayNotifications && (<section>
+                {notifications && notifications.map((notification, index) =>
                     <div key={index} onClick={readNotification}>
                         {notification.message}
                     </div>
@@ -89,9 +89,9 @@ const Dashboard = () => {
 
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
-                <Card className='card finance-card'>
+                <div className='card finance-card'>
                     <div className='flex flex-col md:flex-row md:flex-wrap justify-between'>
-                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] p-[1rem] rounded-md'>
+                        <div className='flex flex-col gap-[1rem] bg-[#926f34] text-white w-[100%] md:w-[30%] md:mt- p-[1rem] rounded-md'>
                             <FaWallet size={32} />
                             <span className='font-medium text-base'>Wallet Balance:</span>
                             <span className='font-bold text-2xl truncate'>₦{user.walletBalance.toLocaleString(undefined, {
@@ -120,7 +120,7 @@ const Dashboard = () => {
                                 </Link>
                             </span>
                             <span className='font-medium text-base'>Commission Balance:</span>
-                            <span className='font-bold text-2xl'>₦{(user.withdrawableCommission).toLocaleString(undefined, {
+                            <span className='font-bold text-2xl md:truncate'>₦{(user.withdrawableCommission).toLocaleString(undefined, {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                             })}</span>
@@ -141,7 +141,7 @@ const Dashboard = () => {
                             <FinancialCards text="More" Icon={<MdGridView size={32} />} />
                         </Link>
                     </div>
-                </Card>
+                </div>
 
                 <Card className='card downline-card hidden md:block'>
                     <Card className='mb-[16px]'>

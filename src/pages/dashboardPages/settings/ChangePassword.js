@@ -3,13 +3,17 @@ import React from 'react';
 import '../../../pages/authPages/auth.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../../components/BackArrowHeading';
-import { changePassword } from '../../../services/usersApiCall';
+import { changePassword } from '../../../services/adminCalls';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../../redux/features/processingStates/processStatesSlice';
+import { useLocation } from 'react-router-dom';
 
 const ChangePassword = () => {
 
     const dispatch = useDispatch();
     const loading = useSelector(selectLoading);
+    const location = useLocation();
+
+    const linkTo = location.pathname === "/change-password" ? "settings" : "admin";
 
     const onFinish = async (values) => {
         dispatch(SET_LOADING())
@@ -37,8 +41,8 @@ const ChangePassword = () => {
     };
 
     return (
-        <div className=''>
-            <BackArrowHeading title="Change Password" link="settings" />
+        <div className='p-[1rem]'>
+            <BackArrowHeading title="Change Password" link={linkTo} />
             <Form
                 className='mt-[30px]'
                 onFinish={onFinish}
