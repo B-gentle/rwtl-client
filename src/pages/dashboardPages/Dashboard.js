@@ -14,6 +14,7 @@ import pvIcon from '../../assets/icons/dashboard_icons/pv-icon.svg';
 import { Link } from 'react-router-dom';
 import { getTransactions } from '../../services/transactionCalls';
 import { getNextIncentive, getNotifications } from '../../services/usersApiCall';
+import Notifications from '../../components/Notifications';
 
 
 const Dashboard = () => {
@@ -61,9 +62,6 @@ const Dashboard = () => {
     const readNotification = () => {
 
     }
-    // const date = new Date()
-    // const todayDate = format(date, 'dd, MMM yyyy')
-    // const time = format(date, 'hh: mm a')
 
     return (
         <div className='dashboard'>
@@ -78,14 +76,7 @@ const Dashboard = () => {
             </div>)
             }
 
-            {displayNotifications && (<section>
-                {notifications && notifications.map((notification, index) =>
-                    <div key={index} onClick={readNotification}>
-                        {notification.message}
-                    </div>
-                )}
-            </section>)}
-
+            {displayNotifications &&  <Notifications notifications={notifications} readNotification={readNotification} /> }
 
             <div className='hidden md:block'><Welcome user={user} /> </div>
             <div className='flex flex-col md:flex-row'>
