@@ -44,7 +44,7 @@ const ChangePassword = () => {
         <div className='p-[1rem]'>
             <BackArrowHeading title="Change Password" link={linkTo} />
             <Form
-                className='mt-[30px]'
+                className='mt-[30px] md:mt-[2rem] md:w-1/2 md:m-auto'
                 onFinish={onFinish}
                 layout='vertical'>
                 <Form.Item

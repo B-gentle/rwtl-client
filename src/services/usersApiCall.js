@@ -12,6 +12,10 @@ export const getFullName = async(payload) => apiCalls('post', '/api/users/get-fu
 
 export const changePassword = async(payload) =>  apiCalls('patch', `/api/users/changepassword`, payload)
 
+export const CreatePin = async(payload) =>  apiCalls('patch', `/api/users/create-pin`, payload)
+
+export const changePin = async(payload) =>  apiCalls('patch', `/api/users/change-pin`, payload)
+
 export const updateUser = async(payload) => apiCalls('patch', `/api/users/updateuser`, payload)
 
 export const UpgradePackage = async(payload) => apiCalls('patch', `/api/users/upgradepackage`, payload)

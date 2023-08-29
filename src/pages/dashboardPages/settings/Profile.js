@@ -54,21 +54,21 @@ const Profile = () => {
                 <ProfileBanner />
                 <BiEditAlt size={22} />
             </div>
-           <h1>Personal Information</h1>
+           <h1 className='md:mt-[3rem] md:mb-[2rem] md:text-center'>Personal Information</h1>
             <Form
-                className='mt-[16px]'
+                className='mt-[16px] md:w-1/2 md:m-auto'
                 onFinish={onFinish}
                 layout='vertical'
                 initialValues={initialValues}>
                 <Form.Item
-                    label="Full Name"
+                    label="Full Name:"
                     name="fullname"
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    label="Email Address"
+                    label="Email Address:"
                     name="eMail"
                 >
                     <Input disabled />

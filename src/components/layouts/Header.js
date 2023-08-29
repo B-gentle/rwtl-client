@@ -1,5 +1,5 @@
 import { Badge } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import './layouts.scss';
 import copy from '../../assets/icons/copy.svg';
 import share from '../../assets/icons/share.svg';
@@ -9,22 +9,20 @@ import { SearchBox } from '../DashbardComponents';
 import { selectUserData } from '../../redux/features/user/userSlice';
 import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header = ({ displayNotifications, setDisplayNotifications, newNotification }) => {
   const onSearch = () => {
 
   }
   const user = useSelector(selectUserData);
-  const [showNotification, setShowNotification] = useState(true)
-  
-  
+
   return (
     <header className='header flex justify-between'>
-          <SearchBox />
+      <SearchBox />
       <span className='header--icons flex-row-reverse md:flex-row'>
         <input className="refLink hidden md:flex" type="text" defaultValue={user?.referralLink} />
         <img className='hidden md:flex' src={copy} alt='copy' />
         <img className='hidden md:flex' src={share} alt='share' />
-        <Badge dot={showNotification}>
+        <Badge dot={newNotification} onClick={() => { setDisplayNotifications(!displayNotifications) }}>
           <img src={notification} alt='notification' />
         </Badge>
         <img className='w-[30px]' src={profileIcon} alt='avatar' />

@@ -70,11 +70,11 @@ export const settingsMenu = [{
         img: profile,
         to: "/packageupgrade"
     },
-    {
-        link: "Notifications",
-        img: notification,
-        to: "/notifications"
-    },
+    // {
+    //     link: "Notifications",
+    //     img: notification,
+    //     to: "/notifications"
+    // },
     {
         link: "Change Password",
         img: changePassword,
@@ -83,12 +83,7 @@ export const settingsMenu = [{
     {
         link: "Change Pin",
         img: changePin,
-        to: ""
-    },
-    {
-        link: "Preferences",
-        img: preference,
-        to: ""
+        to: "/change-pin"
     },
     {
         link: "Referrals",
