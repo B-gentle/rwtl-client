@@ -22,6 +22,7 @@ import TransactionDetails from "./pages/dashboardPages/transactions/TransactionD
 import ViewQualifiedUsers from "./pages/adminPages/ViewQualifiedUsers";
 import Notify from "./pages/adminPages/Notify";
 import ChangePassword from "./pages/dashboardPages/settings/ChangePassword";
+import {changePassword} from './services/adminCalls';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
             <Route path='viewqualifiedusers' element={<ProtectAdmin><ViewQualifiedUsers /></ProtectAdmin>} />
             <Route path='changeusername' element={<ProtectAdmin><ChangeUsername /></ProtectAdmin>} />
             <Route path='message' element={<ProtectAdmin><Notify /></ProtectAdmin>} />
-            <Route path='change-Password' element={<ProtectAdmin><ChangePassword /></ProtectAdmin>} />
+            <Route path='change-Password' element={<ProtectAdmin><ChangePassword changePassword={changePassword} /></ProtectAdmin>} />
             <Route path="transactions/:id" element={<ProtectAdmin><TransactionDetails/></ProtectAdmin>} />
           </Route>
           <Route path="/*" element={

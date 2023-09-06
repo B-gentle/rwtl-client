@@ -3,11 +3,10 @@ import React from 'react';
 import '../../../pages/authPages/auth.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../../components/BackArrowHeading';
-import { changePassword } from '../../../services/adminCalls';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../../redux/features/processingStates/processStatesSlice';
 import { useLocation } from 'react-router-dom';
 
-const ChangePassword = () => {
+const ChangePassword = ({changePassword}) => {
 
     const dispatch = useDispatch();
     const loading = useSelector(selectLoading);

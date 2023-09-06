@@ -29,6 +29,7 @@ import TransactionDetails from '../../pages/dashboardPages/transactions/Transact
 import Jamb from '../../pages/financePages/Jamb';
 import Waec from '../../pages/financePages/Waec';
 import { getNotifications } from '../../services/usersApiCall';
+import { changePassword } from '../../services/usersApiCall';
 import Notifications from '../Notifications';
 import ChangePin from '../../pages/dashboardPages/settings/ChangePin';
 
@@ -75,7 +76,7 @@ const Contents = () => {
                         <Route path="packageupgrade" element={<PackageUpgrade />} />
                         <Route path="portfolio" element={<Portfolio />} />
                         <Route path="downlines" element={<Downlines />} />
-                        <Route path='change-password' element={<ChangePassword />} />
+                        <Route path='change-password' element={<ChangePassword changePassword={changePassword} />} />
                         <Route path='change-pin' element={<ChangePin />} />
                         <Route path='referrals' element={<Referrals />} />
                         <Route path='sendmoney' element={<SendMoney />} />
