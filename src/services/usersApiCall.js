@@ -10,6 +10,8 @@ export const LoginUser = async(payload) =>  apiCalls('post', `/api/users/login`,
 
 export const getFullName = async(payload) => apiCalls('post', '/api/users/get-full-name', payload)
 
+export const generateStaticAccount = async(payload) => apiCalls('post', '/api/users/generate-static-account', payload)
+
 export const changePassword = async(payload) =>  apiCalls('patch', `/api/users/changepassword`, payload)
 
 export const CreatePin = async(payload) =>  apiCalls('patch', `/api/users/create-pin`, payload)
