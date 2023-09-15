@@ -57,6 +57,11 @@ const TransactionDetails = () => {
                     <span className='text-right'>₦{transaction.amount}</span>
                 </section>)}
 
+                { transaction.transactionType === 'walletFunding' && (<section className='flex justify-between items-center'>
+                    <span className=''>Charges</span>
+                    <span className='text-right'>₦{transaction.charges}</span>
+                </section>)}
+
                 { transaction.transactionType === 'commission' && (<section className='flex justify-between items-center'>
                     <span className=''>Commission Earned:</span>
                     <span className='text-right'>₦{transaction.commission}</span>
