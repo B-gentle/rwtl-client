@@ -142,7 +142,7 @@ const TransactionDetails = () => {
                     </section>)}
 
                 {(transaction.transactionType === 'fundTransfer' && transaction.recipient === username) && (<section className='flex justify-between items-center'>
-                    <span>Previous Wallet Balanace</span>
+                    <span>Previous Wallet Balance</span>
                     <span>{transaction.receiverPrevWalletBalance}</span>
                 </section>)}
 
@@ -164,19 +164,19 @@ const TransactionDetails = () => {
                     &&
                     (
                         <section className='flex justify-between items-center'>
-                            <span>New Wallet Balanace</span>
+                            <span>New Wallet Balance</span>
                             <span>{transaction.senderNewWalletBalance}</span>
                         </section>
                     )}
 
                 {(transaction.transactionType !== 'fundTransfer' && transaction.transactionType !== 'commission') && (<section className='flex justify-between items-center'>
-                    <span>Previous Wallet Balanace</span>
+                    <span>Previous Wallet Balance</span>
                     <span>{transaction.prevWalletBalance}</span>
                 </section>)
                 }
 
                 {(transaction.transactionType !== 'fundTransfer' && transaction.transactionType !== 'commission') && (<section className='flex justify-between items-center'>
-                    <span>New Wallet Balanace</span>
+                    <span>New Wallet Balance</span>
                     <span>{transaction.newWalletBalance}</span>
                 </section>
                 )
