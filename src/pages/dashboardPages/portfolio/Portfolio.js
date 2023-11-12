@@ -5,6 +5,7 @@ import { Chart, DoughnutChart } from './portfolioChart'
 import './portfolio.scss';
 import { selectUserData } from '../../../redux/features/user/userSlice';
 import { getNextIncentive } from '../../../services/usersApiCall';
+import logo from '../../../assets/images/RWT_LOGO-removebg-preview.png'
 
 const Portfolio = () => {
 
@@ -26,10 +27,15 @@ const Portfolio = () => {
     return (
         <div className='portfolio'>
             <h4>Portfolio</h4>
+            <div className='flex justify-center flex-col items-center gap-[2px] bg-[#E6DCB1]'>
+                <span className='multicolor-text'>EMBER PR<span><img src={logo} className='w-[25px] h-50' alt='' /></span>M<span><img src={logo} className='w-[25px] h-50' alt='' /></span></span>
+                        <span className='text-[1.2rem]  font-[500]'>Promo PV</span>
+                        <span className='text-[1.5rem] font-[400]'>Kickstarts on the</span>
+                        <span>15th</span>
+                    </div>
             {/* <Chart /> */}
             <div>
                 <span className='flex items-center justify-center mb-[16px] mt-[32px] p-[1rem] bg-[#AE8625] text-white'>
-        
                     <span className='flex justify-center flex-col items-center gap-[2px]'>
                         <span className='text-[1.2rem]  font-[500]'>Total PV</span>
                         <span className='text-[1.5rem] font-[400]'>{user.pv}</span>

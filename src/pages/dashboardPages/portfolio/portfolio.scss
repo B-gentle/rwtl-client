@@ -10,6 +10,16 @@
         margin: 24px auto 20px;
     }
 
+    .multicolor-text{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(to right, #fff1a6, #ed1b24, #00a556, red);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
     .chart{
         >div{
             display: flex;

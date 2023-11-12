@@ -16,7 +16,7 @@ const SelectTableFilter = ({ data, filteredData, searchValue, setFilteredData, s
         const referralState = item.level === 1 ? 'Direct Referral' : 'Indirect Referral';
         return referralState === option.value
       });
-      console.log(filtered)
+
       setFilteredData(filtered);
     }
   };
