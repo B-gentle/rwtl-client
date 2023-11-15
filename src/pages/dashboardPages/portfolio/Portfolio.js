@@ -29,8 +29,8 @@ const Portfolio = () => {
             <h4>Portfolio</h4>
             <div className='flex justify-center flex-col items-center gap-[2px] bg-[#E6DCB1]'>
                 <span className='multicolor-text'>EMBER PR<span><img src={logo} className='w-[25px] h-50' alt='' /></span>M<span><img src={logo} className='w-[25px] h-50' alt='' /></span></span>
-                        <span className='text-[1.2rem]  font-[500]'>Promo PV</span>
-                        <span className='text-[1.5rem] font-[400]'>Kickstarts on the</span>
+                        <span className='text-[1.2rem]  font-[500]'>{user.emberPv}</span>
+                        <span className='text-[1.5rem] font-[400]'>PV</span>
                         <span>15th</span>
                     </div>
             {/* <Chart /> */}
