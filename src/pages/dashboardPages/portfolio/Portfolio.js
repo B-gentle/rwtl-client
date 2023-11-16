@@ -31,7 +31,6 @@ const Portfolio = () => {
                 <span className='multicolor-text'>EMBER PR<span><img src={logo} className='w-[25px] h-50' alt='' /></span>M<span><img src={logo} className='w-[25px] h-50' alt='' /></span></span>
                         <span className='text-[1.2rem]  font-[500]'>{user.emberPv}</span>
                         <span className='text-[1.5rem] font-[400]'>PV</span>
-                        <span>15th</span>
                     </div>
             {/* <Chart /> */}
             <div>
