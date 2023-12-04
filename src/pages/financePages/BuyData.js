@@ -17,8 +17,8 @@ const BuyData = () => {
 
     const loading = useSelector(selectLoading)
     const dispatch = useDispatch()
-    const [selectedOption, setSelectedOption] = useState(null);
     const [selectedPlanAmount, setSelectedPlanAmount] = useState(null);
+    const [companyPrice, setCompanyPrice] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { Option } = Select;
 
@@ -85,7 +85,7 @@ const BuyData = () => {
     const initialValue = {
         network: "Please Select a network",
         networkPlan: "Please Select a Plan",
-        amount: selectedPlanAmount
+        amount: companyPrice
     }
 
     const [dataPln, setDataPln] = useState()
@@ -98,8 +98,8 @@ const BuyData = () => {
 
     const handlePlanChange = (value) => {
         const amount = dataPln.find((plan) => plan.PRODUCT_ID === value);
-        setSelectedPlanAmount(amount?.PRODUCT_AMOUNT);
-        form.setFieldsValue({ amount: amount?.PRODUCT_AMOUNT });
+        setSelectedPlanAmount(Number(amount?.PRODUCT_AMOUNT) + 5);
+        form.setFieldsValue({ amount: Number(amount?.PRODUCT_AMOUNT) + 5 });
       };
 
 
@@ -159,7 +159,7 @@ const BuyData = () => {
                     >
                         {dataPln && dataPln.map((plan => (
                             <Option key={plan?.PRODUCT_NAME} value={plan?.PRODUCT_ID}>
-                                {plan.PRODUCT_NAME} for ₦{plan.PRODUCT_AMOUNT}
+                                {plan.PRODUCT_NAME} for ₦{Number(plan.PRODUCT_AMOUNT) + 5}
                             </Option>
                         )))
                         }
