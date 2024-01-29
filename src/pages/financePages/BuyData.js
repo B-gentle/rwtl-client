@@ -1,5 +1,5 @@
-import { Avatar, Button, Form, Input, Select, Modal, message } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Avatar, Button, Form, Input, Select, message } from 'antd'
+import React, { useState } from 'react'
 import MTN from '../../assets/images/MTN.svg';
 import GLO from '../../assets/images/Glo.svg';
 import airtel from '../../assets/images/airtel.svg';
@@ -10,7 +10,7 @@ import { PurchaseData } from '../../services/transactionCalls'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import './financePages.scss';
-import { getDataPlans } from '../../services/dataCalls';
+import { getDataPlans, getJoeNatechMtnPlans } from '../../services/dataCalls';
 
 
 const BuyData = () => {
@@ -18,8 +18,6 @@ const BuyData = () => {
     const loading = useSelector(selectLoading)
     const dispatch = useDispatch()
     const [selectedPlanAmount, setSelectedPlanAmount] = useState(null);
-    const [companyPrice, setCompanyPrice] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const { Option } = Select;
 
     const [form] = Form.useForm();
@@ -55,7 +53,7 @@ const BuyData = () => {
 
     const onFinish = async (values) => {
         dispatch(SET_LOADING())
-        const { phoneNumber, amount } = values;
+        const { phoneNumber } = values;
         if (phoneNumber.length < 11 || phoneNumber.length > 11) {
             dispatch(SET_ERROR());
             return message.error("Invalid Phone number")
@@ -78,6 +76,7 @@ const BuyData = () => {
         } catch (error) {
             dispatch(SET_ERROR());
             message.error(error.message)
+            console.log(error)
         }
 
     };
@@ -85,13 +84,17 @@ const BuyData = () => {
     const initialValue = {
         network: "Please Select a network",
         networkPlan: "Please Select a Plan",
-        amount: companyPrice
+        amount: ""
     }
 
-    const [dataPln, setDataPln] = useState()
+    const [dataPln, setDataPln] = useState([])
     const handleDataCall = async (value) => {
         const response = await getDataPlans({networkCode: value})
-        if (response.status === 200){
+        const joeNadMtn = await getJoeNatechMtnPlans();
+        if(joeNadMtn.status === 200 && value === "01"){
+            setDataPln(joeNadMtn.data[0].plans)
+        }
+        else if (response.status === 200){
             setDataPln(response.data.data[0])
         }
     }
@@ -157,7 +160,7 @@ const BuyData = () => {
                         onChange={handlePlanChange}
 
                     >
-                        {dataPln && dataPln.map((plan => (
+                        {dataPln && dataPln?.map((plan => (
                             <Option key={plan?.PRODUCT_NAME} value={plan?.PRODUCT_ID}>
                                 {plan.PRODUCT_NAME} for ₦{Number(plan.PRODUCT_AMOUNT) + 5}
                             </Option>
