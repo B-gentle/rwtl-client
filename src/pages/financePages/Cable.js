@@ -2,6 +2,7 @@ import { Button, Form, Input, message, Select } from 'antd';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import BackArrowHeading from '../../components/BackArrowHeading';
+import loader from '../../assets/images/loadingRings.gif';
 import TotalBalance from '../../components/TotalBalance';
 import { selectLoading, SET_ERROR, SET_LOADING, SET_SUCCESS } from '../../redux/features/processingStates/processStatesSlice';
 import { getCable } from '../../services/dataCalls';
@@ -43,9 +44,11 @@ const Cable = () => {
     }
 
     const handleCableCall = async (value) => {
+        dispatch(SET_LOADING());
         const response = await getCable({ cableNetwork: value })
         if (response.status === 200) {
-            setSelectedPlan(response.data.data[0])
+            dispatch(SET_SUCCESS())
+            setSelectedPlan(response.data[0])
         }
     }
 
@@ -115,6 +118,10 @@ const Cable = () => {
                     <Input />
                 </Form.Item>
 
+                {loading && 
+                <div className='flex justify-center'>
+                    <img className='w-[50px] h-[50px] rounded-[100px] text-center' src={loader} alt='' /></div>}
+
                 <Form.Item
                     label="Select Package"
                     name="package"
@@ -125,6 +132,7 @@ const Cable = () => {
                         placeholder="Select Package"
                         style={{ width: '100%' }}
                         onChange={handlePlanChange}
+                        disabled={selectedPlan === null}
 
                     >
                         {selectedPlan && selectedPlan.map((plan => (
